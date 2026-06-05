@@ -1,0 +1,19 @@
+        .desktop-screen { font-family: 'Manrope', sans-serif; }
+        .font-serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom ghost border for inputs */
+        .ghost-input {
+            border: none;
+            border-bottom: 1px solid rgba(197, 198, 205, 0.2);
+            background: transparent;
+            border-radius: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .ghost-input:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom-color: #051125;
+        }
