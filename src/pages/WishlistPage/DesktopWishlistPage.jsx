@@ -64,7 +64,7 @@ export function DesktopWishlistPage() {
                     {/*  Item 2: Vertical Profile  */}
                     <div className="md:col-span-4 group">
                         <div className="relative overflow-hidden bg-surface-container-low rounded-xl">
-                            <img className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105" alt="Hand-Thrown Ceramic Vase" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKZWzkXxqZIf44timHxZyGIZVQ768zJ1xlpUHU05VIT2KLUCZZ-6cW8pWMSQ8DeJzeyfqaGUZcUvLCDyQrCZKKhIaHwCjA4nhiw3qZKIyNeJWvTFx4BReg0n8wy8CYG6gOOfK4fRUWa5N8H_IGm_z2tFckivvW8t4rOR9nowvF1lvZUTfdJc2m7wZ_D2MgxrpteF5avoJrdQdX7dUdaKQpW1Dsg5VWTB5l04krLAHA40ljtBtna0QGZV9MubamSt3TIDRXReNwJ9w3" />
+                            <img className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105" alt="Hand-Thrown Ceramic Vase" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKZWzkXxqZIf44timHxZyGIZVQ1024zJ1xlpUHU05VIT2KLUCZZ-6cW8pWMSQ8DeJzeyfqaGUZcUvLCDyQrCZKKhIaHwCjA4nhiw3qZKIyNeJWvTFx4BReg0n8wy8CYG6gOOfK4fRUWa5N8H_IGm_z2tFckivvW8t4rOR9nowvF1lvZUTfdJc2m7wZ_D2MgxrpteF5avoJrdQdX7dUdaKQpW1Dsg5VWTB5l04krLAHA40ljtBtna0QGZV9MubamSt3TIDRXReNwJ9w3" />
                             <button className="absolute top-6 right-6 w-10 h-10 rounded-full glass-panel flex items-center justify-center text-primary shadow-sm">
                                 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>favorite</span>
                             </button>

@@ -5,10 +5,10 @@ import { MobileSupportPage } from './MobileSupportPage'
 import './MobileSupportPage.css'
 
 export function SupportPage() {
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1024)
 
     window.addEventListener('resize', () => {
-        setIsMobile(window.innerWidth < 768)
+        setIsMobile(window.innerWidth < 1024)
     });
     return (
         <>

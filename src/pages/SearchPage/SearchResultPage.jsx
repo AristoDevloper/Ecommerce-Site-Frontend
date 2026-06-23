@@ -5,10 +5,10 @@ import { DesktopSearchPage } from './DesktopSearchPage';
 import { useState } from 'react';
 
 export default function SearchResultPage() {
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
     window.addEventListener('resize', () => {
-        setIsMobile(window.innerWidth < 768);
+        setIsMobile(window.innerWidth < 1024);
     });
 
     return (

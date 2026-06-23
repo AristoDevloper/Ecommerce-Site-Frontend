@@ -71,7 +71,7 @@ export function MobileSupportPage() {
                     </div>
                     <div className="space-y-4">
                         {/*  Accordion Item 1  */}
-                        <div 
+                        <div
                             className={`rounded-xl p-5 border cursor-pointer ${expandedIndex === 0 ? 'bg-surface-container-low border-outline-variant/20' : 'bg-surface-container-lowest border-outline-variant/10'}`}
                             onClick={() => handleToggle(0)}
                         >
@@ -88,7 +88,7 @@ export function MobileSupportPage() {
                             )}
                         </div>
                         {/*  Accordion Item 2  */}
-                        <div 
+                        <div
                             className={`rounded-xl p-5 border cursor-pointer ${expandedIndex === 1 ? 'bg-surface-container-low border-outline-variant/20' : 'bg-surface-container-lowest border-outline-variant/10'}`}
                             onClick={() => handleToggle(1)}
                         >
@@ -108,7 +108,7 @@ export function MobileSupportPage() {
                             )}
                         </div>
                         {/*  Accordion Item 3  */}
-                        <div 
+                        <div
                             className={`rounded-xl p-5 border cursor-pointer ${expandedIndex === 2 ? 'bg-surface-container-low border-outline-variant/20' : 'bg-surface-container-lowest border-outline-variant/10'}`}
                             onClick={() => handleToggle(2)}
                         >
@@ -125,7 +125,7 @@ export function MobileSupportPage() {
                             )}
                         </div>
                         {/*  Accordion Item 4  */}
-                        <div 
+                        <div
                             className={`rounded-xl p-5 border cursor-pointer ${expandedIndex === 3 ? 'bg-surface-container-low border-outline-variant/20' : 'bg-surface-container-lowest border-outline-variant/10'}`}
                             onClick={() => handleToggle(3)}
                         >
@@ -156,11 +156,11 @@ export function MobileSupportPage() {
             </main>
             {/*  BottomNavBar  */}
             <nav className="fixed bottom-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl flex justify-around items-center pb-safe pt-3 px-4 z-50 rounded-t-xl shadow-[0_-4px_20px_rgba(25,28,29,0.04)]">
-                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white transition-colors tap-highlight-none active:scale-90 transition-transform" href="#">
+                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white tap-highlight-none active:scale-90 transition-transform" href="#">
                     <span className="material-symbols-outlined mb-1">grid_view</span>
                     <span className="font-body text-[10px] tracking-widest uppercase">Gallery</span>
                 </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white transition-colors tap-highlight-none active:scale-90 transition-transform" href="#">
+                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white tap-highlight-none active:scale-90 transition-transform" href="#">
                     <span className="material-symbols-outlined mb-1">search</span>
                     <span className="font-body text-[10px] tracking-widest uppercase">Search</span>
                 </a>
@@ -168,11 +168,11 @@ export function MobileSupportPage() {
                     <span className="material-symbols-outlined mb-1" style={{ fontVariationSettings: "'FILL' 1" }}>contact_support</span>
                     <span className="font-body text-[10px] tracking-widest uppercase">Support</span>
                 </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white transition-colors tap-highlight-none active:scale-90 transition-transform" href="#">
+                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white tap-highlight-none active:scale-90 transition-transform" href="#">
                     <span className="material-symbols-outlined mb-1">package_2</span>
                     <span className="font-body text-[10px] tracking-widest uppercase">Orders</span>
                 </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white transition-colors tap-highlight-none active:scale-90 transition-transform" href="#">
+                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white tap-highlight-none active:scale-90 transition-transform" href="#">
                     <span className="material-symbols-outlined mb-1">person</span>
                     <span className="font-body text-[10px] tracking-widest uppercase">Profile</span>
                 </a>
