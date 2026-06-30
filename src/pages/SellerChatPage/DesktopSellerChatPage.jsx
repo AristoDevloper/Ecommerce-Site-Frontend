@@ -1,29 +1,7 @@
 export function DesktopSellerChatPage() {
     return (
         <div className="bg-background text-on-background antialiased flex flex-col h-screen overflow-hidden">
-            {/* Top Navigation Header */}
-            <header className="h-16 w-full border-b border-slate-200/50 bg-white flex items-center justify-between px-6 z-30 shrink-0">
-                <div className="flex items-center gap-8">
-                    <a className="flex items-center gap-2" href="#">
-                        <span className="text-xl font-noto-serif font-bold text-primary tracking-tight">Ethos Curated</span>
-                        <span className="px-2 py-0.5 bg-primary/5 text-primary text-[10px] font-bold rounded uppercase tracking-wider">Seller Studio</span>
-                    </a>
-                    <nav className="hidden md:flex items-center gap-6">
-                        <a className="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Marketplace</a>
-                        <a className="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Community</a>
-                        <a className="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Resources</a>
-                    </nav>
-                </div>
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-3 pl-2">
-                        <div className="text-right hidden sm:block">
-                            <p className="text-xs font-bold text-slate-900 leading-none">Artisan Collective</p>
-                            <p className="text-[10px] text-slate-400 mt-1 uppercase tracking-tighter">Premium Partner</p>
-                        </div>
-                        <img alt="Seller Avatar" className="w-8 h-8 rounded-full object-cover border border-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-udJy_A-IW7ja7t9NzB5MN_XDJEo5xus76V9l2spRUGJvXyFMrkNZEhqt9paoNT9Ed_y_EsIY__PXCO4qEmpM6ZdBHiST55KN4lq1ZU_KHnNAd7_dP1VgrstJGhcPpHfMN_SPe3P8BcvysP6Id4luE7FmOyLTOyE0dF69Ko3RACFlPbH0HN44EXEUduFNR3KgHrUVcUeNahcyY2xnSnD58QOpWvPxeLDyklhwZ90euVQgTS3MBbwQHvJ-miMSt1iGn6PAX6KY-y40" />
-                    </div>
-                </div>
-            </header>
+            
             <div className="flex flex-1 overflow-hidden">
                 {/* SideNavBar Component */}
                 <aside className="h-full w-64 border-r border-slate-200/20 dark:border-slate-800/20 bg-slate-50 dark:bg-slate-900 flex flex-col p-6 space-y-8 z-20 shrink-0">
@@ -33,34 +11,7 @@ export function DesktopSellerChatPage() {
                             List New Product
                         </button>
                     </div>
-                    <nav className="flex-1 space-y-1">
-                        <a className="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 rounded-lg text-sm" href="#">
-                            <span className="material-symbols-outlined">dashboard</span>
-                            Dashboard
-                        </a>
-                        <a className="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 rounded-lg text-sm" href="#">
-                            <span className="material-symbols-outlined">inventory_2</span>
-                            Inventory
-                        </a>
-                        {/* Active Tab: Messages */}
-                        <a className="flex items-center gap-3 px-4 py-3 text-slate-900 dark:text-white font-semibold bg-white dark:bg-slate-800 rounded-lg shadow-sm text-sm" href="#">
-                            <span className="material-symbols-outlined">forum</span>
-                            Messages
-                        </a>
-                        {/* New Tab: Customer Insights */}
-                        <a className="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 rounded-lg text-sm" href="#">
-                            <span className="material-symbols-outlined">person_search</span>
-                            Customer Data
-                        </a>
-                        <a className="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 rounded-lg text-sm" href="#">
-                            <span className="material-symbols-outlined">monitoring</span>
-                            Analytics
-                        </a>
-                        <a className="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 rounded-lg text-sm" href="#">
-                            <span className="material-symbols-outlined">settings</span>
-                            Settings
-                        </a>
-                    </nav>
+                    
                     <div className="pt-6 border-t border-slate-200/50 dark:border-slate-800/50">
                         <div className="flex items-center gap-3 px-4 text-xs text-slate-400 cursor-pointer hover:text-slate-600 transition-colors">
                             <span className="material-symbols-outlined text-sm">help</span>
@@ -72,10 +23,7 @@ export function DesktopSellerChatPage() {
                 <main className="flex-1 flex flex-row overflow-hidden bg-white">
                     {/* Message List Sidebar */}
                     <section className="w-80 border-r border-slate-100 flex flex-col shrink-0">
-                        <header className="p-6 border-b border-slate-100 flex justify-between items-center">
-                            <h3 className="text-xl font-noto-serif font-bold text-primary">Inquiries</h3>
-                            <span className="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">tune</span>
-                        </header>
+                        
                         <div className="flex-1 overflow-y-auto">
                             {/* Message Item: Active */}
                             <div className="p-6 bg-surface-container-low cursor-pointer border-l-4 border-primary">
@@ -125,20 +73,7 @@ export function DesktopSellerChatPage() {
                     </section>
                     {/* Main Chat Window */}
                     <section className="flex-1 flex flex-col min-w-0 bg-background">
-                        {/* Chat Header */}
-                        <header className="h-20 px-8 flex items-center justify-between bg-white border-b border-slate-100 shadow-sm z-10 shrink-0">
-                            <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-primary font-bold">JV</div>
-                                <div>
-                                    <h4 className="font-bold text-primary">Julian V.</h4>
-                                    <p className="text-xs text-slate-400">London, United Kingdom • Local time: 2:20 PM</p>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <button className="px-4 py-2 text-xs font-bold text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">View Order History</button>
-                                <button className="p-2 text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined">more_horiz</span></button>
-                            </div>
-                        </header>
+                        
                         {/* Chat Messages Area */}
                         <div className="flex-1 overflow-y-auto p-8 space-y-8 bg-slate-50/50">
                             {/* Date Separator */}

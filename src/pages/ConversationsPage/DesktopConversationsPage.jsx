@@ -1,21 +1,7 @@
 export function DesktopConversationsPage() {
     return (
         <div className="bg-background text-on-surface font-body antialiased h-screen flex flex-col overflow-hidden">
-            {/* TopNavBar */}
-            <nav className="shrink-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-outline-variant/10 flex justify-between items-center px-8 py-4 max-w-full mx-auto">
-                <div className="flex items-center gap-8">
-                    <span className="text-2xl font-bold tracking-tighter text-slate-900 font-headline">The Curated Gallery</span>
-                    <div className="hidden md:flex items-center gap-6">
-                        <a className="text-slate-500 hover:text-slate-900 font-headline tracking-tight transition-opacity hover:opacity-70" href="#">Collections</a>
-                        <a className="text-slate-500 hover:text-slate-900 font-headline tracking-tight transition-opacity hover:opacity-70" href="#">Artifacts</a>
-                        <a className="text-slate-500 hover:text-slate-900 font-headline tracking-tight transition-opacity hover:opacity-70" href="#">Designers</a>
-                    </div>
-                </div>
-                <div className="flex items-center gap-4">
-                    <span className="material-symbols-outlined text-slate-900 cursor-pointer transition-opacity hover:opacity-70">shopping_bag</span>
-                    <span className="material-symbols-outlined text-slate-900 cursor-pointer transition-opacity hover:opacity-70">account_circle</span>
-                </div>
-            </nav>
+            
             <div className="flex flex-1 overflow-hidden">
                 {/* SideNavBar */}
                 <aside className="hidden lg:flex flex-col h-full py-8 px-4 gap-2 bg-slate-50 w-64 border-r border-outline-variant/20 font-body antialiased">
@@ -23,34 +9,14 @@ export function DesktopConversationsPage() {
                         <h2 className="text-slate-900 font-bold text-xl leading-tight">Conversations</h2>
                         <p className="text-slate-500 text-xs tracking-widest uppercase mt-1">Direct Access</p>
                     </div>
-                    <nav className="flex flex-col gap-1">
-                        <a className="text-slate-900 font-semibold flex items-center gap-3 px-4 py-3 bg-white rounded-lg hover:translate-x-1 duration-200 active:scale-95" href="#">
-                            <span className="material-symbols-outlined">chat_bubble</span>
-                            <span>All Messages</span>
-                        </a>
-                        <a className="text-slate-500 flex items-center gap-3 px-4 py-3 hover:bg-slate-100 hover:translate-x-1 duration-200 active:scale-95" href="#">
-                            <span className="material-symbols-outlined">storefront</span>
-                            <span>Sellers</span>
-                        </a>
-                        <a className="text-slate-500 flex items-center gap-3 px-4 py-3 hover:bg-slate-100 hover:translate-x-1 duration-200 active:scale-95" href="#">
-                            <span className="material-symbols-outlined">help_outline</span>
-                            <span>Support</span>
-                        </a>
-                        <a className="text-slate-500 flex items-center gap-3 px-4 py-3 hover:bg-slate-100 hover:translate-x-1 duration-200 active:scale-95" href="#">
-                            <span className="material-symbols-outlined">archive</span>
-                            <span>Archived</span>
-                        </a>
-                    </nav>
+                    
                 </aside>
                 {/* Main Split Pane Layout */}
                 <div className="flex-1 flex overflow-hidden">
                     {/* Left Pane: Conversation List */}
                     <section className="w-full md:w-[400px] flex-shrink-0 flex flex-col border-r border-outline-variant/20 bg-white">
                         <div className="p-6 border-b border-outline-variant/10">
-                            <header className="mb-6">
-                                <span className="text-tertiary font-label text-xs font-bold uppercase tracking-[0.2em] mb-2 block">Inbox</span>
-                                <h1 className="text-3xl font-headline font-bold text-on-surface tracking-tighter leading-none">Curated Dialogues</h1>
-                            </header>
+                            
                             <div className="relative group">
                                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">search</span>
                                 <input className="w-full pl-10 pr-4 py-2.5 bg-surface-container-low border-none rounded-lg focus:ring-1 focus:ring-primary/20 transition-all font-body text-sm outline-none" placeholder="Search conversations..." type="text" />

@@ -1,33 +1,8 @@
 export function DesktopHomePage() {
+
     return (
         <div className="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
-            {/*  TopNavBar  */}
-            <nav className="fixed top-0 w-full z-50 glass-nav shadow-sm">
-                <div className="flex justify-between items-center w-full px-6 py-4 md:px-12">
-                    <div className="flex gap-8 items-center">
-                        <a className="text-2xl serif-tight font-bold tracking-tighter text-slate-900" href="#">CURATED</a>
-                        <div className="hidden md:flex gap-6 font-['Noto_Serif'] tracking-tight text-sm uppercase">
-                            <a className="text-slate-900 border-b border-slate-900 pb-1" href="#">Collections</a>
-                            <a className="text-slate-500 hover:text-slate-900 transition-colors" href="#">Archive</a>
-                            <a className="text-slate-500 hover:text-slate-900 transition-colors" href="#">Journal</a>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-xs manrope-caps">
-                            <span className="material-symbols-outlined text-sm">search</span>
-                            <span>Search</span>
-                        </div>
-                        <div className="flex gap-4">
-                            <button className="hover:opacity-70 transition-opacity duration-300">
-                                <span className="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
-                            </button>
-                            <button className="hover:opacity-70 transition-opacity duration-300">
-                                <span className="material-symbols-outlined" data-icon="person">person</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+
             {/*  Main Content  */}
             <main className="pt-0">
                 {/*  Hero Section  */}

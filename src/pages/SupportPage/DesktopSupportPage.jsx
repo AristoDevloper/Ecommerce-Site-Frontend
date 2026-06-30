@@ -1,21 +1,7 @@
 export function DesktopSupportPage() {
     return (
         <div className="bg-background text-on-surface font-body antialiased">
-            <nav className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50 shadow-sm dark:shadow-none">
-                <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-                    <div className="text-2xl font-serif tracking-tight text-slate-900 dark:text-slate-50">ETHOS CURATED</div>
-                    <div className="hidden md:flex items-center gap-8">
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-opacity duration-300" href="#">Collections</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-opacity duration-300" href="#">About</a>
-                        <a className="text-slate-900 dark:text-slate-50 font-semibold border-b border-slate-900 dark:border-slate-50 transition-opacity duration-300" href="#">Support</a>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <span className="material-symbols-outlined text-slate-900 dark:text-slate-50 cursor-pointer hover:opacity-70 transition-opacity">favorite</span>
-                        <span className="material-symbols-outlined text-slate-900 dark:text-slate-50 cursor-pointer hover:opacity-70 transition-opacity">shopping_bag</span>
-                        <span className="material-symbols-outlined text-slate-900 dark:text-slate-50 cursor-pointer hover:opacity-70 transition-opacity">account_circle</span>
-                    </div>
-                </div>
-            </nav>
+            
             <main className="max-w-screen-2xl mx-auto px-8 py-16">
                 <section className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
                     <div className="lg:col-span-5">

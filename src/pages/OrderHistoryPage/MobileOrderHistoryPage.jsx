@@ -1,24 +1,9 @@
 export function MobileOrderHistoryPage() {
     return (
         <div className="bg-background text-on-surface font-body antialiased min-h-screen pb-24">
-            {/*  TopAppBar Component  */}
-            <nav className="fixed top-0 w-full z-50 bg-[#f8f9fa] dark:bg-slate-950/80 backdrop-blur-xl bg-gradient-to-b from-[#f3f4f5] to-transparent">
-                <div className="flex justify-between items-center px-6 h-16 w-full">
-                    <button className="text-[#051125] dark:text-slate-100 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">menu</span>
-                    </button>
-                    <span className="text-xl font-bold tracking-[0.2em] text-[#051125] dark:text-white font-headline uppercase">THE GALLERY</span>
-                    <button className="text-[#051125] dark:text-slate-100 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">shopping_bag</span>
-                    </button>
-                </div>
-            </nav>
+            
             <main className="pt-24 px-6 max-w-md mx-auto">
-                {/*  Header Section  */}
-                <header className="mb-8">
-                    <h1 className="text-3xl font-bold tracking-tight text-primary">Your Order History</h1>
-                    <p className="text-on-secondary-container text-sm font-label mt-2 tracking-wide uppercase">Curating your collection</p>
-                </header>
+                
                 {/*  Orders Feed (Asymmetric Layout)  */}
                 <div className="space-y-6">
                     {/*  Order Card 1: In Transit  */}
@@ -99,29 +84,7 @@ export function MobileOrderHistoryPage() {
                     <button className="px-8 py-3 bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold rounded-lg tracking-[0.2em] uppercase">Contact Concierge</button>
                 </div>
             </main>
-            {/*  BottomNavBar Component  */}
-            <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center pb-safe pt-3 px-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl z-50 rounded-t-xl shadow-[0_-4px_20px_rgba(25,28,29,0.04)]">
-                <button className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 w-16 group transition-colors">
-                    <span className="material-symbols-outlined">grid_view</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase mt-1">Gallery</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 w-16 group transition-colors">
-                    <span className="material-symbols-outlined">search</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase mt-1">Search</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 w-16 group transition-colors">
-                    <span className="material-symbols-outlined">shopping_cart</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase mt-1">Bag</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-[#051125] dark:text-[#6a5f00] font-bold relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-[#6a5f00] after:rounded-full w-16">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>package_2</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase mt-1">Orders</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 w-16 group transition-colors">
-                    <span className="material-symbols-outlined">person</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase mt-1">Profile</span>
-                </button>
-            </nav>
+            
         </div>
     );
 }

@@ -1,31 +1,9 @@
 export function DesktopShoppingCartPage() {
     return (
         <div className="bg-background text-on-surface min-h-screen flex flex-col">
-            {/* TopNavBar */}
-            <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
-                <div className="flex justify-between items-center w-full px-6 py-4 md:px-12">
-                    <div className="text-2xl font-['Noto_Serif'] font-bold tracking-tighter text-slate-900 dark:text-slate-50 uppercase">CURATED</div>
-                    <div className="hidden md:flex items-center space-x-8 font-['Noto_Serif'] tracking-tight text-sm uppercase">
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Collections</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Archive</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Journal</a>
-                    </div>
-                    <div className="flex items-center space-x-6">
-                        <button className="hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                            <span className="material-symbols-outlined text-slate-900 dark:text-slate-50">shopping_bag</span>
-                        </button>
-                        <button className="hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                            <span className="material-symbols-outlined text-slate-900 dark:text-slate-50">person</span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
+            
             <main className="flex-grow pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto w-full">
-                {/* Header */}
-                <header className="mb-12">
-                    <h1 className="serif-heading text-4xl md:text-5xl font-bold tracking-tighter text-primary">Your Bag</h1>
-                    <p className="text-sm font-label uppercase tracking-widest text-secondary mt-2">3 Artifacts Selected</p>
-                </header>
+                
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
                     {/* Left Column: Items */}
                     <div className="lg:col-span-8 space-y-12">

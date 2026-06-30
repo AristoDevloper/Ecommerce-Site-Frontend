@@ -1,31 +1,9 @@
 export function DesktopProductList() {
     return (
         <div className="bg-background text-on-surface flex flex-col min-h-screen">
-            {/*  TopNavBar  */}
-            <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
-                <div className="flex justify-between items-center w-full px-6 py-4 md:px-12">
-                    <div className="text-2xl font-['Noto_Serif'] font-bold tracking-tighter text-slate-900 dark:text-slate-50">CURATED</div>
-                    <div className="hidden md:flex items-center space-x-8 font-['Noto_Serif'] tracking-tight text-sm uppercase">
-                        <a className="text-slate-900 dark:text-slate-50 border-b border-slate-900 dark:border-slate-50 pb-1" href="#">Collections</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Archive</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Journal</a>
-                    </div>
-                    <div className="flex items-center space-x-6">
-                        <button className="hover:opacity-70 transition-opacity duration-300">
-                            <span className="material-symbols-outlined text-slate-900 dark:text-slate-50">shopping_bag</span>
-                        </button>
-                        <button className="hover:opacity-70 transition-opacity duration-300">
-                            <span className="material-symbols-outlined text-slate-900 dark:text-slate-50">person</span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
+            
             <main className="pt-24 pb-12 px-6 md:px-12 flex-grow max-w-screen-2xl mx-auto w-full">
-                {/*  Header Section  */}
-                <header className="mb-12">
-                    <h1 className="serif text-5xl md:text-6xl font-bold text-primary tracking-tighter mb-4">Object &amp; Form</h1>
-                    <p className="text-on-surface-variant max-w-xl font-body leading-relaxed">A permanent collection of essential artifacts for the modern living space. Defined by materiality, silhouette, and the quiet beauty of functional art.</p>
-                </header>
+                
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/*  Sidebar Filter  */}
                     <aside className="w-full lg:w-64 flex-shrink-0 space-y-10">
@@ -148,20 +126,7 @@ export function DesktopProductList() {
                                 </div>
                             </div>
                         </div>
-                        {/*  Pagination  */}
-                        <nav className="mt-24 flex items-center justify-center space-x-4">
-                            <a className="w-10 h-10 flex items-center justify-center rounded-full ghost-border text-on-surface-variant hover:text-primary transition-colors" href="#">
-                                <span className="material-symbols-outlined">chevron_left</span>
-                            </a>
-                            <a className="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold text-sm" href="#">1</a>
-                            <a className="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors font-bold text-sm" href="#">2</a>
-                            <a className="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors font-bold text-sm" href="#">3</a>
-                            <span className="text-on-surface-variant px-2">...</span>
-                            <a className="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors font-bold text-sm" href="#">8</a>
-                            <a className="w-10 h-10 flex items-center justify-center rounded-full ghost-border text-on-surface-variant hover:text-primary transition-colors" href="#">
-                                <span className="material-symbols-outlined">chevron_right</span>
-                            </a>
-                        </nav>
+                        
                     </div>
                 </div>
             </main>

@@ -1,16 +1,7 @@
 export function MobileProductDetails() {
     return (
         <div className="bg-background text-on-background font-body antialiased mobile-screen">
-            {/*  Top Navigation  */}
-            <header className="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm shadow-slate-900/5 dark:shadow-none flex justify-between items-center px-6 h-16">
-                <button className="hover:opacity-70 transition-opacity active:scale-95 duration-150">
-                    <span className="material-symbols-outlined text-slate-900 dark:text-slate-50">arrow_back</span>
-                </button>
-                <span className="text-2xl font-serif tracking-widest text-slate-900 dark:text-slate-50">ETHOS</span>
-                <button className="hover:opacity-70 transition-opacity active:scale-95 duration-150">
-                    <span className="material-symbols-outlined text-slate-900 dark:text-slate-50">shopping_bag</span>
-                </button>
-            </header>
+            
             <main className="pb-32 pt-16">
                 {/*  Hero Carousel Section  */}
                 <section className="relative w-full aspect-[4/5] bg-surface-container overflow-hidden">

@@ -1,16 +1,7 @@
 export function MobileConversationsPage() {
     return (
         <div className="bg-background text-on-surface min-h-screen">
-            {/* Top Navigation */}
-            <header className="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl shadow-sm shadow-slate-900/5 flex items-center justify-between px-6 h-16">
-                <div className="active:scale-95 transition-transform hover:opacity-70 transition-opacity">
-                    <span className="material-symbols-outlined text-slate-900">menu</span>
-                </div>
-                <h1 className="text-slate-900 font-serif tracking-tighter font-semibold text-lg">Inbox</h1>
-                <div className="active:scale-95 transition-transform hover:opacity-70 transition-opacity">
-                    <span className="material-symbols-outlined text-slate-900">search</span>
-                </div>
-            </header>
+            
             {/* Main Content */}
             <main className="pt-20 pb-24 px-4 max-w-md mx-auto">
                 {/* Filter Tabs */}
@@ -94,25 +85,7 @@ export function MobileConversationsPage() {
                 {/* Empty State Whisper */}
                 <p className="text-center text-[10px] uppercase tracking-[0.2em] text-outline mt-12 opacity-50">End of curated conversations</p>
             </main>
-            {/* Bottom Navigation */}
-            <nav className="fixed bottom-0 w-full h-20 bg-slate-50/80 backdrop-blur-xl flex justify-around items-center px-4 pb-4 z-50 rounded-t-xl shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
-                <a className="flex flex-col items-center justify-center text-slate-400 active:translate-y-0.5 transition-all hover:text-slate-700" href="#">
-                    <span className="material-symbols-outlined text-2xl">grid_view</span>
-                    <span className="font-['Manrope'] text-[10px] uppercase tracking-widest font-bold mt-1">Gallery</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 active:translate-y-0.5 transition-all hover:text-slate-700" href="#">
-                    <span className="material-symbols-outlined text-2xl">auto_awesome</span>
-                    <span className="font-['Manrope'] text-[10px] uppercase tracking-widest font-bold mt-1">Curations</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-900 scale-110 active:translate-y-0.5 transition-all" href="#">
-                    <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>chat_bubble</span>
-                    <span className="font-['Manrope'] text-[10px] uppercase tracking-widest font-bold mt-1">Inbox</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 active:translate-y-0.5 transition-all hover:text-slate-700" href="#">
-                    <span className="material-symbols-outlined text-2xl">person</span>
-                    <span className="font-['Manrope'] text-[10px] uppercase tracking-widest font-bold mt-1">Profile</span>
-                </a>
-            </nav>
+            
         </div>
     );
 }

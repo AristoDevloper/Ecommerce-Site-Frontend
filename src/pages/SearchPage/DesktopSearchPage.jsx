@@ -1,35 +1,9 @@
 export function DesktopSearchPage() {
     return (
         <div className="bg-background text-on-surface desktop-screen">
-            {/*  Top Navigation Bar  */}
-            <nav className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl text-slate-900 dark:text-slate-50 docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none">
-                <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-                    <div className="text-2xl font-serif tracking-tight text-slate-900 dark:text-slate-50 uppercase">ETHOS CURATED</div>
-                    <div className="hidden md:flex items-center space-x-8 font-label text-sm tracking-widest uppercase">
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">Collections</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">About</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">Support</a>
-                    </div>
-                    <div className="flex items-center space-x-6">
-                        <div className="relative hidden lg:block">
-                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
-                            <input className="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary w-64 font-body" placeholder="Explore artifacts..." type="text" />
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <button className="hover:opacity-70 transition-opacity duration-300"><span className="material-symbols-outlined">favorite</span></button>
-                            <button className="hover:opacity-70 transition-opacity duration-300"><span className="material-symbols-outlined">shopping_bag</span></button>
-                            <button className="hover:opacity-70 transition-opacity duration-300"><span className="material-symbols-outlined">account_circle</span></button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            
             <main className="max-w-screen-2xl mx-auto px-8 pt-12">
-                {/*  Results Header  */}
-                <header className="mb-12">
-                    <p className="text-sm font-label uppercase tracking-widest text-on-surface-variant mb-2">Search Results</p>
-                    <h1 className="text-4xl md:text-5xl font-serif tracking-tight text-primary">Results for "Obsidian Minimalist"</h1>
-                    <p className="mt-4 text-on-surface-variant font-body">12 curated items found matching your aesthetic intent.</p>
-                </header>
+                
                 <div className="flex flex-col md:flex-row gap-12">
                     {/*  Sidebar Filters  */}
                     <aside className="w-full md:w-64 flex-shrink-0">

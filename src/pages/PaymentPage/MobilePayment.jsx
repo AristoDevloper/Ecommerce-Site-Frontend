@@ -1,18 +1,7 @@
 export function MobilePayment() {
     return (
         <div className="mobile-screen bg-background text-on-background font-body selection:bg-primary-fixed-dim selection:text-primary min-h-screen pb-32">
-            {/*  TopAppBar  */}
-            <header className="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl">
-                <div className="flex justify-between items-center px-6 py-4 w-full max-w-screen-xl mx-auto">
-                    <button className="text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">arrow_back</span>
-                    </button>
-                    <h1 className="text-xl font-bold tracking-[0.2em] text-slate-900 dark:text-slate-50 font-noto-serif">ETHOS</h1>
-                    <button className="text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">shopping_bag</span>
-                    </button>
-                </div>
-            </header>
+            
             <main className="pt-24 px-6 max-w-md mx-auto">
                 {/*  Editorial Title  */}
                 <div className="mb-10 text-center">

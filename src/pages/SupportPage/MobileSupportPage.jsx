@@ -9,18 +9,7 @@ export function MobileSupportPage() {
 
     return (
         <div className="mobile-screen bg-background text-on-background font-body antialiased">
-            {/*  TopAppBar  */}
-            <header className="fixed top-0 w-full z-50 bg-[#f8f9fa] dark:bg-slate-950/80 backdrop-blur-xl bg-gradient-to-b from-[#f3f4f5] to-transparent">
-                <div className="flex justify-between items-center px-6 h-16 w-full">
-                    <button className="text-[#051125] dark:text-slate-100 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">menu</span>
-                    </button>
-                    <h1 className="text-xl font-bold tracking-[0.2em] text-[#051125] dark:text-white font-headline uppercase">THE GALLERY</h1>
-                    <button className="text-[#051125] dark:text-slate-100 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">shopping_bag</span>
-                    </button>
-                </div>
-            </header>
+            
             <main className="pt-24 pb-32 px-6 max-w-md mx-auto">
                 {/*  Hero Header  */}
                 <section className="mb-12">
@@ -154,29 +143,7 @@ export function MobileSupportPage() {
                     </button>
                 </section>
             </main>
-            {/*  BottomNavBar  */}
-            <nav className="fixed bottom-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl flex justify-around items-center pb-safe pt-3 px-4 z-50 rounded-t-xl shadow-[0_-4px_20px_rgba(25,28,29,0.04)]">
-                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white tap-highlight-none active:scale-90 transition-transform" href="#">
-                    <span className="material-symbols-outlined mb-1">grid_view</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase">Gallery</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white tap-highlight-none active:scale-90 transition-transform" href="#">
-                    <span className="material-symbols-outlined mb-1">search</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase">Search</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-[#051125] dark:text-[#6a5f00] font-bold relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-[#6a5f00] after:rounded-full tap-highlight-none active:scale-90 transition-transform" href="#">
-                    <span className="material-symbols-outlined mb-1" style={{ fontVariationSettings: "'FILL' 1" }}>contact_support</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase">Support</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white tap-highlight-none active:scale-90 transition-transform" href="#">
-                    <span className="material-symbols-outlined mb-1">package_2</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase">Orders</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#051125] dark:hover:text-white tap-highlight-none active:scale-90 transition-transform" href="#">
-                    <span className="material-symbols-outlined mb-1">person</span>
-                    <span className="font-body text-[10px] tracking-widest uppercase">Profile</span>
-                </a>
-            </nav>
+            
         </div>
     );
 }

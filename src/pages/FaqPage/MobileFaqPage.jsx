@@ -9,18 +9,7 @@ export function MobileFaqPage() {
 
     return (
         <div className="bg-background text-on-background font-body antialiased">
-            {/*  TopAppBar  */}
-            <header className="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl fixed top-0 w-full z-50">
-                <div className="flex justify-between items-center px-6 py-4 w-full max-w-screen-xl mx-auto">
-                    <button className="text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">menu</span>
-                    </button>
-                    <h1 className="text-xl font-bold tracking-[0.2em] text-slate-900 dark:text-slate-50 font-noto-serif uppercase">Ethos</h1>
-                    <button className="text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">shopping_bag</span>
-                    </button>
-                </div>
-            </header>
+            
             <main className="pt-20 pb-24">
                 {/*  Hero Search Section  */}
                 <section className="px-6 pt-8 pb-12 bg-surface">
@@ -194,31 +183,7 @@ export function MobileFaqPage() {
                     </div>
                 </section>
             </main>
-            {/*  BottomNavBar  */}
-            <nav className="bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 z-50 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.06)] border-t border-slate-200/50 dark:border-slate-800/50">
-                <button className="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 w-16 group transition-colors">
-                    <span className="material-symbols-outlined mb-1">grid_view</span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Explore</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-primary dark:text-primary-fixed w-16">
-                    <div className="bg-primary/5 dark:bg-primary-fixed/10 p-2 rounded-xl mb-1">
-                        <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>help</span>
-                    </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Help</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 w-16 group transition-colors">
-                    <span className="material-symbols-outlined mb-1">receipt_long</span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Orders</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 w-16 group transition-colors">
-                    <span className="material-symbols-outlined mb-1">local_mall</span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Cart</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 w-16 group transition-colors">
-                    <span className="material-symbols-outlined mb-1">person</span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider">Account</span>
-                </button>
-            </nav>
+            
         </div>
     );
 }

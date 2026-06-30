@@ -1,28 +1,12 @@
 export function DesktopCheckout() {
     return (
         <div className="bg-background text-on-surface min-h-screen desktop-screen">
-            {/*  TopNavBar Suppression: Checkout is Transactional. Custom Minimal Header Instead. */}
-            <header className="w-full bg-white/80 backdrop-blur-xl sticky top-0 z-50">
-                <div className="max-w-screen-2xl mx-auto flex justify-between items-center px-8 py-6">
-                    <h1 className="text-2xl font-serif tracking-tight text-primary font-bold">ETHOS CURATED</h1>
-                    <div className="flex items-center gap-2 text-on-surface-variant text-sm font-medium">
-                        <span className="material-symbols-outlined text-sm">lock</span>
-                        <span className="font-label">SECURE CHECKOUT</span>
-                    </div>
-                </div>
-            </header>
+            
             <main className="max-w-screen-2xl mx-auto px-8 py-12 md:py-20">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
                     {/*  Left Column: Checkout Steps */}
                     <div className="lg:col-span-7 space-y-16">
-                        {/*  Progress Indicator */}
-                        <nav className="flex items-center gap-4 text-xs font-label tracking-widest text-on-surface-variant mb-8">
-                            <span className="text-primary font-bold">01 SHIPPING</span>
-                            <span className="w-8 h-[1px] bg-outline-variant/30"></span>
-                            <span className="opacity-40">02 DELIVERY</span>
-                            <span className="w-8 h-[1px] bg-outline-variant/30"></span>
-                            <span className="opacity-40">03 PAYMENT</span>
-                        </nav>
+                        
                         {/*  Step 1: Shipping Address */}
                         <section>
                             <h2 className="text-3xl font-serif text-primary mb-10 leading-tight">Shipping Address</h2>

@@ -1,18 +1,7 @@
 export function MobileAboutPage() {
     return (
         <div className="mobile-screen bg-background text-on-background font-body antialiased">
-            {/*  TopAppBar  */}
-            <header className="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl">
-                <div className="flex justify-between items-center px-6 py-4 w-full max-w-screen-xl mx-auto">
-                    <div className="flex items-center gap-4">
-                        <span className="material-symbols-outlined text-slate-900 cursor-pointer">menu</span>
-                    </div>
-                    <h1 className="text-xl font-bold tracking-[0.2em] text-slate-900 font-headline uppercase">ETHOS</h1>
-                    <div className="flex items-center gap-4">
-                        <span className="material-symbols-outlined text-slate-900 cursor-pointer">shopping_bag</span>
-                    </div>
-                </div>
-            </header>
+            
             <main className="pt-20 pb-32">
                 {/*  Hero Section  */}
                 <section className="px-6 py-12">
@@ -80,25 +69,7 @@ export function MobileAboutPage() {
                     </div>
                 </section>
             </main>
-            {/*  BottomNavBar  */}
-            <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center px-8 py-4 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.04)] z-50 pb-safe">
-                {/*  Home (Inactive)  */}
-                <div className="flex flex-col items-center justify-center text-slate-400 w-12 h-12 active:scale-90 transition-transform tap-highlight-none">
-                    <span className="material-symbols-outlined">grid_view</span>
-                </div>
-                {/*  Search (Inactive)  */}
-                <div className="flex flex-col items-center justify-center text-slate-400 w-12 h-12 active:scale-90 transition-transform tap-highlight-none">
-                    <span className="material-symbols-outlined">search</span>
-                </div>
-                {/*  Mall (Inactive)  */}
-                <div className="flex flex-col items-center justify-center text-slate-400 w-12 h-12 active:scale-90 transition-transform tap-highlight-none">
-                    <span className="material-symbols-outlined">local_mall</span>
-                </div>
-                {/*  Profile (Active - Since About Us is a brand anchor, we assume the user's intent is brand exploration/profile context)  */}
-                <div className="flex flex-col items-center justify-center bg-slate-900 text-white rounded-full w-12 h-12 active:scale-90 transition-transform tap-highlight-none">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>person</span>
-                </div>
-            </nav>
+            
         </div>
     )
 }

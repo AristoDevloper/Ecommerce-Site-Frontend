@@ -1,31 +1,9 @@
 export function DesktopTrackOrderPage() {
     return (
         <div className="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
-            {/* TopNavBar */}
-            <nav className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl text-slate-900 dark:text-slate-50 sticky top-0 z-50 shadow-sm dark:shadow-none transition-all duration-300 ease-in-out">
-                <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-                    <div className="text-2xl font-serif tracking-tight text-slate-900 dark:text-slate-50">ETHOS CURATED</div>
-                    <div className="hidden md:flex items-center gap-10">
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300 font-label" href="#">Collections</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300 font-label" href="#">About</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300 font-label" href="#">Support</a>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <button className="hover:opacity-70 transition-opacity duration-300"><span className="material-symbols-outlined">favorite</span></button>
-                        <button className="hover:opacity-70 transition-opacity duration-300"><span className="material-symbols-outlined">shopping_bag</span></button>
-                        <button className="hover:opacity-70 transition-opacity duration-300 text-slate-900 dark:text-slate-50 font-semibold border-b border-slate-900 dark:border-slate-50"><span className="material-symbols-outlined">account_circle</span></button>
-                    </div>
-                </div>
-            </nav>
+            
             <main className="max-w-screen-xl mx-auto px-6 md:px-8 py-12 md:py-20">
-                {/* Header Section */}
-                <header className="mb-16">
-                    <div className="inline-block px-3 py-1 bg-surface-container-high rounded-full mb-4">
-                        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant font-label">Tracking Artifact #EC-29410</span>
-                    </div>
-                    <h1 className="text-4xl md:text-5xl font-serif tracking-tight leading-tight mb-4">Your acquisition is in transit.</h1>
-                    <p className="text-on-surface-variant max-w-lg leading-relaxed text-lg">Estimated arrival for your curated selection is <span className="text-primary font-bold">October 24th, 2024</span>.</p>
-                </header>
+                
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                     {/* Left: Timeline and Details */}
                     <div className="lg:col-span-8 space-y-12">

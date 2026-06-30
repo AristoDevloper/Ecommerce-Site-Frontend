@@ -1,45 +1,9 @@
 export function DesktopWishlistPage() {
     return (
         <div className="bg-background text-on-surface font-body antialiased">
-            {/*  TopNavBar  */}
-            <nav className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none sticky top-0 z-50">
-                <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-                    <div className="flex items-center gap-8">
-                        <span className="text-2xl font-serif tracking-tight text-slate-900 dark:text-slate-50">ETHOS CURATED</span>
-                        <div className="hidden md:flex gap-6">
-                            <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-opacity duration-300" href="#">Collections</a>
-                            <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-opacity duration-300" href="#">About</a>
-                            <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-opacity duration-300" href="#">Support</a>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <button className="text-slate-900 dark:text-slate-50 font-semibold border-b border-slate-900 dark:border-slate-50 transition-opacity duration-300">
-                            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>favorite</span>
-                        </button>
-                        <button className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-opacity duration-300">
-                            <span className="material-symbols-outlined">shopping_bag</span>
-                        </button>
-                        <button className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 transition-opacity duration-300">
-                            <span className="material-symbols-outlined">account_circle</span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
+            
             <main className="max-w-screen-2xl mx-auto px-8 pt-16">
-                {/*  Header Section  */}
-                <header className="mb-16">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                        <div>
-                            <p className="font-label text-xs uppercase tracking-[0.2em] text-tertiary mb-3">Your Personal Collection</p>
-                            <h1 className="text-5xl md:text-6xl font-serif tracking-tight leading-none text-primary">Wishlist</h1>
-                        </div>
-                        <div className="flex gap-4 items-center text-on-surface-variant font-label text-sm">
-                            <span className="font-semibold text-primary">8 Artifacts</span>
-                            <span className="w-1 h-1 rounded-full bg-outline-variant"></span>
-                            <span>Sorted by: Date Added</span>
-                        </div>
-                    </div>
-                </header>
+                
                 {/*  Wishlist Bento-Style Grid  */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                     {/*  Item 1: Large Featured Card  */}

@@ -1,18 +1,7 @@
 export function MobileCheckout() {
     return (
         <div className="bg-background text-on-background selection:bg-primary/10 mobile-screen">
-            {/*  Header (Shared Component: TopAppBar)  */}
-            <header className="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl fixed top-0 w-full z-50">
-                <div className="flex justify-between items-center px-6 py-4 w-full max-w-screen-xl mx-auto">
-                    <div className="flex items-center gap-4">
-                        <span className="material-symbols-outlined text-slate-900 cursor-pointer transition-opacity hover:opacity-70">arrow_back</span>
-                        <h1 className="text-xl font-bold tracking-[0.2em] text-slate-900 uppercase">ETHOS</h1>
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <span className="material-symbols-outlined text-slate-900 cursor-pointer transition-opacity hover:opacity-70">shopping_bag</span>
-                    </div>
-                </div>
-            </header>
+            
             <main className="pt-24 pb-32 px-6 max-w-lg mx-auto">
                 {/*  Progress Indicator  */}
                 <div className="flex justify-between items-center mb-10 px-2">

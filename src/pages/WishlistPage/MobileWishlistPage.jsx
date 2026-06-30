@@ -1,19 +1,7 @@
 export function MobileWishlistPage() {
     return (
         <div className="mobile-screen bg-background text-on-background font-body selection:bg-primary-fixed-dim selection:text-primary min-h-screen pb-32">
-            {/*  TopAppBar  */}
-            <header className="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl fixed top-0 w-full z-50">
-                <div className="flex justify-between items-center px-6 py-4 w-full max-w-screen-xl mx-auto">
-                    <button className="text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity active:scale-95 duration-200">
-                        <span className="material-symbols-outlined">menu</span>
-                    </button>
-                    <h1 className="text-xl font-bold tracking-[0.2em] text-slate-900 dark:text-slate-50 font-noto-serif">ETHOS</h1>
-                    <button className="text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity active:scale-95 duration-200 relative">
-                        <span className="material-symbols-outlined">shopping_bag</span>
-                        <span className="absolute top-0 -right-1 w-2 h-2 bg-tertiary rounded-full"></span>
-                    </button>
-                </div>
-            </header>
+            
             <main className="pt-24 pb-32 px-6">
                 {/*  Editorial Header  */}
                 <section className="mb-12">
@@ -115,21 +103,7 @@ export function MobileWishlistPage() {
                     <div className="w-px h-12 bg-outline-variant/20 mx-auto mt-6"></div>
                 </div>
             </main>
-            {/*  BottomNavBar  */}
-            <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center px-8 py-4 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl z-50 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
-                <button className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 w-12 h-12 hover:text-slate-900 dark:hover:text-slate-50 transition-colors tap-highlight-none active:scale-90 transition-transform">
-                    <span className="material-symbols-outlined">grid_view</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 w-12 h-12 hover:text-slate-900 dark:hover:text-slate-50 transition-colors tap-highlight-none active:scale-90 transition-transform">
-                    <span className="material-symbols-outlined">search</span>
-                </button>
-                <button className="flex flex-col items-center justify-center bg-slate-900 dark:bg-slate-50 text-white dark:text-slate-900 rounded-full w-12 h-12 tap-highlight-none active:scale-90 transition-transform shadow-lg">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>local_mall</span>
-                </button>
-                <button className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 w-12 h-12 hover:text-slate-900 dark:hover:text-slate-50 transition-colors tap-highlight-none active:scale-90 transition-transform">
-                    <span className="material-symbols-outlined">person</span>
-                </button>
-            </nav>
+            
         </div>
     );
 }

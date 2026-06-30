@@ -1,21 +1,7 @@
 export function DesktopPayment() {
     return (
         <div className="bg-background text-on-surface">
-            <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 shadow-sm">
-                <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-                    <div className="text-2xl font-serif tracking-tight text-slate-900">ETHOS CURATED</div>
-                    <nav className="hidden md:flex items-center space-x-12">
-                        <a className="text-slate-500 hover:text-slate-900 transition-opacity duration-300" href="#">Collections</a>
-                        <a className="text-slate-500 hover:text-slate-900 transition-opacity duration-300" href="#">About</a>
-                        <a className="text-slate-500 hover:text-slate-900 transition-opacity duration-300" href="#">Support</a>
-                    </nav>
-                    <div className="flex items-center space-x-6">
-                        <span className="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity">favorite</span>
-                        <span className="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity">shopping_bag</span>
-                        <span className="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity">account_circle</span>
-                    </div>
-                </div>
-            </header>
+            
             <main className="max-w-screen-2xl mx-auto px-8 py-12 md:py-20">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
                     <section className="lg:col-span-7 space-y-12">
@@ -145,19 +131,11 @@ export function DesktopPayment() {
                     </div>
                     <div className="space-y-4">
                         <h4 className="font-serif text-sm">Services</h4>
-                        <nav className="flex flex-col space-y-2 text-sm text-slate-500">
-                            <a className="hover:text-amber-700 transition-colors" href="#">Shipping &amp; Delivery</a>
-                            <a className="hover:text-amber-700 transition-colors" href="#">Secure Payment</a>
-                            <a className="hover:text-amber-700 transition-colors" href="#">Tracking</a>
-                        </nav>
+                        
                     </div>
                     <div className="space-y-4">
                         <h4 className="font-serif text-sm">Company</h4>
-                        <nav className="flex flex-col space-y-2 text-sm text-slate-500">
-                            <a className="hover:text-amber-700 transition-colors" href="#">Brand Story</a>
-                            <a className="hover:text-amber-700 transition-colors" href="#">FAQ</a>
-                            <a className="hover:text-amber-700 transition-colors" href="#">Contact</a>
-                        </nav>
+                        
                     </div>
                     <div className="space-y-4">
                         <h4 className="font-serif text-sm">Registry</h4>

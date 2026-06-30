@@ -1,22 +1,7 @@
 export function DesktopAboutPage() {
     return (
         <div className="desktop-screen bg-background text-on-surface selection:bg-primary-container selection:text-white">
-            {/*  TopNavBar  */}
-            <nav className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none">
-                <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-                    <div className="text-2xl font-serif tracking-tight text-slate-900 dark:text-slate-50">ETHOS CURATED</div>
-                    <div className="hidden md:flex items-center space-x-12">
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">Collections</a>
-                        <a className="text-slate-900 dark:text-slate-50 font-semibold border-b border-slate-900 dark:border-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">About</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">Support</a>
-                    </div>
-                    <div className="flex items-center space-x-6">
-                        <button className="hover:opacity-70 transition-opacity duration-300"><span className="material-symbols-outlined text-slate-900 dark:text-slate-50" data-icon="favorite">favorite</span></button>
-                        <button className="hover:opacity-70 transition-opacity duration-300"><span className="material-symbols-outlined text-slate-900 dark:text-slate-50" data-icon="shopping_bag">shopping_bag</span></button>
-                        <button className="hover:opacity-70 transition-opacity duration-300"><span className="material-symbols-outlined text-slate-900 dark:text-slate-50" data-icon="account_circle">account_circle</span></button>
-                    </div>
-                </div>
-            </nav>
+            
             <main>
                 {/*  Hero Section  */}
                 <section className="relative h-[85vh] flex items-center overflow-hidden">

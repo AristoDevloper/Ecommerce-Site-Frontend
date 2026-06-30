@@ -1,20 +1,7 @@
 export function MobileHomePage() {
     return (
         <div className="mobile-screen bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
-            {/*  TopAppBar Shell  */}
-            <header className="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 shadow-sm shadow-slate-900/5">
-                <div className="flex items-center gap-4">
-                    <button className="text-slate-900 hover:opacity-70 transition-opacity active:scale-95 duration-150">
-                        <span className="material-symbols-outlined" data-icon="menu">menu</span>
-                    </button>
-                </div>
-                <h1 className="text-2xl font-serif tracking-widest text-slate-900">ETHOS</h1>
-                <div className="flex items-center gap-4">
-                    <button className="text-slate-900 hover:opacity-70 transition-opacity active:scale-95 duration-150">
-                        <span className="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
-                    </button>
-                </div>
-            </header>
+
             <main className="pt-16 pb-24">
                 {/*  Hero Section  */}
                 <section className="relative h-[751px] w-full overflow-hidden flex flex-col justify-end">
@@ -145,29 +132,7 @@ export function MobileHomePage() {
                     </div>
                 </section>
             </main>
-            {/*  BottomNavBar Shell  */}
-            <nav className="fixed bottom-0 w-full z-50 bg-slate-50/90 backdrop-blur-2xl flex justify-around items-center px-4 h-20 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] pb-safe">
-                {/*  Gallery (Active)  */}
-                <a className="flex flex-col items-center justify-center text-slate-900 border-t-2 border-slate-900 pt-2 transform translate-y-[-2px] transition-transform" href="#">
-                    <span className="material-symbols-outlined" data-icon="home_app_logo" style={{ fontVariationSettings: "'FILL' 1" }}>home_app_logo</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Gallery</span>
-                </a>
-                {/*  Search  */}
-                <a className="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-slate-600 transition-colors" href="#">
-                    <span className="material-symbols-outlined" data-icon="search">search</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Search</span>
-                </a>
-                {/*  Bag  */}
-                <a className="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-slate-600 transition-colors" href="#">
-                    <span className="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Bag</span>
-                </a>
-                {/*  Profile  */}
-                <a className="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-slate-600 transition-colors" href="#">
-                    <span className="material-symbols-outlined" data-icon="person">person</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Profile</span>
-                </a>
-            </nav>
+            
         </div>
     )
 }

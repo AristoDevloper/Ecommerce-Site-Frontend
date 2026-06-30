@@ -1,16 +1,7 @@
 export function MobileProductListing() {
     return (
         <div className="bg-background text-on-background font-body select-none mobile-screen">
-            {/*  TopAppBar  */}
-            <header className="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 shadow-sm shadow-slate-900/5 dark:shadow-none">
-                <div className="flex items-center hover:opacity-70 transition-opacity cursor-pointer active:scale-95 duration-150">
-                    <span className="material-symbols-outlined text-slate-900 dark:text-slate-50" data-icon="menu">menu</span>
-                </div>
-                <div className="text-2xl font-serif tracking-widest text-slate-900 dark:text-slate-50">ETHOS</div>
-                <div className="flex items-center hover:opacity-70 transition-opacity cursor-pointer active:scale-95 duration-150">
-                    <span className="material-symbols-outlined text-slate-900 dark:text-slate-50" data-icon="shopping_bag">shopping_bag</span>
-                </div>
-            </header>
+            
             <main className="pt-20 pb-24 px-4 max-w-md mx-auto">
                 {/*  Editorial Header  */}
                 <section className="mb-10 text-center">
@@ -106,25 +97,7 @@ export function MobileProductListing() {
                     </div>
                 </div>
             </main>
-            {/*  BottomNavBar  */}
-            <nav className="fixed bottom-0 w-full z-50 pb-safe bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-2xl flex justify-around items-center px-4 h-20 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
-                <div className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 pt-2 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer">
-                    <span className="material-symbols-outlined" data-icon="home_app_logo">home_app_logo</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold Manrope">Gallery</span>
-                </div>
-                <div className="flex flex-col items-center justify-center text-slate-900 dark:text-white border-t-2 border-slate-900 dark:border-white pt-2 transform translate-y-[-2px] transition-transform cursor-pointer">
-                    <span className="material-symbols-outlined" data-icon="search">search</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold Manrope">Search</span>
-                </div>
-                <div className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 pt-2 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer">
-                    <span className="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold Manrope">Bag</span>
-                </div>
-                <div className="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 pt-2 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer">
-                    <span className="material-symbols-outlined" data-icon="person">person</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold Manrope">Profile</span>
-                </div>
-            </nav>
+            
             {/*  Contextual Quick Action (Only on top-level listing)  */}
             <div className="fixed bottom-24 right-6 z-40">
                 <button className="bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center shadow-2xl shadow-primary/40 backdrop-blur-md bg-opacity-95 active:scale-90 transition-transform">

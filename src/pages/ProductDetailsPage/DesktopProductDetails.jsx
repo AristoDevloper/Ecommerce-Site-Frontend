@@ -1,23 +1,7 @@
 export function DesktopProductDetails() {
     return (
         <div className="bg-background text-on-surface font-body selection:bg-tertiary-container selection:text-on-tertiary-container">
-            {/*  Top Navigation Bar  */}
-            <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 md:px-12">
-                <div className="text-2xl font-['Noto_Serif'] font-bold tracking-tighter text-slate-900 dark:text-slate-50 uppercase">CURATED</div>
-                <div className="hidden md:flex items-center space-x-8 font-['Noto_Serif'] tracking-tight text-sm uppercase">
-                    <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Collections</a>
-                    <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Archive</a>
-                    <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Journal</a>
-                </div>
-                <div className="flex items-center space-x-6">
-                    <button className="hover:opacity-70 transition-opacity duration-300">
-                        <span className="material-symbols-outlined text-slate-900">shopping_bag</span>
-                    </button>
-                    <button className="hover:opacity-70 transition-opacity duration-300">
-                        <span className="material-symbols-outlined text-slate-900">person</span>
-                    </button>
-                </div>
-            </nav>
+            
             <main className="pt-24 pb-20">
                 {/*  Product Hero Section (Asymmetric Editorial Layout)  */}
                 <section className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -25,14 +9,6 @@ export function DesktopProductDetails() {
                     <div className="lg:col-span-7 space-y-8">
                         <div className="aspect-[4/5] bg-surface-container-low rounded-md overflow-hidden">
                             <img className="w-full h-full object-cover" data-alt="studio shot of a minimalist luxury timepiece on a textured charcoal background with sharp editorial lighting and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoQXqDxSRGKPo4aiHjHdP3LCm7W7rvVYOakW5wr6XgEr_cgqdM81FmB5JytntYT2sF2kLlN-Pppepv5zCyxKEkwrcjiKPa2NMVsyE-_OhCF3hGSVLU8QB16phcwIH2S09B3JXb3dpeRZD4FiLzI9Ofu38_3dtWOPr32rpqfcQMtxdbr9zfj8prQYcn4MXNRgdPjGab6O_ebFTSarPA1rBbyPBpACJ5pujK3iThCqYNW6VeO7CLjSBDXf-r3OladvR4IkvwFAvwhg3v" />
-                        </div>
-                        <div className="grid grid-cols-2 gap-8">
-                            <div className="aspect-square bg-surface-container-low rounded-md overflow-hidden">
-                                <img className="w-full h-full object-cover" data-alt="extreme close up of a watch crown and bezel showing intricate mechanical details and polished steel reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ_FuqmHvv8sJYmiaEwMkETKVbKJCFufOy3e9H3nQdYdekF8UYf540oIxMRWapgjjg5XZhQLmR2DLAV4PBAmO30wfd-TMGv__dITHvxl_bxEsrTqDc0lou6tZ1z2TrXmywFZMiAvXX-67MlI_eNuQ7i5NM7oVQD7odax94lc0IiwSEdL4tLovfKziZxeORhI_CtHz1lOZWAEMilhp7unSu4kkKiHYsoKCeRMUUUOeAxz_ZopCZlImowjn8fKBbKOhniWyGXeVlYIlO" />
-                            </div>
-                            <div className="aspect-square bg-surface-container-low rounded-md overflow-hidden translate-y-12">
-                                <img className="w-full h-full object-cover" data-alt="lifestyle shot of a luxury watch worn on a wrist under a tailored wool sleeve in a soft lit architectural setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs_EB-S3oHLtGBCDR8xA0pyMh6soKNGCC7jqoXolCr22cB-GMAImAd5Ku48DWk4JHnSwbNuIu219_StUKGDvS9X4iVNMhPHUGmnfCUlUeB_1xtPxxULmMwwYmEV36vza_qRvDjhlB4VTXNY1_niolZLm51x1h_e9y11wiFPwVFdveX9Y8Lh1ihQgEdUL4_MfPVNFZhnVOoNsJrak5B7f3uph7hICdsiANicKJB0THFhSNo4C0__fodCCGOvOkSMCuL_sMgvM4JthBW" />
-                            </div>
                         </div>
                     </div>
                     {/*  Product Details Sticky Container  */}

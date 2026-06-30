@@ -1,28 +1,9 @@
 export function DesktopFaqPage() {
     return (
         <div className="bg-background text-on-surface">
-            {/*  Top Navigation Bar  */}
-            <nav className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm dark:shadow-none sticky top-0 z-50">
-                <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-                    <div className="text-2xl font-serif tracking-tight text-slate-900 dark:text-slate-50">ETHOS CURATED</div>
-                    <div className="hidden md:flex gap-10 items-center">
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">Collections</a>
-                        <a className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">About</a>
-                        <a className="text-slate-900 dark:text-slate-50 font-semibold border-b border-slate-900 dark:border-slate-50 hover:opacity-70 transition-opacity duration-300" href="#">Support</a>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <button className="material-symbols-outlined text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity duration-300">favorite</button>
-                        <button className="material-symbols-outlined text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity duration-300">shopping_bag</button>
-                        <button className="material-symbols-outlined text-slate-900 dark:text-slate-50 hover:opacity-70 transition-opacity duration-300">account_circle</button>
-                    </div>
-                </div>
-            </nav>
+            
             <main className="max-w-screen-2xl mx-auto px-8 py-20">
-                {/*  Hero Section  */}
-                <header className="mb-24 max-w-3xl">
-                    <h1 className="font-serif text-5xl md:text-7xl mb-8 tracking-tight text-primary leading-tight">Concierge &amp; Artifact Care</h1>
-                    <p className="text-on-surface-variant text-lg leading-relaxed font-light">Your journey with Ethos Curated continues long after your acquisition. Explore our curated knowledge base for guidance on logistics, returns, and the enduring care of your collection.</p>
-                </header>
+                
                 {/*  Bento Grid Navigation for FAQ Categories  */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-32">
                     <a className="group relative bg-surface-container-low p-8 h-64 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:bg-surface-container-high" href="#shipping">

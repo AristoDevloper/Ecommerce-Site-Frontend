@@ -1,17 +1,7 @@
 export function MobileShoppingCartPage() {
     return (
         <div className="bg-background text-on-background font-body min-h-screen pb-32 mobile-screen">
-            {/* TopAppBar */}
-            <header className="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 shadow-sm shadow-slate-900/5">
-                <button className="hover:opacity-70 transition-opacity active:scale-95 duration-150 text-slate-900">
-                    <span className="material-symbols-outlined">menu</span>
-                </button>
-                <h1 className="text-2xl font-serif tracking-widest text-slate-900">ETHOS</h1>
-                <button className="hover:opacity-70 transition-opacity active:scale-95 duration-150 text-slate-900 relative">
-                    <span className="material-symbols-outlined">shopping_bag</span>
-                    <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">3</span>
-                </button>
-            </header>
+            
             <main className="pt-24 px-6 max-w-md mx-auto">
                 {/* Editorial Header */}
                 <div className="mb-12">
@@ -142,25 +132,7 @@ export function MobileShoppingCartPage() {
                     </div>
                 </div>
             </div>
-            {/* BottomNavBar */}
-            <nav className="fixed bottom-0 w-full z-50 bg-slate-50/90 backdrop-blur-2xl flex justify-around items-center px-4 h-20 shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
-                <a className="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-slate-600 transition-colors" href="#">
-                    <span className="material-symbols-outlined">home_app_logo</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Gallery</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-slate-600 transition-colors" href="#">
-                    <span className="material-symbols-outlined">search</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Search</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-900 border-t-2 border-slate-900 pt-2 transform translate-y-[-2px] transition-transform" href="#">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_cart</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Bag</span>
-                </a>
-                <a className="flex flex-col items-center justify-center text-slate-400 pt-2 hover:text-slate-600 transition-colors" href="#">
-                    <span className="material-symbols-outlined">person</span>
-                    <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Profile</span>
-                </a>
-            </nav>
+            
         </div>
     );
 }
