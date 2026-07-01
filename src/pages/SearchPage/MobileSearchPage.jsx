@@ -14,7 +14,7 @@ export function MobileSearchPage() {
     };
 
     return (
-        <div className="bg-background text-on-background font-body antialiased mobile-screen min-h-screen">
+        <div className="mt-12 bg-background text-on-background font-body antialiased mobile-screen min-h-screen">
             
             <main className="pt-8 pb-24 px-6">
                 {/* Search Input Area */}

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export function DesktopHeader() {
     return (
-        <nav className="fixed top-0 w-full z-50 glass-nav shadow-sm bg-white/80 backdrop-blur-md">
+        <nav className="sticky top-0 w-full z-50 glass-nav shadow-sm bg-white/80 backdrop-blur-md">
             <div className="flex justify-between items-center w-full px-6 py-4 md:px-12">
                 <div className="flex gap-8 items-center">
                     <Link className="text-2xl serif-tight font-bold tracking-tighter text-slate-900" to="/">CURATED</Link>
