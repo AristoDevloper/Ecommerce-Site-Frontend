@@ -3,7 +3,7 @@ import { DesktopHeader } from './DesktopHeader';
 import { MobileHeader } from './MobileHeader';
 import { MobileBottomNav } from './MobileBottomNav';
 
-export function Header() {
+export function Header({ isAuthenticated }) {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
     useEffect(() => {
@@ -19,8 +19,8 @@ export function Header() {
 
     return isMobile ? (
         <>
-            <MobileHeader />
-            <MobileBottomNav />
+            <MobileHeader isAuthenticated={isAuthenticated} />
+            <MobileBottomNav isAuthenticated={isAuthenticated} />
         </>
-    ) : <DesktopHeader />;
+    ) : <DesktopHeader isAuthenticated={isAuthenticated} />;
 }

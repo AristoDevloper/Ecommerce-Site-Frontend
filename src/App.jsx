@@ -10,6 +10,7 @@ import { ShoppingCartPage } from './pages/ShoppingCartPage/ShoppingCartPage'
 import { TrackOrderPage } from './pages/TrackOrderPage/TrackOrderPage'
 import { ConversationsPage } from './pages/ConversationsPage/ConversationsPage'
 import { SellerChatPage } from './pages/SellerChatPage/SellerChatPage'
+import { OrderHistoryPage } from './pages/OrderHistoryPage/OrderHistoryPage'
 import { Header } from './components/Header/Header'
 import { useEffect, useState } from 'react'
 
@@ -81,7 +82,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} />
       <Routes>
         <Route path="/" element={<HomePage isAuthenticated={isAuthenticated} />} />
         <Route path="/about" element={<AboutPage isAuthenticated={isAuthenticated} />} />
@@ -93,6 +94,7 @@ function App() {
         <Route path="/track-order" element={<TrackOrderPage isAuthenticated={isAuthenticated} />} />
         <Route path="/conversations" element={<ConversationsPage isAuthenticated={isAuthenticated} />} />
         <Route path="/seller-chat" element={<SellerChatPage isAuthenticated={isAuthenticated} />} />
+        <Route path="/orders" element={<OrderHistoryPage isAuthenticated={isAuthenticated} />} />
       </Routes>
     </>
   )
