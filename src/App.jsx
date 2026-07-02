@@ -11,14 +11,24 @@ import { TrackOrderPage } from './pages/TrackOrderPage/TrackOrderPage'
 import { ConversationsPage } from './pages/ConversationsPage/ConversationsPage'
 import { SellerChatPage } from './pages/SellerChatPage/SellerChatPage'
 import { OrderHistoryPage } from './pages/OrderHistoryPage/OrderHistoryPage'
+import { AccountPage } from './pages/AccountPage/AccountPage'
+import { WishlistPage } from './pages/WishlistPage/WishlistPage'
 import { Header } from './components/Header/Header'
+import { LoginPage } from './pages/LoginPage/LoginPage'
+import { SignupPage } from './pages/SignupPage/SignupPage'
+import { ProtectedRoute } from './components/Routes/ProtectedRoute'
+import { AnonymousRoute } from './components/Routes/AnonymousRoute'
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     async function AuthenticationCheck() {
+      setIsAuthLoading(true);
       try {
         const response = await fetch('http://localhost:8000/auth-check/', {
           method: 'POST',
@@ -32,69 +42,80 @@ function App() {
 
       } catch (error) {
         console.error('Authentication check failed:', error);
+        setIsAuthenticated(false);
+      } finally {
+        setIsAuthLoading(false);
       }
     }
 
-    async function ProductsFetch() {
-      try {
-        const response = await fetch('http://localhost:8000/products-api/', {
-          credentials: 'include'
-        });
-        const data = await response.json();
-        // Do something with the fetched products data
-        console.log('Fetched products:', data);
-      } catch (error) {
-        console.error('Failed to fetch products:', error);
-      }
-    }
+    AuthenticationCheck();
 
-    async function LoginIn() {
-      try {
-        const response = await fetch('http://localhost:8000/user_login/', {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            "username": 'gurughantal',
-            "password": 'gogogreen'
-          })
-        });
+  }, [location.pathname])
 
-        const data = await response.json();
-        console.log('Login response:', data);
-      } catch (error) {
-        console.error('Login failed:', error);
-      }
-    }
-
-    async function InitializeApp() {
-      await LoginIn();
-      await ProductsFetch();
-      await AuthenticationCheck();
-    }
-
-    InitializeApp();
-
-  }, [])
-
+  const hideHeader = ['/login', '/signup'].includes(location.pathname);
 
   return (
     <>
-      <Header isAuthenticated={isAuthenticated} />
+      {!hideHeader && <Header isAuthenticated={isAuthenticated} />}
       <Routes>
         <Route path="/" element={<HomePage isAuthenticated={isAuthenticated} />} />
         <Route path="/about" element={<AboutPage isAuthenticated={isAuthenticated} />} />
         <Route path="/search" element={<SearchResultPage isAuthenticated={isAuthenticated} />} />
         <Route path="/product" element={<ProductDetailsPage isAuthenticated={isAuthenticated} />} />
         <Route path="/products" element={<ProductListingPage isAuthenticated={isAuthenticated} />} />
-        <Route path="/checkout" element={<CheckoutPage isAuthenticated={isAuthenticated} />} />
-        <Route path="/cart" element={<ShoppingCartPage isAuthenticated={isAuthenticated} />} />
-        <Route path="/track-order" element={<TrackOrderPage isAuthenticated={isAuthenticated} />} />
-        <Route path="/conversations" element={<ConversationsPage isAuthenticated={isAuthenticated} />} />
-        <Route path="/seller-chat" element={<SellerChatPage isAuthenticated={isAuthenticated} />} />
-        <Route path="/orders" element={<OrderHistoryPage isAuthenticated={isAuthenticated} />} />
+        {/* Protected Routes */}
+        <Route path="/checkout" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <CheckoutPage isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
+        } />
+        <Route path="/cart" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <ShoppingCartPage isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
+        } />
+        <Route path="/track-order" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <TrackOrderPage isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
+        } />
+        <Route path="/conversations" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <ConversationsPage isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
+        } />
+        <Route path="/seller-chat" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <SellerChatPage isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
+        } />
+        <Route path="/orders" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <OrderHistoryPage isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
+        } />
+        <Route path="/account" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <AccountPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+          </ProtectedRoute>
+        } />
+        <Route path="/wishlist" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <WishlistPage isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
+        } />
+
+        {/* Anonymous Routes (Redirect to home if logged in) */}
+        <Route path="/login" element={
+          <AnonymousRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <LoginPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+          </AnonymousRoute>
+        } />
+        <Route path="/signup" element={
+          <AnonymousRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <SignupPage isAuthenticated={isAuthenticated} />
+          </AnonymousRoute>
+        } />
       </Routes>
     </>
   )

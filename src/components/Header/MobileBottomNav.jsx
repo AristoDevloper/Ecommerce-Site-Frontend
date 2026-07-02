@@ -45,10 +45,10 @@ export function MobileBottomNav({ isAuthenticated }) {
                     
                     {/*  Profile  */}
                     <Link 
-                        className={`flex flex-col items-center justify-center pt-2 transition-colors ${location.pathname === '/about' ? 'text-slate-900 border-t-2 border-slate-900 transform translate-y-[-2px]' : 'text-slate-400 hover:text-slate-600'}`} 
-                        to="/about"
+                        className={`flex flex-col items-center justify-center pt-2 transition-colors ${location.pathname === '/account' ? 'text-slate-900 border-t-2 border-slate-900 transform translate-y-[-2px]' : 'text-slate-400 hover:text-slate-600'}`} 
+                        to="/account"
                     >
-                        <span className="material-symbols-outlined" data-icon="person" style={location.pathname === '/about' ? { fontVariationSettings: "'FILL' 1" } : {}}>person</span>
+                        <span className="material-symbols-outlined" data-icon="person" style={location.pathname === '/account' ? { fontVariationSettings: "'FILL' 1" } : {}}>person</span>
                         <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Profile</span>
                     </Link>
                 </>

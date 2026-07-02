@@ -31,7 +31,7 @@ export function DesktopHeader({ isAuthenticated }) {
                             <Link to="/cart" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900">
                                 <span className="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
                             </Link>
-                            <Link to="/about" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900">
+                            <Link to="/account" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900">
                                 <span className="material-symbols-outlined" data-icon="person">person</span>
                             </Link>
                         </div>

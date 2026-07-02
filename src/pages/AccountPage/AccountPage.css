@@ -1,0 +1,8 @@
+/* AccountPage CSS */
+.premium-gradient {
+  background: linear-gradient(135deg, #051125 0%, #1b263b 100%);
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+}
