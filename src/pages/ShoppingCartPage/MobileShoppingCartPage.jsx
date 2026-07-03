@@ -119,7 +119,7 @@ export function MobileShoppingCartPage() {
                 <div className="max-w-md mx-auto space-y-4">
                     <div className="flex justify-between items-center text-on-surface-variant">
                         <span className="text-xs tracking-wider uppercase font-medium">Estimated Shipping</span>
-                        <span className="text-xs font-bold">Complimentary</span>
+                        <span className="text-xs font-bold">Calculated at checkout</span>
                     </div>
                     <div className="flex justify-between items-end">
                         <div>
