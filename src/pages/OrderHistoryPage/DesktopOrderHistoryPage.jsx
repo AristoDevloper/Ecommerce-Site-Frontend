@@ -1,9 +1,54 @@
 import { Link } from 'react-router-dom';
 
 export function DesktopOrderHistoryPage({ orders = [] }) {
+    const currencyFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    });
+
+    const formatOrderDate = (createdAt) => {
+        return new Date(createdAt).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+        });
+    };
+
+    const getStatusMeta = (status) => {
+        if (status === 'DELIVERED') {
+            return {
+                label: 'Delivered',
+                icon: 'check_circle',
+                tone: 'text-tertiary'
+            };
+        }
+
+        if (status === 'SHIPPED') {
+            return {
+                label: 'In Transit',
+                icon: 'local_shipping',
+                tone: 'text-on-surface-variant'
+            };
+        }
+
+        if (status === 'CANCELLED') {
+            return {
+                label: 'Cancelled',
+                icon: 'cancel',
+                tone: 'text-error'
+            };
+        }
+
+        return {
+            label: 'Pending',
+            icon: 'schedule',
+            tone: 'text-secondary'
+        };
+    };
+
     return (
         <div className="bg-background text-on-surface font-body antialiased">
-            
+
             <main className="max-w-screen-xl mx-auto px-8 py-16">
                 {/*  Editorial Header  */}
                 <div className="mb-16">
@@ -26,122 +71,47 @@ export function DesktopOrderHistoryPage({ orders = [] }) {
                     <>
                         {/*  Orders Table/List  */}
                         <div className="space-y-4">
-                            {/*  Order Entry 01  */}
-                            <div className="bg-surface-container-lowest rounded-md transition-all duration-300 hover:shadow-[0_20px_40px_rgba(25,28,29,0.04)] group">
-                                <div className="p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                                    {/*  Image/Thumbnail Block  */}
-                                    <div className="md:col-span-2 flex -space-x-4">
-                                        <div className="w-16 h-20 bg-surface-variant rounded-lg overflow-hidden ghost-border">
-                                            <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="leather sneakers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWwtEbdGPXhUquzBEu37ebSQ795IsFgm0G0UX9OfIZMoyo_EhjOKICBM0oUtuNkU3k37svlMqbMKZKkusqruiVj9dzpzvLa-2RHcazFD_pqRSA6ZvYB93krazzDqns_30wUlIOR5SVBqe3ohbmxXKVgCDPheNc0ueDsfopdQkBI0UHfOEzQ-PUNhuN1xYUi0TQ_Ibiw1IJrFpKyCxKNOau3hnjVIsTJvcRbg5F09eeGgp78VW_fQtihm0S8prem6WoPvd7GjBFISDq" />
-                                        </div>
-                                        <div className="w-16 h-20 bg-surface-variant rounded-lg overflow-hidden ghost-border">
-                                            <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="wool knitwear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiVW1Nl-y5pZknDjrrq74yV7mXLtX9vVFvFTZP3EAnkudQHVUWwIsRQC6Qdc7fn5g1m7pGvv7wtwUuuI7JLLTCNV7zUi8M0QD7C7iSlH-T441BUBrDMY2QGpV2HTV6AJQvVptsXarvNVqqJk9C6D40LUw755KFx4euS5OpIUZutxrMoZBGSyiN4zYvZW5XFy4V4wCb9IhgGQE6L-KKX-PjKXu7nNaWTaf-R9cv_0_QdizovBCHX7YNMgifs2_vOaSGl_inRAHwSaoC" />
-                                        </div>
-                                    </div>
-                                    {/*  Details Block  */}
-                                    <div className="md:col-span-3">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Order Ref.</p>
-                                        <p className="font-body font-bold text-primary">#EC-92841-B</p>
-                                        <p className="font-body text-sm text-on-surface-variant mt-2">November 12, 2023</p>
-                                    </div>
-                                    {/*  Status Block  */}
-                                    <div className="md:col-span-2">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Status</p>
-                                        <div className="flex items-center gap-2">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
-                                            <p className="font-body text-sm font-medium">Delivered</p>
-                                        </div>
-                                    </div>
-                                    {/*  Total Block  */}
-                                    <div className="md:col-span-2">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Investment</p>
-                                        <p className="font-headline text-lg">$1,240.00</p>
-                                    </div>
-                                    {/*  Actions Block  */}
-                                    <div className="md:col-span-3 flex md:justify-end gap-6">
-                                        <button className="font-body text-sm text-primary hover:text-tertiary transition-colors relative group/link">
-                                            View Details
-                                            <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-tertiary transition-all duration-300 group-hover/link:w-full"></span>
-                                        </button>
-                                        <button className="bg-primary-container text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
-                                            <span className="material-symbols-outlined text-sm">rebase_edit</span>
-                                            Reorder
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            {/*  Order Entry 02  */}
-                            <div className="bg-surface-container-low rounded-md group">
-                                <div className="p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                                    <div className="md:col-span-2">
-                                        <div className="w-16 h-20 bg-surface-variant rounded-lg overflow-hidden ghost-border">
-                                            <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="luxury watch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzjgxnVD75ptQoUOhwOK0ePUMF1ZpqsghHX5PFCpfkHXWF0cXumxbH4Qj1VnIagJbm4nrPhEzexFZCdJQFSsfiGKB9zuNQ3oBsODpa9AjC7joWNOuMrXa0YpEeUNPokKPEJdUmciYQStToAeHE6AkmlCKrfzn7zGOh_Lk6IHJMslavy1GsNNElptR9vmQi9R-OFcUiF9SvMEWy6HVa8cYHC8uG1tR2aotvjtnHWlY1Ae2lh4UH0N8YJkBe4pjDqpGQL8_QjoWzWYaY" />
+                            {orders.map((order) => {
+                                const statusMeta = getStatusMeta(order.status);
+
+                                return (
+                                    <div key={order.order_id} className="bg-surface-container-lowest rounded-md transition-all duration-300 hover:shadow-[0_20px_40px_rgba(25,28,29,0.04)] group">
+                                        <div className="p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                                            <div className="md:col-span-2 flex -space-x-4">
+                                                <div className="w-16 h-20 bg-surface-variant rounded-lg overflow-hidden ghost-border flex items-center justify-center">
+                                                    <span className="material-symbols-outlined text-2xl text-outline-variant">package_2</span>
+                                                </div>
+                                            </div>
+                                            <div className="md:col-span-3">
+                                                <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Order Ref.</p>
+                                                <p className="font-body font-bold text-primary">#{order.order_id.slice(0, 8).toUpperCase()}</p>
+                                                <p className="font-body text-sm text-on-surface-variant mt-2">{formatOrderDate(order.created_at)}</p>
+                                            </div>
+                                            <div className="md:col-span-2">
+                                                <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Status</p>
+                                                <div className={`flex items-center gap-2 ${statusMeta.tone}`}>
+                                                    <span className="material-symbols-outlined text-sm">{statusMeta.icon}</span>
+                                                    <p className="font-body text-sm font-medium">{statusMeta.label}</p>
+                                                </div>
+                                            </div>
+                                            <div className="md:col-span-2">
+                                                <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Investment</p>
+                                                <p className="font-headline text-lg">{currencyFormatter.format(Number(order.total_price))}</p>
+                                            </div>
+                                            <div className="md:col-span-3 flex md:justify-end gap-6">
+                                                <Link to={`/track-order/${order.order_id}`} className="font-body text-sm text-primary hover:text-tertiary transition-colors relative group/link">
+                                                    View Details
+                                                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-tertiary transition-all duration-300 group-hover/link:w-full"></span>
+                                                </Link>
+                                                <button className="bg-primary-container text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
+                                                    <span className="material-symbols-outlined text-sm">rebase_edit</span>
+                                                    Reorder
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="md:col-span-3">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Order Ref.</p>
-                                        <p className="font-body font-bold text-primary">#EC-88210-C</p>
-                                        <p className="font-body text-sm text-on-surface-variant mt-2">October 28, 2023</p>
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Status</p>
-                                        <div className="flex items-center gap-2 text-on-surface-variant">
-                                            <span className="material-symbols-outlined text-sm">local_shipping</span>
-                                            <p className="font-body text-sm font-medium">In Transit</p>
-                                        </div>
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Investment</p>
-                                        <p className="font-headline text-lg">$850.00</p>
-                                    </div>
-                                    <div className="md:col-span-3 flex md:justify-end gap-6">
-                                        <button className="font-body text-sm text-primary hover:text-tertiary transition-colors relative group/link">
-                                            View Details
-                                            <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-tertiary transition-all duration-300 group-hover/link:w-full"></span>
-                                        </button>
-                                        <button className="bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
-                                            <span className="material-symbols-outlined text-sm">rebase_edit</span>
-                                            Reorder
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            {/*  Order Entry 03  */}
-                            <div className="bg-surface-container-lowest rounded-md transition-all duration-300 hover:shadow-[0_20px_40px_rgba(25,28,29,0.04)] group">
-                                <div className="p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                                    <div className="md:col-span-2 flex -space-x-4">
-                                        <div className="w-16 h-20 bg-surface-variant rounded-lg overflow-hidden ghost-border">
-                                            <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="wool coat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgkWu7bsrP4MFFb0Y8OhGJ3vUNRCp2_KIrahnt05cI8N7LLwTt4SQc9DvOnAw6BuEULdDG0tIqhXUiGkCqGcPYDW0C8Sf1DbsW4cd5yRZlkcxo6r5p3oZyu_IE8kgLUg8e0sGTFRf17tb9DI8UNm-iREh0FJW7ZHLHz3_qg2jOdt7VYG0H1EKGLG3evlRcVttwiNnN-ru70ZKRT4O3mXj4eOSyMDPqw_EoxZ91G8aNCKFS2txz2USKdN9Y8FEcWTXOUPce_o3SslR3" />
-                                        </div>
-                                    </div>
-                                    <div className="md:col-span-3">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Order Ref.</p>
-                                        <p className="font-body font-bold text-primary">#EC-71044-A</p>
-                                        <p className="font-body text-sm text-on-surface-variant mt-2">September 14, 2023</p>
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Status</p>
-                                        <div className="flex items-center gap-2">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
-                                            <p className="font-body text-sm font-medium">Delivered</p>
-                                        </div>
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <p className="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Investment</p>
-                                        <p className="font-headline text-lg">$2,100.00</p>
-                                    </div>
-                                    <div className="md:col-span-3 flex md:justify-end gap-6">
-                                        <button className="font-body text-sm text-primary hover:text-tertiary transition-colors relative group/link">
-                                            View Details
-                                            <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-tertiary transition-all duration-300 group-hover/link:w-full"></span>
-                                        </button>
-                                        <button className="bg-primary-container text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
-                                            <span className="material-symbols-outlined text-sm">rebase_edit</span>
-                                            Reorder
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                                );
+                            })}
                         </div>
                         {/*  Pagination / Load More  */}
                         <div className="mt-16 flex justify-center">

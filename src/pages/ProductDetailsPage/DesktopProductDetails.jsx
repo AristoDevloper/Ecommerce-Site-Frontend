@@ -1,4 +1,9 @@
-export function DesktopProductDetails() {
+export function DesktopProductDetails({ product, onAddToCart, onBuyNow, cartAdding, cartSuccess }) {
+    if (!product) return null;
+
+    const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
+    const categoryName = product.category_name || 'Curated pick';
+
     return (
         <div className="bg-background text-on-surface font-body selection:bg-tertiary-container selection:text-on-tertiary-container">
             
@@ -8,44 +13,45 @@ export function DesktopProductDetails() {
                     {/*  Gallery Grid  */}
                     <div className="lg:col-span-7 space-y-8">
                         <div className="aspect-[4/5] bg-surface-container-low rounded-md overflow-hidden">
-                            <img className="w-full h-full object-cover" data-alt="studio shot of a minimalist luxury timepiece on a textured charcoal background with sharp editorial lighting and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoQXqDxSRGKPo4aiHjHdP3LCm7W7rvVYOakW5wr6XgEr_cgqdM81FmB5JytntYT2sF2kLlN-Pppepv5zCyxKEkwrcjiKPa2NMVsyE-_OhCF3hGSVLU8QB16phcwIH2S09B3JXb3dpeRZD4FiLzI9Ofu38_3dtWOPr32rpqfcQMtxdbr9zfj8prQYcn4MXNRgdPjGab6O_ebFTSarPA1rBbyPBpACJ5pujK3iThCqYNW6VeO7CLjSBDXf-r3OladvR4IkvwFAvwhg3v" />
+                            <img className="w-full h-full object-cover" alt={product.name} src={imageUrl} />
                         </div>
                     </div>
                     {/*  Product Details Sticky Container  */}
                     <div className="lg:col-span-5 lg:sticky lg:top-32 space-y-10">
                         <div className="space-y-4">
-                            <p className="font-label text-xs tracking-widest uppercase text-tertiary font-bold">New Arrival — Edition 01</p>
-                            <h1 className="font-headline text-5xl md:text-6xl text-primary tracking-tighter leading-none">The Obsidian Chronograph</h1>
-                            <p className="font-headline text-2xl italic text-secondary">$3,450</p>
+                            <p className="font-label text-xs tracking-widest uppercase text-tertiary font-bold">{categoryName}</p>
+                            <h1 className="font-headline text-5xl md:text-6xl text-primary tracking-tighter leading-none">{product.name}</h1>
+                            <p className="font-headline text-2xl italic text-secondary">${Number(product.price).toLocaleString()}</p>
                         </div>
                         <div className="space-y-6">
                             <div className="space-y-3">
-                                <span className="font-label text-[10px] uppercase tracking-[0.2em] text-outline">Select Material</span>
-                                <div className="flex gap-4">
-                                    <button className="w-12 h-12 rounded-full border-2 border-primary bg-[#051125] p-1 shadow-sm"></button>
-                                    <button className="w-12 h-12 rounded-full border border-outline-variant/20 bg-[#c5c6cd] p-1"></button>
-                                    <button className="w-12 h-12 rounded-full border border-outline-variant/20 bg-[#d8c860] p-1"></button>
-                                </div>
-                            </div>
-                            <div className="space-y-3">
-                                <span className="font-label text-[10px] uppercase tracking-[0.2em] text-outline">Strap Size</span>
-                                <div className="flex flex-wrap gap-2">
-                                    <button className="px-6 py-2 border border-outline-variant/20 text-sm hover:border-primary transition-colors">40mm</button>
-                                    <button className="px-6 py-2 border border-primary text-sm font-bold">42mm</button>
-                                    <button className="px-6 py-2 border border-outline-variant/20 text-sm hover:border-primary transition-colors">44mm</button>
+                                <span className="font-label text-[10px] uppercase tracking-[0.2em] text-outline">Stock Availability</span>
+                                <div className="text-sm font-medium text-primary">
+                                    {product.stock > 0 ? `${product.stock} items remaining` : 'Temporarily Out of Stock'}
                                 </div>
                             </div>
                         </div>
                         <div className="space-y-4 pt-4">
-                            <button className="velvet-gradient w-full py-5 text-on-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-lg active:scale-[0.98] transition-all">
-                                Add to Collection
+                            <button 
+                                onClick={onAddToCart} 
+                                disabled={cartAdding || product.stock <= 0}
+                                className="velvet-gradient w-full py-5 text-on-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-lg active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {cartAdding ? "Adding to Collection..." : cartSuccess ? "Added to Collection ✓" : "Add to Collection"}
+                            </button>
+                            <button 
+                                onClick={onBuyNow} 
+                                disabled={cartAdding || product.stock <= 0}
+                                className="w-full py-5 bg-primary text-on-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-lg active:scale-[0.98] transition-all hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed mt-3"
+                            >
+                                Buy Now
                             </button>
                             <p className="text-center text-[10px] text-outline uppercase tracking-widest">Complimentary insured global shipping included.</p>
                         </div>
                         <div className="pt-10 border-t border-outline-variant/10">
                             <h3 className="font-headline text-lg mb-4">Provenance &amp; Philosophy</h3>
                             <p className="text-on-surface-variant text-sm leading-relaxed max-w-md">
-                                Hand-assembled in our Zurich atelier, the Obsidian series represents the pinnacle of tactile horology. Featuring a sapphire crystal exhibition caseback and an 80-hour reserve, it is an artifact designed for generations.
+                                {product.description}
                             </p>
                         </div>
                     </div>

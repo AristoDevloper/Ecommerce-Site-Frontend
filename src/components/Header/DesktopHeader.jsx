@@ -1,6 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export function DesktopHeader({ isAuthenticated }) {
+    const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = (e) => {
+        if (e.key === 'Enter' && searchQuery.trim()) {
+            navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+            setSearchQuery('');
+        }
+    };
+
     return (
         <nav className="sticky top-0 w-full z-50 glass-nav shadow-sm bg-white/80 backdrop-blur-md">
             <div className="flex justify-between items-center w-full px-6 py-4 md:px-12">
@@ -17,6 +28,9 @@ export function DesktopHeader({ isAuthenticated }) {
                         <input
                             type="text"
                             placeholder="Search"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onKeyDown={handleSearch}
                             className="bg-transparent outline-none text-xs placeholder:text-slate-500 w-24 focus:w-48 transition-all duration-300 text-slate-900"
                         />
                     </div>

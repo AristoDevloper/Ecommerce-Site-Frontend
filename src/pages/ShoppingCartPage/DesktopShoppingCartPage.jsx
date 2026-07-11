@@ -1,11 +1,20 @@
 import { Link } from 'react-router-dom';
 
-export function DesktopShoppingCartPage({ cartItems = [] }) {
+export function DesktopShoppingCartPage({ cartItems = [], onUpdateQuantity, onRemoveItem }) {
+    const currencyFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    });
+
+    const subtotal = cartItems.reduce((total, item) => {
+        return total + Number(item.product.price) * item.quantity;
+    }, 0);
+
     return (
         <div className="bg-background text-on-surface min-h-screen flex flex-col">
-            
+
             <main className="flex-grow pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto w-full">
-                
+
                 {cartItems.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-32 text-center">
                         <span className="material-symbols-outlined text-6xl text-outline-variant mb-6" style={{ fontVariationSettings: "'FILL' 0, 'wght' 200" }}>shopping_bag</span>
@@ -21,84 +30,54 @@ export function DesktopShoppingCartPage({ cartItems = [] }) {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
                         {/* Left Column: Items */}
                         <div className="lg:col-span-8 space-y-12">
-                            {/* Artifact 1 */}
-                            <div className="group flex flex-col md:flex-row gap-8 pb-12">
-                                <div className="w-full md:w-48 aspect-[3/4] bg-surface-container-low rounded-md overflow-hidden relative">
-                                    <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Minimalist alabaster sculpture with smooth organic curves sitting on a dark wooden plinth in soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCta2F7uu6qts3E0JeNKJ9w08fvxqXvYPF0A3MMbfKVwRDarUaeSYmk_n1jm7hC2ol-vsi2NwhrCT--bklVpLfWc1Y_Kr_zmBZHk2LNjQjWpvdegGYqk9TwhMqBRtrT1OXhtz04vCZx_BgOxmZfgStAKHZEb3zKRvvsREWwI5g-Lfst8odkgUcFfnL8ppJzP3JA8e5dJ4WgpVLmZnGw0mcLQC4mntnNofJDthQ0QSrYYhWi9yRFns5f-nrU_TPdK_Jr-g4QMC6oe-Ve" alt="Alabaster Form" />
-                                </div>
-                                <div className="flex-grow flex flex-col justify-between">
-                                    <div>
-                                        <div className="flex justify-between items-start">
-                                            <h3 className="serif-heading text-2xl font-bold text-primary">Alabaster Form № 04</h3>
-                                            <p className="text-xl font-medium text-primary">$1,200</p>
+                            {cartItems.map((item) => {
+                                const productImage = item.product.images?.[0]?.image_url;
+
+                                return (
+                                    <div key={item.id} className="group flex flex-col md:flex-row gap-8 pb-12 border-b border-outline-variant/10 last:border-b-0 last:pb-0">
+                                        <div className="w-full md:w-48 aspect-[3/4] bg-surface-container-low rounded-md overflow-hidden relative">
+                                            <img
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                                src={productImage}
+                                                alt={item.product.name}
+                                            />
                                         </div>
-                                        <p className="text-on-surface-variant mt-2 max-w-md leading-relaxed">Hand-carved mineral stone sculpture. A study of light and negative space.</p>
-                                        <p className="text-xs font-label uppercase tracking-widest text-secondary mt-4">Edition: 1 of 12</p>
-                                    </div>
-                                    <div className="flex items-center justify-between mt-8">
-                                        <div className="flex items-center ghost-border rounded px-2 py-1">
-                                            <button className="p-1 hover:text-primary transition-colors"><span className="material-symbols-outlined text-sm">remove</span></button>
-                                            <span className="px-4 text-sm font-medium">1</span>
-                                            <button className="p-1 hover:text-primary transition-colors"><span className="material-symbols-outlined text-sm">add</span></button>
+                                        <div className="flex-grow flex flex-col justify-between">
+                                            <div>
+                                                <div className="flex justify-between items-start gap-4">
+                                                    <h3 className="serif-heading text-2xl font-bold text-primary">{item.product.name}</h3>
+                                                    <p className="text-xl font-medium text-primary">{currencyFormatter.format(Number(item.product.price) * item.quantity)}</p>
+                                                </div>
+                                                <p className="text-on-surface-variant mt-2 max-w-md leading-relaxed">{item.product.description}</p>
+                                                <p className="text-xs font-label uppercase tracking-widest text-secondary mt-4">Qty: {item.quantity}</p>
+                                            </div>
+                                            <div className="flex items-center justify-between mt-8">
+                                                <div className="flex items-center ghost-border rounded px-2 py-1">
+                                                    <button 
+                                                        onClick={() => onUpdateQuantity(item.product.product_id, -1)}
+                                                        className="p-1 hover:text-primary transition-colors"
+                                                    >
+                                                        <span className="material-symbols-outlined text-sm">remove</span>
+                                                    </button>
+                                                    <span className="px-4 text-sm font-medium">{item.quantity}</span>
+                                                    <button 
+                                                        onClick={() => onUpdateQuantity(item.product.product_id, 1)}
+                                                        className="p-1 hover:text-primary transition-colors"
+                                                    >
+                                                        <span className="material-symbols-outlined text-sm">add</span>
+                                                    </button>
+                                                </div>
+                                                <button 
+                                                    onClick={() => onRemoveItem(item.product.product_id)}
+                                                    className="text-xs font-label uppercase tracking-widest text-outline hover:text-error transition-colors flex items-center gap-1"
+                                                >
+                                                    <span className="material-symbols-outlined text-base">close</span> Remove
+                                                </button>
+                                            </div>
                                         </div>
-                                        <button className="text-xs font-label uppercase tracking-widest text-outline hover:text-error transition-colors flex items-center gap-1">
-                                            <span className="material-symbols-outlined text-base">close</span> Remove
-                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                            {/* Artifact 2 */}
-                            <div className="group flex flex-col md:flex-row gap-8 pb-12">
-                                <div className="w-full md:w-48 aspect-[3/4] bg-surface-container-low rounded-md overflow-hidden relative">
-                                    <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Hand-thrown ceramic vase with a matte charcoal glaze and subtle gold leaf repair along the rim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj2lMszUHFAX_oOTd3UbUAIv6Adlm5mg1R_84ATqIKA3MAT4ENh_a5KhmeeIn5atDtcS6hsg3CKIRFbWraKDIDxgq4bI-EMHfnFqi6lzPykEGtn0_C0mVUr5sOTLPHtvIvPJewwlaq30yLR8-yhBQHbqLaCTV3qDB_bM_y_YItZZzrZHuDLuUB-TYVAy418p5gLF-04z56s0adJhQjzII0Tav5EV9m-cgt7AXGigUzxWuMGHs0GRNSGazyxFVXl8iqQvjPrwR26RX_" alt="Obsidian Vessel" />
-                                </div>
-                                <div className="flex-grow flex flex-col justify-between">
-                                    <div>
-                                        <div className="flex justify-between items-start">
-                                            <h3 className="serif-heading text-2xl font-bold text-primary">Obsidian Vessel</h3>
-                                            <p className="text-xl font-medium text-primary">$850</p>
-                                        </div>
-                                        <p className="text-on-surface-variant mt-2 max-w-md leading-relaxed">High-fire stoneware with a reactive metallic glaze. Part of the Nocturne Collection.</p>
-                                        <p className="text-xs font-label uppercase tracking-widest text-secondary mt-4">Size: Large (42cm)</p>
-                                    </div>
-                                    <div className="flex items-center justify-between mt-8">
-                                        <div className="flex items-center ghost-border rounded px-2 py-1">
-                                            <button className="p-1 hover:text-primary transition-colors"><span className="material-symbols-outlined text-sm">remove</span></button>
-                                            <span className="px-4 text-sm font-medium">1</span>
-                                            <button className="p-1 hover:text-primary transition-colors"><span className="material-symbols-outlined text-sm">add</span></button>
-                                        </div>
-                                        <button className="text-xs font-label uppercase tracking-widest text-outline hover:text-error transition-colors flex items-center gap-1">
-                                            <span className="material-symbols-outlined text-base">close</span> Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Artifact 3 */}
-                            <div className="group flex flex-col md:flex-row gap-8 pb-12">
-                                <div className="w-full md:w-48 aspect-[3/4] bg-surface-container-low rounded-md overflow-hidden relative">
-                                    <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Monochrome textured oil painting on linen with heavy impasto strokes in cream and beige tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUZHY2RZUhfvvOy8NYyo7Z_1OIVrwHG4yN53gcJphr-8I8Qw4GmHEKpQjLWvC28F9C7c5cRKeg4CXeGCAzJqBcoVpgEqjloIib_1TvWX0NVpmhYKLCAw2T-lKq-aFJ8wvWNdH2j6rY6Ek0hZV3zoV2S4hzip2kNNL5fIjLSytOUmjvjLM9eLq5YxRWRZnI3FnfdTsPATk1p6JHK58kBJBRbdsmhpoMJrpNZR143ewEkFMv55ZAibc6W1Uz0vw1SnxYlGpeBXR7YZUr" alt="Texture Study III" />
-                                </div>
-                                <div className="flex-grow flex flex-col justify-between">
-                                    <div>
-                                        <div className="flex justify-between items-start">
-                                            <h3 className="serif-heading text-2xl font-bold text-primary">Texture Study III</h3>
-                                            <p className="text-xl font-medium text-primary">$3,400</p>
-                                        </div>
-                                        <p className="text-on-surface-variant mt-2 max-w-md leading-relaxed">Original oil on Belgian linen. Explores the tactile nature of white pigments.</p>
-                                        <p className="text-xs font-label uppercase tracking-widest text-secondary mt-4">Frame: Natural Oak</p>
-                                    </div>
-                                    <div className="flex items-center justify-between mt-8">
-                                        <div className="flex items-center ghost-border rounded px-2 py-1">
-                                            <button className="p-1 hover:text-primary transition-colors"><span className="material-symbols-outlined text-sm">remove</span></button>
-                                            <span className="px-4 text-sm font-medium">1</span>
-                                            <button className="p-1 hover:text-primary transition-colors"><span className="material-symbols-outlined text-sm">add</span></button>
-                                        </div>
-                                        <button className="text-xs font-label uppercase tracking-widest text-outline hover:text-error transition-colors flex items-center gap-1">
-                                            <span className="material-symbols-outlined text-base">close</span> Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                                );
+                            })}
                         </div>
                         {/* Right Column: Summary */}
                         <div className="lg:col-span-4">
@@ -107,7 +86,7 @@ export function DesktopShoppingCartPage({ cartItems = [] }) {
                                 <div className="space-y-4 mb-8">
                                     <div className="flex justify-between items-center text-sm">
                                         <span className="text-on-surface-variant font-label uppercase tracking-widest">Subtotal</span>
-                                        <span className="text-primary font-medium">$5,450.00</span>
+                                        <span className="text-primary font-medium">{currencyFormatter.format(subtotal)}</span>
                                     </div>
                                     <div className="flex justify-between items-center text-sm">
                                         <span className="text-on-surface-variant font-label uppercase tracking-widest">Shipping</span>
@@ -120,13 +99,16 @@ export function DesktopShoppingCartPage({ cartItems = [] }) {
                                     <div className="pt-6 mt-6 border-t border-outline-variant/20">
                                         <div className="flex justify-between items-center">
                                             <span className="serif-heading text-lg font-bold text-primary">Total</span>
-                                            <span className="serif-heading text-xl font-bold text-primary">$5,450.00</span>
+                                            <span className="serif-heading text-xl font-bold text-primary">{currencyFormatter.format(subtotal)}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <button className="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 rounded font-label uppercase tracking-widest text-xs font-bold hover:opacity-90 transition-all active:scale-95 shadow-lg">
+                                <Link 
+                                    to="/checkout" 
+                                    className="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 rounded font-label uppercase tracking-widest text-xs font-bold hover:opacity-90 transition-all active:scale-95 shadow-lg block text-center"
+                                >
                                     Proceed to Checkout
-                                </button>
+                                </Link>
                                 <div className="mt-8 space-y-4">
                                     <div className="flex gap-4 items-start text-xs text-on-surface-variant">
                                         <span className="material-symbols-outlined text-tertiary">verified_user</span>

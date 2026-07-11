@@ -11,6 +11,9 @@ export function AccountPage({ isAuthenticated, setIsAuthenticated }) {
   const [profile, setProfile] = useState({
     name: 'Alexander Van Der Meer',
     email: 'alex.vdm@curated.ethos',
+    defaultMobile: '+31 20 555 0142',
+    secondaryEmail: 'alexander.vandermeer@studio.ethos',
+    gender: 'Male',
     tier: 'Gold Tier Member',
     since: '2021'
   });
@@ -37,6 +40,21 @@ export function AccountPage({ isAuthenticated, setIsAuthenticated }) {
     }
   ]);
 
+  const [paymentAccounts, setPaymentAccounts] = useState([
+    {
+      label: 'Primary Wallet',
+      method: 'eSewa',
+      accountId: '9841-2233-8890',
+      isDefault: true
+    },
+    {
+      label: 'Backup Card',
+      method: 'Stripe Pay',
+      accountId: '4242 4242 4242 4242',
+      isDefault: false
+    }
+  ]);
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
     window.addEventListener('resize', handleResize);
@@ -46,19 +64,23 @@ export function AccountPage({ isAuthenticated, setIsAuthenticated }) {
   return (
     <>
       {isMobile ? (
-        <MobileAccountPage 
-          profile={profile} 
-          setProfile={setProfile} 
-          addresses={addresses} 
-          setAddresses={setAddresses} 
+        <MobileAccountPage
+          profile={profile}
+          setProfile={setProfile}
+          addresses={addresses}
+          setAddresses={setAddresses}
+          paymentAccounts={paymentAccounts}
+          setPaymentAccounts={setPaymentAccounts}
           setIsAuthenticated={setIsAuthenticated}
         />
       ) : (
-        <DesktopAccountPage 
-          profile={profile} 
-          setProfile={setProfile} 
-          addresses={addresses} 
+        <DesktopAccountPage
+          profile={profile}
+          setProfile={setProfile}
+          addresses={addresses}
           setAddresses={setAddresses}
+          paymentAccounts={paymentAccounts}
+          setPaymentAccounts={setPaymentAccounts}
           setIsAuthenticated={setIsAuthenticated}
         />
       )}

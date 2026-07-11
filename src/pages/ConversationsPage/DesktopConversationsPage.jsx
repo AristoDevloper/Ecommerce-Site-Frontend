@@ -1,174 +1,197 @@
-export function DesktopConversationsPage() {
+import { useState, useRef, useEffect } from 'react';
+
+export function DesktopConversationsPage({
+    conversations,
+    selectedConversation,
+    messages,
+    currentUser,
+    loadingConvs,
+    loadingMessages,
+    onSelectConversation,
+    onSendMessage,
+}) {
+    const [inputText, setInputText] = useState('');
+    const messagesEndRef = useRef(null);
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
+    const handleSend = () => {
+        if (!inputText.trim()) return;
+        onSendMessage(inputText);
+        setInputText('');
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    };
+
+    const formatTime = (isoString) => {
+        const date = new Date(isoString);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMins = Math.floor(diffMs / 60000);
+        if (diffMins < 1) return 'Just now';
+        if (diffMins < 60) return `${diffMins}m ago`;
+        const diffHrs = Math.floor(diffMins / 60);
+        if (diffHrs < 24) return `${diffHrs}h ago`;
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    };
+
+    const getOtherParticipant = (conv) => {
+        if (!currentUser) return { username: '...', id: null };
+        if (conv.user1_id === currentUser.id) return { username: conv.user2_username, id: conv.user2_id };
+        return { username: conv.user1_username, id: conv.user1_id };
+    };
+
     return (
         <div className="bg-background text-on-surface font-body antialiased h-screen flex flex-col overflow-hidden">
-            
             <div className="flex flex-1 overflow-hidden">
-                {/* SideNavBar */}
-                <aside className="hidden lg:flex flex-col h-full py-8 px-4 gap-2 bg-slate-50 w-64 border-r border-outline-variant/20 font-body antialiased">
-                    <div className="mb-8 px-4">
-                        <h2 className="text-slate-900 font-bold text-xl leading-tight">Conversations</h2>
-                        <p className="text-slate-500 text-xs tracking-widest uppercase mt-1">Direct Access</p>
-                    </div>
-                    
-                </aside>
-                {/* Main Split Pane Layout */}
                 <div className="flex-1 flex overflow-hidden">
+
                     {/* Left Pane: Conversation List */}
                     <section className="w-full md:w-[400px] flex-shrink-0 flex flex-col border-r border-outline-variant/20 bg-white">
                         <div className="p-6 border-b border-outline-variant/10">
-                            
+                            <h2 className="text-lg font-headline font-bold text-primary mb-4">Messages</h2>
                             <div className="relative group">
                                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">search</span>
                                 <input className="w-full pl-10 pr-4 py-2.5 bg-surface-container-low border-none rounded-lg focus:ring-1 focus:ring-primary/20 transition-all font-body text-sm outline-none" placeholder="Search conversations..." type="text" />
                             </div>
                         </div>
                         <div className="flex-1 overflow-y-auto p-4 space-y-2">
-                            {/* Chat Item 1: Active */}
-                            <div className="group relative flex items-center gap-4 p-4 rounded-xl bg-surface-container-low border border-primary/10 cursor-pointer transition-all">
-                                <div className="relative h-14 w-14 flex-shrink-0">
-                                    <img alt="Artifact" className="h-full w-full object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLlo9FEw3EEdYGfNiyUwJnAPWuKzX6Lgcjq2FXUt5riXkbPu675UMSwPfiXwQb9uSyr6JBVVgnVXLAL-Ty798E2e0hmJ9rP-vXwKqL_Vfa_zHPG9cbbGY7ISgtl3vgav8A1A3jsObmvYHl0RSoiRN6Jq7tN0URAt3Y6Sr9Ac3Mn_NlDzb0eBNTqztqmea63Im8RasA8N5gFfqURkA4f7GzxpocX3EngxtgStLaq7KKNzu2V3DjBXKH20iCQkG7ui2AvgRrR3_CIU-v" />
-                                    <div className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                                        <img alt="Seller" className="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Tnk0B7-_-MMm4hYdVKh19VNN4wJJ2ZCXYEuisfR4neLuiedWTREjixzQejEBuIasLu83C4Bp-CQm1Xiq-UT4VwFF7-Q8GHaoGmit4NztfnRp8wXKUBQfQ5zEdRiKUitaAO7Mu41jn4nrSLoyxmE84wFg2WnOvotLOkWsVqcMD679aMnARnS1haTEbAMk3qwPCz5lsASvLdy_abNAeIXZwOCzT1jepo85PfTjaP96Q-PrwCvcCcYdnAITvYepTtGpVv7MqntvK9iS" />
+                            {loadingConvs ? (
+                                <div className="flex items-center justify-center py-12">
+                                    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                                </div>
+                            ) : conversations.length === 0 ? (
+                                <div className="flex flex-col items-center justify-center py-12 text-center text-on-surface-variant">
+                                    <span className="material-symbols-outlined text-4xl mb-3 text-outline-variant" style={{ fontVariationSettings: "'wght' 200" }}>chat_bubble</span>
+                                    <p className="text-sm">No conversations yet.</p>
+                                </div>
+                            ) : conversations.map((conv) => {
+                                const other = getOtherParticipant(conv);
+                                const isActive = selectedConversation?.uuid === conv.uuid;
+                                return (
+                                    <div
+                                        key={conv.uuid}
+                                        onClick={() => onSelectConversation(conv)}
+                                        className={`group relative flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all ${isActive ? 'bg-surface-container-low border border-primary/10' : 'hover:bg-surface-container-low'}`}
+                                    >
+                                        {/* Avatar */}
+                                        <div className="relative h-12 w-12 flex-shrink-0">
+                                            <div className="h-full w-full rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-lg">
+                                                {other.username.charAt(0).toUpperCase()}
+                                            </div>
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex items-center justify-between">
+                                                <h3 className="text-sm font-headline font-bold text-on-surface truncate">{other.username}</h3>
+                                                <span className="text-[10px] font-label font-medium text-outline whitespace-nowrap ml-2">
+                                                    {conv.last_message ? formatTime(conv.last_message.created_at) : formatTime(conv.created_at)}
+                                                </span>
+                                            </div>
+                                            {conv.last_message ? (
+                                                <p className="text-[11px] font-body text-on-surface-variant truncate mt-0.5">
+                                                    {conv.last_message.sender_username === (currentUser?.username || '') ? 'You: ' : ''}{conv.last_message.content}
+                                                </p>
+                                            ) : (
+                                                <p className="text-[11px] font-body text-on-surface-variant/50 italic mt-0.5">No messages yet</p>
+                                            )}
+                                        </div>
+                                        {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 bg-primary rounded-r-full"></div>}
                                     </div>
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex items-center justify-between">
-                                        <h3 className="text-sm font-headline font-bold text-on-surface truncate">Elias Thorne Studios</h3>
-                                        <span className="text-[10px] font-label font-medium text-tertiary whitespace-nowrap">2m ago</span>
-                                    </div>
-                                    <p className="text-xs font-body font-semibold text-primary truncate mb-0.5">Hand-Glazed Terra Vase</p>
-                                    <p className="text-[11px] font-body text-on-surface-variant truncate">The kiln just finished its cooling cycle...</p>
-                                </div>
-                                <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 bg-primary rounded-r-full"></div>
-                            </div>
-                            {/* Chat Item 2 */}
-                            <div className="group flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low transition-all cursor-pointer">
-                                <div className="relative h-14 w-14 flex-shrink-0">
-                                    <img alt="Artifact" className="h-full w-full object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjCRzGA9MIFbD4KuDF8uXicoWMCYJPN-998JbbCfOrIOM24VnxoLQ6X-RLgb5fkMZWYh-jQrVZUxoO_XJR2uHGeYvOkRgoAI1WfJKroeFnAi-rjB9yezSacWbGTEon8xTzpnB1DVrL7zFILnfbT0MiuD4BDlDK5g05n-nmQxphaRMG-vNLCk-WTfn0pION7to6PHUrHGFWot9cVv92aSjTY5kPTItM-dJYSUgZwn2gh1yftqI0mqcKQPInk5AKKJkGhbVpbdhWDnwg" />
-                                    <div className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                                        <img alt="Seller" className="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZalIRnsHKpC8SNFCgGHhLs618wP698tHY1bswAK9aOEtHxSQ3v3cQ9OSus3jEKXw6fBq8DbIK9sg9juqXXp0YxhOPOVXUIkU8b_Fq7LTKBQBHFMtDH53T8RPO1nHr6yRLTvGdgpbS-E0SfTJKG6Xj1wfXMO2Wo-ewHuzqZBE2DFnBMR2UQfEIUbV3Dw8-7iPYuVndt__H3_NOfaoDlXCWufhWx3RvmZaWyJp5aZ-p5kUzTh_H_dE39M7jQgmoRP68eR8GuKmCT5Gj" />
-                                    </div>
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex items-center justify-between">
-                                        <h3 className="text-sm font-headline font-bold text-on-surface truncate">Heritage Horology</h3>
-                                        <span className="text-[10px] font-label text-outline whitespace-nowrap">1h ago</span>
-                                    </div>
-                                    <p className="text-xs font-body font-semibold text-on-surface truncate mb-0.5">1964 Chronograph Zenith</p>
-                                    <p className="text-[11px] font-body text-on-surface-variant truncate">I've attached the authentication documents...</p>
-                                </div>
-                            </div>
-                            {/* Chat Item 3 */}
-                            <div className="group flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low transition-all cursor-pointer">
-                                <div className="relative h-14 w-14 flex-shrink-0">
-                                    <img alt="Artifact" className="h-full w-full object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7CsO-YETB_JNVGCIl8GAO-FGvFw8ep5S7l_Rojwz3_nq55MRh9Ur89nx2bT5m-ownOYI3rkijMwR-cy0MarsWvqyzKoJTOz6zoBQtHIwINNRmOXWmhzpEraRsTv-v8J1e3G4C1zkd1s4R4NKdR10ObdO4-aDtegyqaWdqdEbI_kRWeQpI3gwA9KETR7w4Cl1uqC8ufdsP8IqukuaHgmVvXHpbgEBfzlK775n_CIkUA6CO3nolDhRn86LJRrdu63qsoWSBqxZXJmoC" />
-                                    <div className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full border-2 border-white overflow-hidden shadow-sm flex items-center justify-center bg-primary text-[8px] text-white font-bold">AG</div>
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex items-center justify-between">
-                                        <h3 className="text-sm font-headline font-bold text-on-surface truncate">Atelier Gallerie</h3>
-                                        <span className="text-[10px] font-label text-outline whitespace-nowrap">Yesterday</span>
-                                    </div>
-                                    <p className="text-xs font-body font-semibold text-on-surface truncate mb-0.5">Silent Nocturne No. 4</p>
-                                    <p className="text-[11px] font-body text-on-surface-variant truncate">We can arrange a private viewing this Saturday...</p>
-                                </div>
-                            </div>
+                                );
+                            })}
                         </div>
                     </section>
+
                     {/* Right Pane: Messaging Section */}
                     <section className="flex-1 flex flex-col bg-surface-bright relative">
-                        {/* Chat Header */}
-                        <div className="h-20 shrink-0 px-8 border-b border-outline-variant/10 bg-white/50 backdrop-blur-md flex items-center justify-between z-10">
-                            <div className="flex items-center gap-4">
-                                <div className="h-10 w-10 rounded-full overflow-hidden border border-outline-variant/20">
-                                    <img alt="Seller" className="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Tnk0B7-_-MMm4hYdVKh19VNN4wJJ2ZCXYEuisfR4neLuiedWTREjixzQejEBuIasLu83C4Bp-CQm1Xiq-UT4VwFF7-Q8GHaoGmit4NztfnRp8wXKUBQfQ5zEdRiKUitaAO7Mu41jn4nrSLoyxmE84wFg2WnOvotLOkWsVqcMD679aMnARnS1haTEbAMk3qwPCz5lsASvLdy_abNAeIXZwOCzT1jepo85PfTjaP96Q-PrwCvcCcYdnAITvYepTtGpVv7MqntvK9iS" />
-                                </div>
-                                <div>
-                                    <h2 className="text-lg font-headline font-bold text-on-surface leading-tight">Elias Thorne Studios</h2>
-                                    <div className="flex items-center gap-1.5">
-                                        <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
-                                        <span className="text-[10px] uppercase tracking-wider font-bold text-outline">Online now</span>
+                        {!selectedConversation ? (
+                            <div className="flex-1 flex flex-col items-center justify-center text-center text-on-surface-variant p-12">
+                                <span className="material-symbols-outlined text-8xl text-outline-variant mb-6" style={{ fontVariationSettings: "'wght' 200, 'FILL' 0" }}>chat</span>
+                                <h2 className="font-headline text-2xl text-primary mb-2">Select a Conversation</h2>
+                                <p className="text-sm max-w-xs leading-relaxed">Choose a conversation from the left panel to start messaging.</p>
+                            </div>
+                        ) : (
+                            <>
+                                {/* Chat Header */}
+                                <div className="h-20 shrink-0 px-8 border-b border-outline-variant/10 bg-white/50 backdrop-blur-md flex items-center justify-between z-10">
+                                    <div className="flex items-center gap-4">
+                                        <div className="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">
+                                            {getOtherParticipant(selectedConversation).username.charAt(0).toUpperCase()}
+                                        </div>
+                                        <div>
+                                            <h2 className="text-lg font-headline font-bold text-on-surface leading-tight">{getOtherParticipant(selectedConversation).username}</h2>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <button className="p-2.5 rounded-full hover:bg-surface-container-low transition-colors">
+                                            <span className="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <button className="p-2.5 rounded-full hover:bg-surface-container-low transition-colors"><span className="material-symbols-outlined text-on-surface-variant">call</span></button>
-                                <button className="p-2.5 rounded-full hover:bg-surface-container-low transition-colors"><span className="material-symbols-outlined text-on-surface-variant">info</span></button>
-                                <button className="p-2.5 rounded-full hover:bg-surface-container-low transition-colors"><span className="material-symbols-outlined text-on-surface-variant">more_vert</span></button>
-                            </div>
-                        </div>
-                        {/* Product Preview Card (Pinned) */}
-                        <div className="px-8 py-4 bg-white/30 backdrop-blur-sm border-b border-outline-variant/10 flex items-center justify-between z-10 group cursor-pointer hover:bg-white/50 transition-colors">
-                            <div className="flex items-center gap-4">
-                                <img alt="Vase" className="h-12 w-12 rounded object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLlo9FEw3EEdYGfNiyUwJnAPWuKzX6Lgcjq2FXUt5riXkbPu675UMSwPfiXwQb9uSyr6JBVVgnVXLAL-Ty798E2e0hmJ9rP-vXwKqL_Vfa_zHPG9cbbGY7ISgtl3vgav8A1A3jsObmvYHl0RSoiRN6Jq7tN0URAt3Y6Sr9Ac3Mn_NlDzb0eBNTqztqmea63Im8RasA8N5gFfqURkA4f7GzxpocX3EngxtgStLaq7KKNzu2V3DjBXKH20iCQkG7ui2AvgRrR3_CIU-v" />
-                                <div>
-                                    <p className="text-[10px] uppercase tracking-widest font-bold text-tertiary">Discussing Artifact</p>
-                                    <h3 className="text-sm font-bold text-on-surface">Hand-Glazed Terra Vase</h3>
+
+                                {/* Message History */}
+                                <div className="flex-1 overflow-y-auto px-8 py-10 space-y-6 flex flex-col scroll-smooth">
+                                    {loadingMessages ? (
+                                        <div className="flex items-center justify-center py-12">
+                                            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                                        </div>
+                                    ) : messages.length === 0 ? (
+                                        <div className="flex flex-col items-center justify-center flex-1 text-on-surface-variant">
+                                            <span className="material-symbols-outlined text-4xl mb-2 text-outline-variant" style={{ fontVariationSettings: "'wght' 200" }}>waving_hand</span>
+                                            <p className="text-sm">Start the conversation!</p>
+                                        </div>
+                                    ) : messages.map((msg) => {
+                                        const isOwnMessage = msg.sender === currentUser?.id || msg.sender_username === currentUser?.username;
+                                        return (
+                                            <div key={msg.id} className={`flex gap-4 max-w-[75%] ${isOwnMessage ? 'self-end flex-row-reverse' : ''}`}>
+                                                {!isOwnMessage && (
+                                                    <div className="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs shrink-0 mt-auto">
+                                                        {msg.sender_username?.charAt(0).toUpperCase()}
+                                                    </div>
+                                                )}
+                                                <div className={`space-y-1 ${isOwnMessage ? 'text-right' : ''}`}>
+                                                    <div className={`p-4 rounded-2xl shadow-sm ${isOwnMessage ? 'bg-primary text-on-primary rounded-br-none' : 'bg-white text-on-surface-variant rounded-bl-none border border-outline-variant/5'}`}>
+                                                        <p className="text-sm leading-relaxed">{msg.content}</p>
+                                                    </div>
+                                                    <span className="text-[10px] text-outline px-1">{formatTime(msg.created_at)}</span>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                    <div ref={messagesEndRef} />
                                 </div>
-                            </div>
-                            <div className="text-right">
-                                <p className="text-xs font-bold text-primary font-headline">$1,240</p>
-                                <p className="text-[10px] text-outline">Limited Edition</p>
-                            </div>
-                        </div>
-                        {/* Message History */}
-                        <div className="flex-1 overflow-y-auto px-8 py-10 space-y-8 flex flex-col scroll-smooth">
-                            <div className="flex justify-center">
-                                <span className="px-3 py-1 bg-surface-container text-[10px] font-bold uppercase tracking-[0.15em] text-outline rounded-full">Monday, Oct 24</span>
-                            </div>
-                            {/* Seller Message */}
-                            <div className="flex gap-4 max-w-[80%]">
-                                <div className="h-8 w-8 rounded-full overflow-hidden shrink-0 mt-auto border border-outline-variant/10">
-                                    <img alt="Elias" className="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Tnk0B7-_-MMm4hYdVKh19VNN4wJJ2ZCXYEuisfR4neLuiedWTREjixzQejEBuIasLu83C4Bp-CQm1Xiq-UT4VwFF7-Q8GHaoGmit4NztfnRp8wXKUBQfQ5zEdRiKUitaAO7Mu41jn4nrSLoyxmE84wFg2WnOvotLOkWsVqcMD679aMnARnS1haTEbAMk3qwPCz5lsASvLdy_abNAeIXZwOCzT1jepo85PfTjaP96Q-PrwCvcCcYdnAITvYepTtGpVv7MqntvK9iS" />
-                                </div>
-                                <div className="space-y-1">
-                                    <div className="bg-white p-4 rounded-2xl rounded-bl-none shadow-sm border border-outline-variant/5">
-                                        <p className="text-sm text-on-surface-variant leading-relaxed">Good morning. I've been refining the glaze for your custom Terra Vase. The iron oxide proportions are finally achieving that deep, earthy crackle we discussed.</p>
+
+                                {/* Message Bar — no file/image buttons for buyers */}
+                                <div className="p-6 bg-white border-t border-outline-variant/10">
+                                    <div className="max-w-4xl mx-auto relative flex items-center gap-3">
+                                        <div className="flex-1 relative">
+                                            <input
+                                                className="w-full bg-surface-container-low border-none rounded-full py-3 px-6 pr-12 text-sm focus:ring-1 focus:ring-primary/20 outline-none placeholder:text-outline/60"
+                                                placeholder={`Message ${getOtherParticipant(selectedConversation).username}...`}
+                                                type="text"
+                                                value={inputText}
+                                                onChange={(e) => setInputText(e.target.value)}
+                                                onKeyDown={handleKeyDown}
+                                            />
+                                        </div>
+                                        <button
+                                            onClick={handleSend}
+                                            disabled={!inputText.trim()}
+                                            className="h-11 w-11 rounded-full bg-primary text-on-primary flex items-center justify-center hover:shadow-lg transition-all active:scale-95 shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                                        >
+                                            <span className="material-symbols-outlined">send</span>
+                                        </button>
                                     </div>
-                                    <span className="text-[10px] text-outline px-1">10:42 AM</span>
                                 </div>
-                            </div>
-                            {/* Buyer Message */}
-                            <div className="flex flex-row-reverse gap-4 max-w-[80%] self-end">
-                                <div className="space-y-1 text-right">
-                                    <div className="bg-primary text-on-primary p-4 rounded-2xl rounded-br-none shadow-md">
-                                        <p className="text-sm leading-relaxed">That sounds perfect. Do you think the finish will be matte or have a slight sheen? I'm hoping it catches the afternoon light in my studio.</p>
-                                    </div>
-                                    <span className="text-[10px] text-outline px-1">10:45 AM</span>
-                                </div>
-                            </div>
-                            {/* Seller Message with Image */}
-                            <div className="flex gap-4 max-w-[80%]">
-                                <div className="h-8 w-8 rounded-full overflow-hidden shrink-0 mt-auto border border-outline-variant/10">
-                                    <img alt="Elias" className="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Tnk0B7-_-MMm4hYdVKh19VNN4wJJ2ZCXYEuisfR4neLuiedWTREjixzQejEBuIasLu83C4Bp-CQm1Xiq-UT4VwFF7-Q8GHaoGmit4NztfnRp8wXKUBQfQ5zEdRiKUitaAO7Mu41jn4nrSLoyxmE84wFg2WnOvotLOkWsVqcMD679aMnARnS1haTEbAMk3qwPCz5lsASvLdy_abNAeIXZwOCzT1jepo85PfTjaP96Q-PrwCvcCcYdnAITvYepTtGpVv7MqntvK9iS" />
-                                </div>
-                                <div className="space-y-2">
-                                    <div className="bg-white p-4 rounded-2xl rounded-bl-none shadow-sm border border-outline-variant/5">
-                                        <p className="text-sm text-on-surface-variant leading-relaxed">The kiln just finished its cooling cycle. The finish is exactly as you requested—a soft eggshell matte that glows rather than shines. Here's a quick look at the texture.</p>
-                                    </div>
-                                    <div className="w-64 h-48 rounded-xl overflow-hidden shadow-sm border border-outline-variant/10">
-                                        <img alt="Vase detail" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLlo9FEw3EEdYGfNiyUwJnAPWuKzX6Lgcjq2FXUt5riXkbPu675UMSwPfiXwQb9uSyr6JBVVgnVXLAL-Ty798E2e0hmJ9rP-vXwKqL_Vfa_zHPG9cbbGY7ISgtl3vgav8A1A3jsObmvYHl0RSoiRN6Jq7tN0URAt3Y6Sr9Ac3Mn_NlDzb0eBNTqztqmea63Im8RasA8N5gFfqURkA4f7GzxpocX3EngxtgStLaq7KKNzu2V3DjBXKH20iCQkG7ui2AvgRrR3_CIU-v" />
-                                    </div>
-                                    <span className="text-[10px] text-outline px-1">2m ago</span>
-                                </div>
-                            </div>
-                        </div>
-                        {/* Message Bar */}
-                        <div className="p-6 bg-white border-t border-outline-variant/10">
-                            <div className="max-w-4xl mx-auto relative flex items-center gap-2">
-                                <div className="flex items-center gap-1">
-                                    <button className="p-2 text-outline hover:text-primary transition-colors"><span className="material-symbols-outlined">add_circle</span></button>
-                                    <button className="p-2 text-outline hover:text-primary transition-colors"><span className="material-symbols-outlined">image</span></button>
-                                </div>
-                                <div className="flex-1 relative">
-                                    <input className="w-full bg-surface-container-low border-none rounded-full py-3 px-6 pr-12 text-sm focus:ring-1 focus:ring-primary/20 outline-none placeholder:text-outline/60" placeholder="Message Elias Thorne..." type="text" />
-                                    <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-outline hover:text-primary transition-colors"><span className="material-symbols-outlined">mood</span></button>
-                                </div>
-                                <button className="h-11 w-11 rounded-full bg-primary text-on-primary flex items-center justify-center hover:shadow-lg transition-all active:scale-95 shrink-0">
-                                    <span className="material-symbols-outlined">send</span>
-                                </button>
-                            </div>
-                        </div>
+                            </>
+                        )}
                     </section>
                 </div>
             </div>

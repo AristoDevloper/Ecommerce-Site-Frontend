@@ -1,7 +1,36 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export function MobileProductListing() {
+    const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                setLoading(true);
+                const response = await fetch('http://localhost:8000/products-api/');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                const data = await response.json();
+                const items = Array.isArray(data.results) ? data.results : Array.isArray(data) ? data : [];
+                setProducts(items);
+            } catch (err) {
+                console.error(err);
+                setError('Unable to load products.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
     return (
         <div className="bg-background text-on-background font-body select-none mobile-screen">
-            
             <main className="pt-20 pb-24 px-4 max-w-md mx-auto">
                 {/*  Editorial Header  */}
                 <section className="mb-10 text-center">
@@ -16,114 +45,52 @@ export function MobileProductListing() {
                         <span className="font-label text-xs uppercase font-bold tracking-wider">Refine</span>
                     </button>
                     <div className="flex items-center gap-4">
-                        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">24 Items</span>
-                        <button className="material-symbols-outlined text-on-surface-variant" data-icon="grid_view">grid_view</button>
+                        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{products.length} Items</span>
                     </div>
                 </div>
                 {/*  Product Grid  */}
-                <div className="grid grid-cols-1 gap-12">
-                    {/*  Product Card 1: Asymmetric Hero  */}
-                    <div className="relative group">
-                        <div className="aspect-[4/5] bg-surface-variant rounded-md overflow-hidden mb-4 relative">
-                            <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Minimalist luxury handbag made of smooth charcoal leather on a clean stone pedestal with soft directional light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfKWfH6CmZe2vBLMpGkEbuJc3H872_Kv6yIWIl1IzxtI1V0aV1QLfjySwbBb9noSTQE6jK-QeFA9k8PdFuZpxcaJzN4DQq2EvndOTziqBcFJRKLezH5p32uN-4k6jjW8x0BlfEI4ndzNwPFkVSSgUqYuIwuI-BxzopomFGnZMwiX9a-i46qyuxJp_fnDRXXimoL-a-lnuw2H9SchXYYSLz97DEmhCNA1QDValQpksp-2Z8U4okDQ17vS8YWAZlqt1ijF6N6KGK6K-x" />
-                            <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full">
-                                <span className="font-label text-[10px] font-bold text-primary tracking-tighter">LIMITED</span>
-                            </div>
-                        </div>
-                        <div className="flex flex-col items-center">
-                            <h2 className="font-headline text-2xl text-primary italic">Obsidian Vessel</h2>
-                            <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Sculpted Leather</span>
-                            <div className="mt-4 flex items-center gap-3">
-                                <span className="font-label text-sm font-bold text-primary">$1,240</span>
-                                <div className="h-[1px] w-8 bg-outline-variant/30"></div>
-                                <button className="text-[10px] uppercase font-bold tracking-wider underline underline-offset-4 hover:text-tertiary transition-colors">Details</button>
-                            </div>
-                        </div>
+                {loading ? (
+                    <div className="flex flex-col items-center justify-center py-20">
+                        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+                        <p className="text-xs uppercase tracking-widest text-on-surface-variant">Loading collection...</p>
                     </div>
-                    {/*  2-Column Grid Row  */}
-                    <div className="grid grid-cols-2 gap-6 items-start">
-                        {/*  Product Card 2  */}
-                        <div className="flex flex-col">
-                            <div className="aspect-[3/4] bg-surface-container-low rounded-md overflow-hidden mb-3">
-                                <img className="w-full h-full object-cover" data-alt="Elegant tailored wool coat in ivory color draped over a vintage wooden chair against a neutral beige wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJlrVLB6ZvHREqibPExmsEQO-xCmYLY_rO_L4Md7ddXMd-mHGeVwLaldvULSUakoR7o8uNeqET3CRdtPV2QZXPDvylxKyDzSpbS_tmt_to3jSVBAQE_XNQieDPfPzErkTpccYe1n_J_xmFym7lT5n_aLtR9GdiI0PZdwXUkmFWL7lfbD7QtccHU71nnsh4mdnX82_WccyzWWvW2xZn666T-bzTjZyTkMOMlmlTLisLuqJvMKWzcAsi8rR1IZs8WF8vKad_58w20I_2" />
-                            </div>
-                            <h3 className="font-headline text-lg italic text-primary leading-tight">Artisan Overcoat</h3>
-                            <span className="font-label text-[9px] text-on-surface-variant uppercase tracking-tighter">Merino Wool</span>
-                            <span className="font-label text-xs font-bold mt-2">$850</span>
-                        </div>
-                        {/*  Product Card 3  */}
-                        <div className="flex flex-col pt-8">
-                            <div className="aspect-[3/4] bg-surface-container-low rounded-md overflow-hidden mb-3">
-                                <img className="w-full h-full object-cover" data-alt="Brushed gold designer watch with a simple white face and black leather strap resting on a piece of raw quartz" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqGim3oqFixLIfezJ3vSyYEs0yAAWXjSarMLFKcz2JQJ5RBcuG8ArjG7rcC22wEuPX3eSSCpUrnlQcu1upwHh__EnlBnVXeqJH2d4VX4VRsc0M3liImnaCi1p_tQAVrGaxdq3fE2Qtt5rM8wAsPxEY8-1G0jEzq4cFQBYyjZqVc6ZA6zjqCrK6m4Yi4VKZQ923yhX44VmnYWPEXJRkOZUEToNyiryDfNEl1TmzARwtF0zmimnmcrafnnnFuHfaRNURgzV9j_LJTifA" />
-                            </div>
-                            <h3 className="font-headline text-lg italic text-primary leading-tight">Temporal Dial</h3>
-                            <span className="font-label text-[9px] text-on-surface-variant uppercase tracking-tighter">Brushed Brass</span>
-                            <span className="font-label text-xs font-bold mt-2">$390</span>
-                        </div>
+                ) : error ? (
+                    <div className="text-center py-10 text-sm text-on-surface-variant">{error}</div>
+                ) : (
+                    <div className="grid grid-cols-1 gap-12">
+                        {products.map((product) => {
+                            const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
+                            const categoryName = product.category_name || 'Curated pick';
+                            return (
+                                <div 
+                                    key={product.product_id || product.id} 
+                                    className="relative group cursor-pointer"
+                                    onClick={() => navigate(`/product/${product.product_id}`)}
+                                >
+                                    <div className="aspect-[4/5] bg-surface-variant rounded-md overflow-hidden mb-4 relative">
+                                        <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={product.name} src={imageUrl} />
+                                    </div>
+                                    <div className="flex flex-col items-center text-center px-4">
+                                        <h2 className="font-headline text-2xl text-primary italic leading-tight">{product.name}</h2>
+                                        <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">{categoryName}</span>
+                                        <div className="mt-4 flex items-center gap-3">
+                                            <span className="font-label text-sm font-bold text-primary">${Number(product.price).toLocaleString()}</span>
+                                            <div className="h-[1px] w-8 bg-outline-variant/30"></div>
+                                            <button className="text-[10px] uppercase font-bold tracking-wider underline underline-offset-4 hover:text-tertiary transition-colors">Details</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
-                    {/*  Feature Promotion (No Line Rule)  */}
-                    <div className="bg-surface-container-low -mx-4 px-8 py-12 flex flex-col items-center text-center">
-                        <span className="material-symbols-outlined text-4xl text-tertiary mb-4" data-icon="eco">eco</span>
-                        <h4 className="font-headline text-2xl text-primary italic mb-2">Sustainable Grace</h4>
-                        <p className="text-xs font-light text-on-surface-variant leading-relaxed max-w-[240px]">Every artifact is sourced from workshops committed to restorative environmental practices.</p>
-                        <button className="mt-6 px-6 py-3 bg-primary text-on-primary rounded-lg font-label text-[10px] uppercase tracking-widest active:scale-95 transition-transform bg-gradient-to-br from-primary to-primary-container shadow-xl shadow-primary/10">Read Our Ethos</button>
-                    </div>
-                    {/*  Product Card 4  */}
-                    <div className="relative group">
-                        <div className="aspect-[4/5] bg-surface-variant rounded-md overflow-hidden mb-4">
-                            <img className="w-full h-full object-cover" data-alt="Sophisticated knit sweater in sage green texture close-up with soft morning light illuminating the fabric fibers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIDaJgt41Ox4MY6c0EwFAeRwZULKqZvNXzSwNV8g3s29GcFSL6jT4MSbEd0fRw7PsxEXqcaRq2M_vsmc8S3gDgk_tHnkafbBgixYKl-yzofhZX5lSr7iUI0n7s1Vy-cMAwzWScEIp7VUvxp8vb-WJLVXiVqoLV6h7bRU63Ea4Oys9AkLJZDgjxqcAgtlOUooRaJfmdD1KW7FaInleCyyBAqybQ0GzA9NutpqSz2DGrNs64MZ4__SsIzp1JjfOYfw5OQjECBYCor49V" />
-                        </div>
-                        <div className="flex justify-between items-end">
-                            <div>
-                                <h2 className="font-headline text-2xl text-primary italic">Flora Knit</h2>
-                                <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Organic Cashmere</span>
-                            </div>
-                            <span className="font-label text-sm font-bold text-primary">$560</span>
-                        </div>
-                    </div>
-                    {/*  Product Card 5 (Asymmetric offset)  */}
-                    <div className="grid grid-cols-5 gap-4">
-                        <div className="col-span-3">
-                            <div className="aspect-[3/4] bg-surface-container-low rounded-md overflow-hidden mb-3">
-                                <img className="w-full h-full object-cover" data-alt="High-end designer loafers in dark brown polished leather on a reflective black marble surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC21228yl63hkToT6_uKyp-3J8ERFFiMiY13nNEtJljHrr6hE7bF_IEwDPS0NcJgEXZ5kxQYnP8h_UUC8dGoMJnDQJD-KmzfU2wL0lNn5XXkBvmcnZhGy2ZrXgp6MV0lNYWDUtuGkx_CcO_TqL4vHHxJxhVwLHPi3RdzDWSFhcYDDXA7Smel5X663XcEhcvMqQhB9OPJ1U-vYlZOqoksLZ5JJfJ4vmRk2MRlK2CT3JCT48wkl9wswYy4-dLCd-ZWTpzlansG53uqTZA" />
-                            </div>
-                            <h3 className="font-headline text-lg italic text-primary leading-tight">Marbled Loafer</h3>
-                            <span className="font-label text-xs font-bold mt-2">$425</span>
-                        </div>
-                        <div className="col-span-2 pt-12">
-                            <p className="font-label text-[9px] uppercase leading-relaxed tracking-widest text-on-surface-variant/60">Selected for the Autumn '24 Collection for its timeless silhouette and uncompromising comfort.</p>
-                            <div className="mt-4 h-[1px] w-12 bg-tertiary"></div>
-                        </div>
-                    </div>
-                </div>
+                )}
             </main>
-            
             {/*  Contextual Quick Action (Only on top-level listing)  */}
             <div className="fixed bottom-24 right-6 z-40">
-                <button className="bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center shadow-2xl shadow-primary/40 backdrop-blur-md bg-opacity-95 active:scale-90 transition-transform">
+                <button className="bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center shadow-2xl shadow-primary/40 backdrop-blur-md bg-opacity-95 active:scale-90 transition-transform" onClick={() => navigate('/conversations')}>
                     <span className="material-symbols-outlined" data-icon="chat_bubble" style={{ fontVariationSettings: "'FILL' 1" }}>chat_bubble</span>
                 </button>
             </div>
-            {/*  Hidden Drawer / Bottom Sheet Placeholder (Visual representation)  */}
-            <div className="fixed inset-0 bg-primary/20 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity">
-                <div className="absolute bottom-0 w-full bg-surface rounded-t-3xl p-8 flex flex-col gap-6">
-                    <div className="w-12 h-1 bg-outline-variant/30 rounded-full mx-auto mb-4"></div>
-                    <h5 className="font-headline text-2xl italic text-primary">Sort By</h5>
-                    <div className="flex flex-col gap-4">
-                        <div className="flex justify-between items-center text-primary font-bold italic">
-                            <span className="font-body text-lg">Newest Arrivals</span>
-                            <span className="material-symbols-outlined" data-icon="check">check</span>
-                        </div>
-                        <div className="flex justify-between items-center text-on-surface-variant">
-                            <span className="font-body text-lg">Price: Low to High</span>
-                        </div>
-                        <div className="flex justify-between items-center text-on-surface-variant">
-                            <span className="font-body text-lg">Price: High to Low</span>
-                        </div>
-                    </div>
-                    <button className="mt-4 w-full py-4 bg-primary text-on-primary font-label text-xs uppercase tracking-[0.2em] rounded-lg">Apply</button>
-                </div>
-            </div>
         </div>
-    )
+    );
 }

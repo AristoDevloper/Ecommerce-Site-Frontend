@@ -1,16 +1,23 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export function DesktopAccountPage({ profile, setProfile, addresses, setAddresses, setIsAuthenticated }) {
+export function DesktopAccountPage({ profile, setProfile, addresses, setAddresses, paymentAccounts, setPaymentAccounts, setIsAuthenticated }) {
   // Profile modal
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [tempProfileName, setTempProfileName] = useState(profile.name);
   const [tempProfileEmail, setTempProfileEmail] = useState(profile.email);
+  const [tempProfileMobile, setTempProfileMobile] = useState(profile.defaultMobile || '');
+  const [tempProfileSecondaryEmail, setTempProfileSecondaryEmail] = useState(profile.secondaryEmail || '');
+  const [tempProfileGender, setTempProfileGender] = useState(profile.gender || '');
   const navigate = useNavigate();
 
   // Address modal
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
   const [tempAddresses, setTempAddresses] = useState(JSON.parse(JSON.stringify(addresses)));
+
+  // Payment modal
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [tempPaymentAccounts, setTempPaymentAccounts] = useState(JSON.parse(JSON.stringify(paymentAccounts || [])));
 
   const handleAddressFieldChange = (index, field, value) => {
     const updated = [...tempAddresses];
@@ -35,6 +42,35 @@ export function DesktopAccountPage({ profile, setProfile, addresses, setAddresse
     }
     setTempAddresses(updated);
   };
+
+  const handlePaymentFieldChange = (index, field, value) => {
+    const updated = [...tempPaymentAccounts];
+    updated[index] = { ...updated[index], [field]: value };
+    setTempPaymentAccounts(updated);
+  };
+
+  const handleSetDefaultPayment = (index) => {
+    const updated = tempPaymentAccounts.map((account, i) => ({ ...account, isDefault: i === index }));
+    setTempPaymentAccounts(updated);
+  };
+
+  const handleAddPaymentAccount = () => {
+    setTempPaymentAccounts([
+      ...tempPaymentAccounts,
+      { label: '', method: 'eSewa', accountId: '', isDefault: false }
+    ]);
+  };
+
+  const handleRemovePaymentAccount = (index) => {
+    if (tempPaymentAccounts.length <= 1) return;
+    const updated = tempPaymentAccounts.filter((_, i) => i !== index);
+    if (tempPaymentAccounts[index].isDefault && updated.length > 0) {
+      updated[0].isDefault = true;
+    }
+    setTempPaymentAccounts(updated);
+  };
+
+  const defaultPaymentAccount = paymentAccounts.find((account) => account.isDefault) || paymentAccounts[0];
 
   const defaultAddress = addresses.find(a => a.isDefault) || addresses[0];
 
@@ -133,6 +169,9 @@ export function DesktopAccountPage({ profile, setProfile, addresses, setAddresse
               onClick={() => {
                 setTempProfileName(profile.name);
                 setTempProfileEmail(profile.email);
+                setTempProfileMobile(profile.defaultMobile || '');
+                setTempProfileSecondaryEmail(profile.secondaryEmail || '');
+                setTempProfileGender(profile.gender || '');
                 setIsProfileModalOpen(true);
               }}
               className="mt-8 flex items-center gap-2 text-primary font-bold text-sm cursor-pointer"
@@ -165,10 +204,16 @@ export function DesktopAccountPage({ profile, setProfile, addresses, setAddresse
             <div>
               <span className="material-symbols-outlined text-primary text-3xl mb-4 group-hover:scale-110 transition-transform">account_balance_wallet</span>
               <h3 className="text-2xl font-headline text-primary mb-2">Financials</h3>
-              <p className="text-on-surface-variant text-sm mt-4">Visa ending in •••• 4242</p>
-              <p className="text-on-surface-variant text-[10px] uppercase tracking-tighter mt-1 opacity-60">Expires 09/27</p>
+              <p className="text-on-surface-variant text-sm mt-4">{defaultPaymentAccount?.method || 'No payment method'} ending in {defaultPaymentAccount?.accountId || 'not set'}</p>
+              <p className="text-on-surface-variant text-[10px] uppercase tracking-tighter mt-1 opacity-60">{defaultPaymentAccount?.label || 'Add a payment account'}</p>
             </div>
-            <div className="mt-8 flex items-center gap-2 text-primary font-bold text-sm cursor-pointer">
+            <div
+              onClick={() => {
+                setTempPaymentAccounts(JSON.parse(JSON.stringify(paymentAccounts || [])));
+                setIsPaymentModalOpen(true);
+              }}
+              className="mt-8 flex items-center gap-2 text-primary font-bold text-sm cursor-pointer"
+            >
               SECURE PAYMENTS <span className="material-symbols-outlined text-sm">arrow_forward</span>
             </div>
           </div>
@@ -254,6 +299,38 @@ export function DesktopAccountPage({ profile, setProfile, addresses, setAddresse
                   className="w-full bg-surface-container-low border border-outline-variant/20 focus:border-primary focus:ring-0 rounded px-4 py-3 text-sm text-primary font-body"
                 />
               </div>
+              <div>
+                <label className="block text-xs font-label uppercase tracking-widest text-on-surface-variant font-bold mb-2">Default Mobile Number</label>
+                <input
+                  type="tel"
+                  value={tempProfileMobile}
+                  onChange={(e) => setTempProfileMobile(e.target.value)}
+                  className="w-full bg-surface-container-low border border-outline-variant/20 focus:border-primary focus:ring-0 rounded px-4 py-3 text-sm text-primary font-body"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-label uppercase tracking-widest text-on-surface-variant font-bold mb-2">Secondary Email</label>
+                <input
+                  type="email"
+                  value={tempProfileSecondaryEmail}
+                  onChange={(e) => setTempProfileSecondaryEmail(e.target.value)}
+                  className="w-full bg-surface-container-low border border-outline-variant/20 focus:border-primary focus:ring-0 rounded px-4 py-3 text-sm text-primary font-body"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-label uppercase tracking-widest text-on-surface-variant font-bold mb-2">Gender</label>
+                <select
+                  value={tempProfileGender}
+                  onChange={(e) => setTempProfileGender(e.target.value)}
+                  className="w-full bg-surface-container-low border border-outline-variant/20 focus:border-primary focus:ring-0 rounded px-4 py-3 text-sm text-primary font-body"
+                >
+                  <option value="">Select gender</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Non-binary">Non-binary</option>
+                  <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+              </div>
             </div>
 
             <div className="flex gap-4 mt-8">
@@ -265,7 +342,14 @@ export function DesktopAccountPage({ profile, setProfile, addresses, setAddresse
               </button>
               <button
                 onClick={() => {
-                  setProfile({ ...profile, name: tempProfileName, email: tempProfileEmail });
+                  setProfile({
+                    ...profile,
+                    name: tempProfileName,
+                    email: tempProfileEmail,
+                    defaultMobile: tempProfileMobile,
+                    secondaryEmail: tempProfileSecondaryEmail,
+                    gender: tempProfileGender,
+                  });
                   setIsProfileModalOpen(false);
                 }}
                 className="flex-1 py-3 text-xs font-label uppercase tracking-widest text-on-primary premium-gradient rounded hover:opacity-90 transition-opacity"
@@ -408,6 +492,113 @@ export function DesktopAccountPage({ profile, setProfile, addresses, setAddresse
                 className="flex-1 py-3 text-xs font-label uppercase tracking-widest text-on-primary premium-gradient rounded hover:opacity-90 transition-opacity"
               >
                 Save All
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ───── Manage Payment Accounts Modal ───── */}
+      {isPaymentModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl p-8 border border-outline-variant/10 relative max-h-[90vh] overflow-y-auto no-scrollbar">
+            <button
+              onClick={() => setIsPaymentModalOpen(false)}
+              className="absolute top-6 right-6 text-on-surface-variant hover:text-primary transition-colors"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+
+            <h3 className="text-2xl font-headline text-primary mb-6">Manage Payment Accounts</h3>
+
+            <div className="space-y-8">
+              {tempPaymentAccounts.map((account, idx) => (
+                <div key={idx} className="p-6 bg-surface-container-low rounded-lg border border-outline-variant/10 relative">
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="text"
+                        value={account.label}
+                        onChange={(e) => handlePaymentFieldChange(idx, 'label', e.target.value)}
+                        placeholder="Label (e.g. Primary Wallet)"
+                        className="bg-transparent border-none focus:ring-0 text-lg font-headline text-primary p-0 w-56"
+                      />
+                      {account.isDefault && (
+                        <span className="text-[9px] uppercase tracking-widest font-bold text-tertiary bg-tertiary-fixed/20 px-2 py-0.5 rounded">Default</span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {!account.isDefault && (
+                        <button
+                          onClick={() => handleSetDefaultPayment(idx)}
+                          className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant hover:text-primary transition-colors"
+                        >
+                          Set Default
+                        </button>
+                      )}
+                      {tempPaymentAccounts.length > 1 && (
+                        <button
+                          onClick={() => handleRemovePaymentAccount(idx)}
+                          className="text-on-surface-variant hover:text-error transition-colors ml-2"
+                        >
+                          <span className="material-symbols-outlined text-lg">delete</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold mb-1.5">Payment Method</label>
+                      <select
+                        value={account.method}
+                        onChange={(e) => handlePaymentFieldChange(idx, 'method', e.target.value)}
+                        className="w-full bg-white border border-outline-variant/20 focus:border-primary focus:ring-0 rounded px-4 py-2.5 text-sm text-primary font-body"
+                      >
+                        <option value="eSewa">eSewa</option>
+                        <option value="Khalti">Khalti</option>
+                        <option value="Stripe Pay">Stripe Pay</option>
+                        <option value="PayPal">PayPal</option>
+                        <option value="Visa">Visa</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold mb-1.5">Account / Reference</label>
+                      <input
+                        type="text"
+                        value={account.accountId}
+                        onChange={(e) => handlePaymentFieldChange(idx, 'accountId', e.target.value)}
+                        placeholder="Wallet ID or card number"
+                        className="w-full bg-white border border-outline-variant/20 focus:border-primary focus:ring-0 rounded px-4 py-2.5 text-sm text-primary font-body"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={handleAddPaymentAccount}
+              className="w-full mt-6 py-3 border border-dashed border-outline-variant/40 rounded-lg text-sm font-label uppercase tracking-widest text-on-surface-variant hover:text-primary hover:border-primary transition-colors flex items-center justify-center gap-2"
+            >
+              <span className="material-symbols-outlined text-lg">add</span> Add New Payment Account
+            </button>
+
+            <div className="flex gap-4 mt-8">
+              <button
+                onClick={() => setIsPaymentModalOpen(false)}
+                className="flex-1 py-3 text-xs font-label uppercase tracking-widest text-on-surface-variant bg-surface-container-high hover:opacity-90 rounded transition-opacity"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  setPaymentAccounts(tempPaymentAccounts);
+                  setIsPaymentModalOpen(false);
+                }}
+                className="flex-1 py-3 text-xs font-label uppercase tracking-widest text-on-primary premium-gradient rounded hover:opacity-90 transition-opacity"
+              >
+                Save Payments
               </button>
             </div>
           </div>

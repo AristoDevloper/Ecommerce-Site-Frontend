@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 
-export function MobileShoppingCartPage({ cartItems = [] }) {
+export function MobileShoppingCartPage({ cartItems = [], onUpdateQuantity, onRemoveItem }) {
+    const currencyFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    });
+
+    const subtotal = cartItems.reduce((total, item) => {
+        return total + Number(item.product.price) * item.quantity;
+    }, 0);
+
     return (
         <div className="bg-background text-on-background font-body min-h-screen pb-32 mobile-screen">
-            
+
             <main className="pt-24 px-6 max-w-md mx-auto">
                 {/* Editorial Header */}
                 <div className="mb-12">
@@ -25,58 +34,50 @@ export function MobileShoppingCartPage({ cartItems = [] }) {
                     <>
                         {/* Cart Items List */}
                         <div className="space-y-8">
-                            {/* Item 1 */}
-                            <div className="flex gap-6 items-start group">
-                                <div className="w-32 aspect-[3/4] bg-surface-variant rounded-md overflow-hidden flex-shrink-0">
-                                    <img className="w-full h-full object-cover grayscale-[0.2] group-hover:scale-105 transition-transform duration-700" data-alt="minimalist sculptural glass vase on a linen cloth with soft morning shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUguxqaN1SPe1PIgiYn6DIdxxfIpwbbvm1BCjpgjUg7xaTclvLIdZKIxnns6-7H1tnv_Wo30zKHo_Fk-O-U0NjT8leJyr6lv9GHPniFM0OAw56HzidAwSbHG4WWR-g2tTJGt2Elsi0bZs-ek-IayGKv_X6xIb9rdjcUH0QkMypM5JXlWnHwbsCZRAvAtutuuPnaO7oSott6HiJnNn_Swn4-JNzaFCA1DwAcFRLqfSXdTRaPX5XoYYbJz6PTzQ9ACPzs9UzjzH8GJBd" alt="Orbital Vase" />
-                                </div>
-                                <div className="flex flex-col justify-between h-32 flex-grow">
-                                    <div>
-                                        <div className="flex justify-between items-start">
-                                            <h3 className="text-lg font-headline italic text-primary">Orbital Vase</h3>
-                                            <button className="text-on-surface-variant/40 hover:text-error transition-colors">
-                                                <span className="material-symbols-outlined text-sm">close</span>
-                                            </button>
+                            {cartItems.map((item) => {
+                                const productImage = item.product.images?.[0]?.image_url;
+
+                                return (
+                                    <div key={item.id} className="flex gap-6 items-start group">
+                                        <div className="w-32 aspect-[3/4] bg-surface-variant rounded-md overflow-hidden flex-shrink-0">
+                                            <img className="w-full h-full object-cover grayscale-[0.2] group-hover:scale-105 transition-transform duration-700" src={productImage} alt={item.product.name} />
                                         </div>
-                                        <p className="text-[10px] uppercase tracking-widest text-tertiary mt-1">Hand-Blown Glass</p>
-                                        <p className="text-sm text-on-surface-variant mt-2">Clear / Large</p>
-                                    </div>
-                                    <div className="flex justify-between items-end">
-                                        <div className="flex items-center gap-4 bg-surface-container-low px-3 py-1 rounded-sm">
-                                            <button className="text-xs text-on-surface-variant hover:text-primary">-</button>
-                                            <span className="text-xs font-bold">1</span>
-                                            <button className="text-xs text-on-surface-variant hover:text-primary">+</button>
+                                        <div className="flex flex-col justify-between h-32 flex-grow">
+                                            <div>
+                                                <div className="flex justify-between items-start gap-4">
+                                                    <h3 className="text-lg font-headline italic text-primary">{item.product.name}</h3>
+                                                    <button 
+                                                        onClick={() => onRemoveItem(item.product.product_id)}
+                                                        className="text-on-surface-variant/40 hover:text-error transition-colors"
+                                                    >
+                                                        <span className="material-symbols-outlined text-sm">close</span>
+                                                    </button>
+                                                </div>
+                                                <p className="text-[10px] uppercase tracking-widest text-tertiary mt-1">{item.product.category_name}</p>
+                                                <p className="text-sm text-on-surface-variant mt-2">Qty {item.quantity}</p>
+                                            </div>
+                                            <div className="flex justify-between items-end">
+                                                <div className="flex items-center gap-4 bg-surface-container-low px-3 py-1 rounded-sm">
+                                                    <button 
+                                                        onClick={() => onUpdateQuantity(item.product.product_id, -1)}
+                                                        className="text-xs text-on-surface-variant hover:text-primary"
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span className="text-xs font-bold">{item.quantity}</span>
+                                                    <button 
+                                                        onClick={() => onUpdateQuantity(item.product.product_id, 1)}
+                                                        className="text-xs text-on-surface-variant hover:text-primary"
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                                <span className="text-sm font-bold text-primary">{currencyFormatter.format(Number(item.product.price) * item.quantity)}</span>
+                                            </div>
                                         </div>
-                                        <span className="text-sm font-bold text-primary">$240.00</span>
                                     </div>
-                                </div>
-                            </div>
-                            {/* Item 2 */}
-                            <div className="flex gap-6 items-start group">
-                                <div className="w-32 aspect-[3/4] bg-surface-variant rounded-md overflow-hidden flex-shrink-0">
-                                    <img className="w-full h-full object-cover grayscale-[0.2] group-hover:scale-105 transition-transform duration-700" data-alt="premium organic cotton lounge chair with wooden frame in a bright minimalist gallery setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcrVqbrCWz2SG1ampUlfM7APYeJO9gLehgrGZpzhxt4QwlPIOzmmJXIfhuE2S34sNq4Yr0hqTbDfFzGuriYRxR4cCR5bdyZgnzp8JYy4hmrYE5ejZEaNh0IBk8vQjsh1k1kg47-nP7DEtFRBaEQ6EnfG7lCRv7XaQ0cnGA8ozjEDEPI37zJgpYc0gbyNc1LtPkrwwyUUZbC19zi_LNXUKMksAeLOycaAt2tzW8Ixd6Acv7IiftL67t-7HebQf2xyx9EXJrrd7OSONq" alt="Sable Lounge" />
-                                </div>
-                                <div className="flex flex-col justify-between h-32 flex-grow">
-                                    <div>
-                                        <div className="flex justify-between items-start">
-                                            <h3 className="text-lg font-headline italic text-primary">Sable Lounge</h3>
-                                            <button className="text-on-surface-variant/40 hover:text-error transition-colors">
-                                                <span className="material-symbols-outlined text-sm">close</span>
-                                            </button>
-                                        </div>
-                                        <p className="text-[10px] uppercase tracking-widest text-tertiary mt-1">Made to Order</p>
-                                        <p className="text-sm text-on-surface-variant mt-2">Ivory Linen</p>
-                                    </div>
-                                    <div className="flex justify-between items-end">
-                                        <div className="flex items-center gap-4 bg-surface-container-low px-3 py-1 rounded-sm">
-                                            <button className="text-xs text-on-surface-variant hover:text-primary">-</button>
-                                            <span className="text-xs font-bold">1</span>
-                                            <button className="text-xs text-on-surface-variant hover:text-primary">+</button>
-                                        </div>
-                                        <span className="text-sm font-bold text-primary">$1,960.00</span>
-                                    </div>
-                                </div>
-                            </div>
+                                );
+                            })}
                         </div>
 
                         {/* Complementary Pieces Suggestion */}
@@ -118,16 +119,19 @@ export function MobileShoppingCartPage({ cartItems = [] }) {
                         <div className="flex justify-between items-end">
                             <div>
                                 <span className="text-[10px] uppercase tracking-widest text-on-surface-variant block">Subtotal</span>
-                                <span className="text-2xl font-headline tracking-tighter text-primary">$2,200.00</span>
+                                <span className="text-2xl font-headline tracking-tighter text-primary">{currencyFormatter.format(subtotal)}</span>
                             </div>
-                            <button className="bg-primary hover:bg-primary-container text-on-primary px-8 py-4 rounded-sm text-xs font-bold uppercase tracking-widest shadow-lg shadow-primary/10 transition-all active:scale-95">
+                            <Link 
+                                to="/checkout"
+                                className="bg-primary hover:bg-primary-container text-on-primary px-8 py-4 rounded-sm text-xs font-bold uppercase tracking-widest shadow-lg shadow-primary/10 transition-all active:scale-95 block text-center"
+                            >
                                 Proceed to Checkout
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
             )}
-            
+
         </div>
     );
 }

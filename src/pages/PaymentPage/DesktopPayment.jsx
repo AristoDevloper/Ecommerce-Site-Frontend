@@ -1,6 +1,9 @@
-export function DesktopPayment() {
+export function DesktopPayment({
+    items, subtotal, deliveryCost, tax, total, deliveryLabel,
+    selectedPaymentMethod, setSelectedPaymentMethod, handlePlaceOrder, placingOrder
+}) {
     return (
-        <div className="bg-background text-on-surface">
+        <div className="bg-background text-on-surface min-h-screen">
             
             <main className="max-w-screen-2xl mx-auto px-8 py-12 md:py-20">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -9,101 +12,168 @@ export function DesktopPayment() {
                             <h1 className="text-4xl md:text-5xl font-serif tracking-tight">Finalize Transaction</h1>
                             <p className="text-on-surface-variant font-light max-w-lg">Your artifacts are held for 15 minutes. Secure payment processed via encrypted gateway.</p>
                         </div>
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-on-surface-variant opacity-60">
-                                <span>Express Checkout</span>
-                                <div className="h-px flex-1 bg-outline-variant opacity-20"></div>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <button className="flex items-center justify-center gap-2 py-4 bg-black text-white rounded-lg hover:opacity-90 transition-opacity">
-                                    <span className="text-sm font-semibold">Apple Pay</span>
-                                </button>
-                                <button className="flex items-center justify-center gap-2 py-4 bg-[#ffc439] text-[#003087] rounded-lg hover:opacity-90 transition-opacity">
-                                    <span className="text-sm font-extrabold italic">PayPal</span>
-                                </button>
-                            </div>
-                        </div>
+                        
+                        {/* Payment Method Selection */}
                         <div className="space-y-8">
                             <div className="flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-on-surface-variant opacity-60">
-                                <span>Card Details</span>
+                                <span>Payment Method</span>
                                 <div className="h-px flex-1 bg-outline-variant opacity-20"></div>
                             </div>
-                            <form className="space-y-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold tracking-wider text-on-surface uppercase" for="cardholder">Cardholder Name</label>
-                                    <input className="w-full bg-surface-container-lowest ghost-border px-4 py-4 focus-ring transition-all" id="cardholder" placeholder="Enter full name" type="text" />
-                                </div>
-                                <div className="space-y-2 relative">
-                                    <label className="text-xs font-bold tracking-wider text-on-surface uppercase" for="cardnumber">Card Number</label>
-                                    <input className="w-full bg-surface-container-lowest ghost-border px-4 py-4 focus-ring transition-all" id="cardnumber" placeholder="0000 0000 0000 0000" type="text" />
-                                    <div className="absolute right-4 bottom-4 flex gap-2">
-                                        <span className="material-symbols-outlined text-on-surface-variant opacity-40">credit_card</span>
+                            
+                            <div className="space-y-4">
+                                {/* Credit Card Option */}
+                                <label 
+                                    className={`group relative flex flex-col gap-4 p-6 cursor-pointer transition-all rounded-lg ${
+                                        selectedPaymentMethod === 'credit_card' 
+                                            ? 'bg-primary/5 ring-2 ring-primary/20' 
+                                            : 'bg-surface-container-low hover:bg-surface-container'
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-4" onClick={() => setSelectedPaymentMethod('credit_card')}>
+                                        <input 
+                                            type="radio" 
+                                            name="paymentMethod" 
+                                            checked={selectedPaymentMethod === 'credit_card'}
+                                            onChange={() => setSelectedPaymentMethod('credit_card')}
+                                            className="w-4 h-4 text-primary border-outline-variant focus:ring-0" 
+                                        />
+                                        <div className="flex items-center gap-3">
+                                            <span className="material-symbols-outlined text-primary">credit_card</span>
+                                            <span className="text-sm font-bold text-primary">Credit or Debit Card</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="grid grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold tracking-wider text-on-surface uppercase" for="expiry">Expiry Date</label>
-                                        <input className="w-full bg-surface-container-lowest ghost-border px-4 py-4 focus-ring transition-all" id="expiry" placeholder="MM/YY" type="text" />
+
+                                    {/* Card Form (Expands if selected) */}
+                                    {selectedPaymentMethod === 'credit_card' && (
+                                        <div className="pl-8 pt-4 border-t border-outline-variant/10 mt-2 space-y-6" onClick={(e) => e.stopPropagation()}>
+                                            <div className="space-y-2">
+                                                <label className="text-xs font-bold tracking-wider text-on-surface uppercase" htmlFor="cardholder">Cardholder Name</label>
+                                                <input className="w-full bg-surface-container-lowest border-none border-b border-outline-variant/20 px-4 py-4 focus:ring-0 focus:border-primary transition-all" id="cardholder" placeholder="Enter full name" type="text" />
+                                            </div>
+                                            <div className="space-y-2 relative">
+                                                <label className="text-xs font-bold tracking-wider text-on-surface uppercase" htmlFor="cardnumber">Card Number</label>
+                                                <input className="w-full bg-surface-container-lowest border-none border-b border-outline-variant/20 px-4 py-4 focus:ring-0 focus:border-primary transition-all" id="cardnumber" placeholder="0000 0000 0000 0000" type="text" />
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-6">
+                                                <div className="space-y-2">
+                                                    <label className="text-xs font-bold tracking-wider text-on-surface uppercase" htmlFor="expiry">Expiry Date</label>
+                                                    <input className="w-full bg-surface-container-lowest border-none border-b border-outline-variant/20 px-4 py-4 focus:ring-0 focus:border-primary transition-all" id="expiry" placeholder="MM/YY" type="text" />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-xs font-bold tracking-wider text-on-surface uppercase" htmlFor="cvc">CVC</label>
+                                                    <input className="w-full bg-surface-container-lowest border-none border-b border-outline-variant/20 px-4 py-4 focus:ring-0 focus:border-primary transition-all" id="cvc" placeholder="***" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </label>
+
+                                {/* eSewa Option */}
+                                <label 
+                                    className={`group relative flex items-center justify-between p-6 cursor-pointer transition-all rounded-lg ${
+                                        selectedPaymentMethod === 'esewa' 
+                                            ? 'bg-primary/5 ring-2 ring-primary/20' 
+                                            : 'bg-surface-container-low hover:bg-surface-container'
+                                    }`}
+                                    onClick={() => setSelectedPaymentMethod('esewa')}
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <input 
+                                            type="radio" 
+                                            name="paymentMethod" 
+                                            checked={selectedPaymentMethod === 'esewa'}
+                                            onChange={() => setSelectedPaymentMethod('esewa')}
+                                            className="w-4 h-4 text-primary border-outline-variant focus:ring-0" 
+                                        />
+                                        <div className="flex flex-col">
+                                            <span className="text-sm font-bold text-[#60bb46]">eSewa</span>
+                                            <span className="text-xs text-on-surface-variant">Pay securely using your eSewa wallet</span>
+                                        </div>
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold tracking-wider text-on-surface uppercase" for="cvc">CVC</label>
-                                        <input className="w-full bg-surface-container-lowest ghost-border px-4 py-4 focus-ring transition-all" id="cvc" placeholder="***" type="text" />
+                                </label>
+
+                                {/* Cash on Delivery Option */}
+                                <label 
+                                    className={`group relative flex items-center justify-between p-6 cursor-pointer transition-all rounded-lg ${
+                                        selectedPaymentMethod === 'cod' 
+                                            ? 'bg-primary/5 ring-2 ring-primary/20' 
+                                            : 'bg-surface-container-low hover:bg-surface-container'
+                                    }`}
+                                    onClick={() => setSelectedPaymentMethod('cod')}
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <input 
+                                            type="radio" 
+                                            name="paymentMethod" 
+                                            checked={selectedPaymentMethod === 'cod'}
+                                            onChange={() => setSelectedPaymentMethod('cod')}
+                                            className="w-4 h-4 text-primary border-outline-variant focus:ring-0" 
+                                        />
+                                        <div className="flex flex-col">
+                                            <span className="text-sm font-bold text-primary">Cash on Delivery</span>
+                                            <span className="text-xs text-on-surface-variant">Pay when your order arrives</span>
+                                        </div>
                                     </div>
+                                </label>
+                            </div>
+
+                            <div className="pt-8 flex flex-col gap-6">
+                                <button 
+                                    onClick={handlePlaceOrder}
+                                    disabled={placingOrder}
+                                    className="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-5 rounded-lg text-sm font-bold tracking-widest uppercase shadow-lg shadow-primary/10 hover:opacity-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {placingOrder ? 'Processing...' : `Confirm Order — $${total.toFixed(2)}`}
+                                </button>
+                                <div className="flex items-center justify-center gap-2 text-on-surface-variant text-xs">
+                                    <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>lock</span>
+                                    <span>SSL Encrypted Transaction. Payment information is never stored.</span>
                                 </div>
-                                <div className="pt-8 flex flex-col gap-6">
-                                    <button className="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-5 rounded-lg text-sm font-bold tracking-widest uppercase shadow-lg shadow-primary/10 hover:opacity-95 transition-all">
-                                        Authorize Payment — $1,420.00
-                                    </button>
-                                    <div className="flex items-center justify-center gap-2 text-on-surface-variant text-xs">
-                                        <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>lock</span>
-                                        <span>SSL Encrypted Transaction. Payment information is never stored.</span>
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </section>
+                    
                     <aside className="lg:col-span-5 bg-surface-container-low p-8 md:p-12 rounded-xl sticky top-32">
                         <h2 className="text-2xl font-serif mb-8 border-b border-outline-variant/20 pb-4">Order Summary</h2>
                         <div className="space-y-8 mb-12">
-                            <div className="flex gap-6">
-                                <div className="w-24 h-32 bg-surface-variant rounded-md overflow-hidden flex-shrink-0">
-                                    <img alt="Watch" className="w-full h-full object-cover" data-alt="Minimalist luxury white ceramic watch with silver details on a clean studio background with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZS6vbzTl8FUlWfGRFSro115DNtPEuGHOaG2bRpOdteqtctIX-xYaB_sgh8gTTYYKMYky2gUXOI-dderMRcx17X35f-4yqUZCihbSl1OF0utT989aXUUy_r9SxahXUJ_aONIGS2bqFuuArha1IDuA2NoqHIMDiz-_OJc6At0y9k3TikkGnVbM8ErPe9rPsq3r88_ASfsyhLH_k7oIwsRdf27XN16jpXXsLWpVkj_ubJP2Cty5QGpm8S1LsAy48ILmJO0nTDArOCtPb" />
-                                </div>
-                                <div className="flex flex-col justify-between py-1">
-                                    <div>
-                                        <p className="text-xs text-tertiary-container font-bold tracking-widest uppercase mb-1">Timepiece</p>
-                                        <h3 className="text-lg font-serif">Aethelred Chrono</h3>
-                                        <p className="text-sm text-on-surface-variant">Silver / Italian Leather</p>
+                            {items.map((item, index) => {
+                                const product = item.product || item;
+                                const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
+                                return (
+                                    <div key={product.product_id || index} className="flex gap-6">
+                                        <div className="w-24 h-32 bg-surface-variant rounded-md overflow-hidden flex-shrink-0">
+                                            <img alt={product.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src={imageUrl} />
+                                        </div>
+                                        <div className="flex flex-col justify-between py-1">
+                                            <div>
+                                                <p className="text-xs text-tertiary font-bold tracking-widest uppercase mb-1">{product.category_name || 'Product'}</p>
+                                                <h3 className="text-lg font-serif">{product.name}</h3>
+                                                <p className="text-sm text-on-surface-variant mt-1">Qty: {item.quantity || 1}</p>
+                                            </div>
+                                            <p className="font-bold text-primary">${Number(product.price).toFixed(2)}</p>
+                                        </div>
                                     </div>
-                                    <p className="font-bold text-primary">$850.00</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-6">
-                                <div className="w-24 h-32 bg-surface-variant rounded-md overflow-hidden flex-shrink-0">
-                                    <img alt="Stool" className="w-full h-full object-cover" data-alt="Handcrafted dark green velvet designer stool with matte gold legs in a high-end interior setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG8xRRyOmeHxynck93_vf7wTblOesHiDrFfdEvwUO8BdkS1Eql8x6c035me6dM6GRu8x6TUQTM9H37nJWq2uYwBVZgCikT-wi6gPXmxthokXkmpjDVD5yxsNFd84EfqeT8C8_jmLPJITyAVPXELk6oC-ekZjA76khrSre0p-mFjP9x_Bv74UckSWCVqAgdtELCiXr6C4cAPxZdS4grG5NOs0YRK414tKHlzlRli7gwIu9ukUlbGE1WfRpux8unYa3yC8aPjeKk6ph2" />
-                                </div>
-                                <div className="flex flex-col justify-between py-1">
-                                    <div>
-                                        <p className="text-xs text-tertiary-container font-bold tracking-widest uppercase mb-1">Furniture</p>
-                                        <h3 className="text-lg font-serif">Velvet Plinth Stool</h3>
-                                        <p className="text-sm text-on-surface-variant">Sage / Brushed Brass</p>
-                                    </div>
-                                    <p className="font-bold text-primary">$570.00</p>
-                                </div>
-                            </div>
+                                );
+                            })}
                         </div>
                         <div className="space-y-4 border-t border-outline-variant/20 pt-8">
                             <div className="flex justify-between text-sm text-on-surface-variant">
                                 <span>Subtotal</span>
-                                <span>$1,420.00</span>
+                                <span>${subtotal.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between text-sm text-on-surface-variant">
-                                <span>Shipping (Priority)</span>
-                                <span className="text-tertiary font-bold">Complimentary</span>
+                                <span>Shipping ({deliveryLabel})</span>
+                                <span className={deliveryCost === 0 ? "text-tertiary font-bold" : ""}>
+                                    {deliveryCost === 0 ? 'Complimentary' : `$${deliveryCost.toFixed(2)}`}
+                                </span>
                             </div>
-                            <div className="flex justify-between text-lg font-bold text-primary pt-4">
+                            <div className="flex justify-between text-sm text-on-surface-variant">
+                                <span>Est. Tax</span>
+                                <span>${tax.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between text-lg font-bold text-primary pt-4 border-t border-outline-variant/10">
                                 <span>Total</span>
-                                <span>$1,420.00</span>
+                                <span>${total.toFixed(2)}</span>
                             </div>
                         </div>
                         <div className="mt-12 grid grid-cols-3 gap-4">
@@ -124,28 +194,6 @@ export function DesktopPayment() {
                 </div>
             </main>
             <footer className="bg-slate-50 py-16 mt-20">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-12 px-8 max-w-screen-2xl mx-auto">
-                    <div className="col-span-2 md:col-span-1 space-y-4">
-                        <div className="text-xl font-serif text-slate-900">ETHOS CURATED</div>
-                        <p className="text-xs text-slate-500 leading-relaxed uppercase tracking-widest">Defined by rarity.<br />Guided by craft.</p>
-                    </div>
-                    <div className="space-y-4">
-                        <h4 className="font-serif text-sm">Services</h4>
-                        
-                    </div>
-                    <div className="space-y-4">
-                        <h4 className="font-serif text-sm">Company</h4>
-                        
-                    </div>
-                    <div className="space-y-4">
-                        <h4 className="font-serif text-sm">Registry</h4>
-                        <p className="text-xs text-slate-500">Subscribe for early access to curated drops.</p>
-                        <div className="flex border-b border-slate-300 py-2">
-                            <input className="bg-transparent text-xs w-full focus:outline-none" placeholder="email@example.com" type="email" />
-                            <button className="material-symbols-outlined text-slate-400">arrow_forward</button>
-                        </div>
-                    </div>
-                </div>
                 <div className="max-w-screen-2xl mx-auto px-8 mt-16 pt-8 border-t border-slate-200">
                     <p className="text-[10px] font-bold tracking-[0.2em] text-slate-400">© 2024 ETHOS CURATED. ALL ARTIFACTS RESERVED.</p>
                 </div>

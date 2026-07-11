@@ -6,6 +6,9 @@ import SearchResultPage from './pages/SearchPage/SearchResultPage'
 import { ProductDetailsPage } from './pages/ProductDetailsPage/ProductDetailsPage'
 import { ProductListingPage } from './pages/ProductListingPage/ProductListingPage'
 import { CheckoutPage } from './pages/CheckoutPage/CheckoutPage'
+import { PaymentPage } from './pages/PaymentPage/PaymentPage'
+import { EsewaSuccessPage } from './pages/PaymentPage/EsewaSuccessPage'
+import { EsewaFailurePage } from './pages/PaymentPage/EsewaFailurePage'
 import { ShoppingCartPage } from './pages/ShoppingCartPage/ShoppingCartPage'
 import { TrackOrderPage } from './pages/TrackOrderPage/TrackOrderPage'
 import { ConversationsPage } from './pages/ConversationsPage/ConversationsPage'
@@ -20,6 +23,7 @@ import { ProtectedRoute } from './components/Routes/ProtectedRoute'
 import { AnonymousRoute } from './components/Routes/AnonymousRoute'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { checkAuthentication } from './components/utils/Authentication'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,28 +31,7 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    async function AuthenticationCheck() {
-      setIsAuthLoading(true);
-      try {
-        const response = await fetch('http://localhost:8000/auth-check/', {
-          method: 'POST',
-          credentials: 'include'
-        });
-        if (response.status === 200) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
-
-      } catch (error) {
-        console.error('Authentication check failed:', error);
-        setIsAuthenticated(false);
-      } finally {
-        setIsAuthLoading(false);
-      }
-    }
-
-    AuthenticationCheck();
+    checkAuthentication(setIsAuthenticated, setIsAuthLoading);
 
   }, [location.pathname])
 
@@ -61,7 +44,7 @@ function App() {
         <Route path="/" element={<HomePage isAuthenticated={isAuthenticated} />} />
         <Route path="/about" element={<AboutPage isAuthenticated={isAuthenticated} />} />
         <Route path="/search" element={<SearchResultPage isAuthenticated={isAuthenticated} />} />
-        <Route path="/product" element={<ProductDetailsPage isAuthenticated={isAuthenticated} />} />
+        <Route path="/product/:productId" element={<ProductDetailsPage isAuthenticated={isAuthenticated} />} />
         <Route path="/products" element={<ProductListingPage isAuthenticated={isAuthenticated} />} />
         {/* Protected Routes */}
         <Route path="/checkout" element={
@@ -69,12 +52,27 @@ function App() {
             <CheckoutPage isAuthenticated={isAuthenticated} />
           </ProtectedRoute>
         } />
+        <Route path="/payment" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <PaymentPage isAuthenticated={isAuthenticated} />
+          </ProtectedRoute>
+        } />
+        <Route path="/payment/esewa/success" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <EsewaSuccessPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/payment/esewa/failure" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <EsewaFailurePage />
+          </ProtectedRoute>
+        } />
         <Route path="/cart" element={
           <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
             <ShoppingCartPage isAuthenticated={isAuthenticated} />
           </ProtectedRoute>
         } />
-        <Route path="/track-order" element={
+        <Route path="/track-order/:orderId" element={
           <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
             <TrackOrderPage isAuthenticated={isAuthenticated} />
           </ProtectedRoute>

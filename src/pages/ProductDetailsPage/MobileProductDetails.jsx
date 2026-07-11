@@ -1,4 +1,9 @@
-export function MobileProductDetails() {
+export function MobileProductDetails({ product, onAddToCart, onBuyNow, cartAdding, cartSuccess }) {
+    if (!product) return null;
+
+    const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
+    const categoryName = product.category_name || 'Curated pick';
+
     return (
         <div className="bg-background text-on-background font-body antialiased mobile-screen">
             
@@ -7,32 +12,27 @@ export function MobileProductDetails() {
                 <section className="relative w-full aspect-[4/5] bg-surface-container overflow-hidden">
                     <div className="flex h-full w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar">
                         <div className="flex-shrink-0 w-full h-full snap-center">
-                            <img alt="" className="w-full h-full object-cover" data-alt="High-end minimalist sculptural lounge chair in a dimly lit, minimalist art gallery setting with soft architectural shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8HAoyNleCP_TZOpXT5pQYn0jZAu2KHlSQzRq3NdpQHC3xwE3yd1Lopf0NwNEmmsptOh6kPX9VcZyLeGYBOwkIW9LBmbYRseLWqR-62Ibt-OwrjdXgkReAnz3gS6Np0R3kUVEmvaOmvrK5DcF8FlwvN_hIrwrIdM7xzK-tjllZo5O8nKHJ3JrCXTmz0uThAY2ptn-4_2X_yiSsCaF278zmo4dswSbY3SXsY5Db8-59jhwtyVAp6S9sLgGbAMpdKY-1qJb2c8TmKRKg" />
-                        </div>
-                        <div className="flex-shrink-0 w-full h-full snap-center">
-                            <img alt="" className="w-full h-full object-cover" data-alt="Close-up of premium textured charcoal fabric upholstery and hand-finished oak wood joint on a piece of luxury furniture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA25v5RwmaLbFMKqdXFQFc9133U-Bb6Brqcs7eCb-TOiKYuETAteiII-wu7TRekGBH0Lm_UZosHqMfXeKddg0BdgB5zmGq6p37n-trJP_BTHHT_wJi-4XigwYW1Kag9pxcIeCbLUfOCYx0wAYEwXEq_zS0GxHHMy3vuKj2bPVx4Bv4vjGdwRQarG6HgfGYwU25Xt6yOBQWVwB5vRNay6zRflNL8cL1jPSnxWiqwIjXSTTcAKWGd9LP2zCNVMa8hvxciFUbEMFMtM6Ch" />
+                            <img alt={product.name} className="w-full h-full object-cover" src={imageUrl} />
                         </div>
                     </div>
                     {/*  Carousel Indicators  */}
                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary/20"></div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary/20"></div>
                     </div>
                 </section>
                 {/*  Product Header  */}
                 <section className="px-6 pt-10 pb-6 space-y-4">
                     <div className="flex justify-between items-start">
                         <div className="space-y-1">
-                            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-tertiary">Limited Edition · Series 04</p>
-                            <h1 className="text-4xl font-headline tracking-tight text-primary leading-none">The Monolith Lounge</h1>
+                            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-tertiary">{categoryName}</p>
+                            <h1 className="text-4xl font-headline tracking-tight text-primary leading-none">{product.name}</h1>
                         </div>
                         <div className="text-right">
-                            <p className="text-xl font-headline text-primary">$4,850</p>
+                            <p className="text-xl font-headline text-primary">${Number(product.price).toLocaleString()}</p>
                         </div>
                     </div>
                     <p className="text-on-surface-variant font-light text-base leading-relaxed max-w-[90%]">
-                        A study in brutalist comfort. Carved from a single block of sustainable European Oak, upholstered in artisanal boucle.
+                        {product.description}
                     </p>
                 </section>
                 {/*  Provenance & Philosophy (Collapsible)  */}
@@ -43,7 +43,7 @@ export function MobileProductDetails() {
                     </div>
                     <div className="bg-surface-container-low px-6 py-6 border-t border-outline-variant/10">
                         <p className="text-sm leading-relaxed text-on-surface-variant">
-                            Sourced from the Black Forest of Germany, each piece undergoes a 12-week curing process. Our philosophy centers on "The Eternal Object"—designing pieces that age into artifacts rather than waste.
+                            {product.description}
                         </p>
                     </div>
                     <div className="bg-surface-container-low px-6 py-5 flex justify-between items-center cursor-pointer">
@@ -115,14 +115,24 @@ export function MobileProductDetails() {
                     </div>
                 </section>
             </main>
-            {/*  Bottom Action Bar (Glassmorphism)  */}
-            <footer className="fixed bottom-0 w-full z-50 p-6 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
-                <div className="flex gap-4">
-                    <button className="w-14 h-14 flex items-center justify-center bg-surface-container-highest text-primary rounded-lg active:scale-95 transition-transform">
+            <footer className="fixed bottom-0 w-full z-50 p-4 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+                <div className="flex gap-3">
+                    <button className="w-12 h-12 flex items-center justify-center bg-surface-container-highest text-primary rounded-lg active:scale-95 transition-transform flex-shrink-0">
                         <span className="material-symbols-outlined">favorite</span>
                     </button>
-                    <button className="flex-1 h-14 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-sm tracking-widest uppercase rounded-lg active:scale-95 transition-all shadow-lg shadow-primary/10">
-                        Add to Collection
+                    <button 
+                        onClick={onAddToCart} 
+                        disabled={cartAdding || product.stock <= 0}
+                        className="flex-1 h-12 border border-primary text-primary font-bold text-xs tracking-wider uppercase rounded-lg active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {cartAdding ? "Adding..." : cartSuccess ? "Added ✓" : "Add to Cart"}
+                    </button>
+                    <button 
+                        onClick={onBuyNow} 
+                        disabled={cartAdding || product.stock <= 0}
+                        className="flex-1 h-12 bg-primary text-on-primary font-bold text-xs tracking-wider uppercase rounded-lg active:scale-95 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Buy Now
                     </button>
                 </div>
             </footer>
