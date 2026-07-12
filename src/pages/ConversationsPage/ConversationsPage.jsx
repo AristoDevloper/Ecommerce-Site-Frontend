@@ -45,6 +45,7 @@ export function ConversationsPage() {
         const res = await fetch('http://localhost:8000/chat/rooms/', { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
+          console.log('Fetched conversations:', data);
           setConversations(data);
         }
       } catch (err) {
@@ -82,8 +83,7 @@ export function ConversationsPage() {
     }
 
     const uuid = selectedConversation.uuid;
-    const roomName = uuid.replace(/-/g, '');
-    const wsUrl = `ws://localhost:8000/ws/chat/${roomName}/${uuid}/`;
+    const wsUrl = `ws://localhost:8000/ws/chat/${uuid}/`;
 
     const ws = new WebSocket(wsUrl);
     wsRef.current = ws;

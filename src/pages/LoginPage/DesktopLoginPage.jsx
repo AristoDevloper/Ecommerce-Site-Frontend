@@ -124,20 +124,6 @@ export function DesktopLoginPage({ setIsAuthenticated }) {
                                 Login
                             </button>
 
-                            <div className="relative flex items-center py-2">
-                                <div className="flex-grow border-t ghost-border"></div>
-                                <span className="flex-shrink mx-4 text-xs font-label uppercase tracking-widest text-outline">or</span>
-                                <div className="flex-grow border-t ghost-border"></div>
-                            </div>
-
-                            {/* Secondary Social Login */}
-                            <button
-                                className="w-full bg-surface-container-low text-on-surface py-4 rounded font-label text-sm uppercase tracking-widest font-semibold flex items-center justify-center gap-3 hover:bg-surface-container-high transition-colors"
-                                type="button"
-                            >
-                                <span className="material-symbols-outlined text-[18px]">account_circle</span>
-                                Continue with SSO
-                            </button>
                         </div>
                     </form>
 
