@@ -16,6 +16,7 @@ import { SellerChatPage } from './pages/SellerChatPage/SellerChatPage'
 import { OrderHistoryPage } from './pages/OrderHistoryPage/OrderHistoryPage'
 import { AccountPage } from './pages/AccountPage/AccountPage'
 import { WishlistPage } from './pages/WishlistPage/WishlistPage'
+import { InventoryPage } from './pages/InventoryPage/InventoryPage'
 import { Header } from './components/Header/Header'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import { SignupPage } from './pages/SignupPage/SignupPage'
@@ -101,6 +102,9 @@ function App() {
           <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
             <WishlistPage isAuthenticated={isAuthenticated} />
           </ProtectedRoute>
+        } />
+        <Route path="/inventory" element={
+          <InventoryPage isAuthenticated={isAuthenticated} />
         } />
 
         {/* Anonymous Routes (Redirect to home if logged in) */}

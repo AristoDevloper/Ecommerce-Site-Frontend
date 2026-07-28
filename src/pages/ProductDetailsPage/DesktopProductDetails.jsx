@@ -1,4 +1,4 @@
-export function DesktopProductDetails({ product, onAddToCart, onBuyNow, cartAdding, cartSuccess }) {
+export function DesktopProductDetails({ product, onAddToCart, onBuyNow, onVisitStore, cartAdding, cartSuccess }) {
     if (!product) return null;
 
     const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
@@ -45,6 +45,12 @@ export function DesktopProductDetails({ product, onAddToCart, onBuyNow, cartAddi
                                 className="w-full py-5 bg-primary text-on-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-lg active:scale-[0.98] transition-all hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed mt-3"
                             >
                                 Buy Now
+                            </button>
+                            <button 
+                                onClick={onVisitStore} 
+                                className="w-full py-5 bg-surface-container-high text-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-sm active:scale-[0.98] transition-all hover:bg-surface-variant mt-3 border border-outline-variant/50"
+                            >
+                                Visit Store
                             </button>
                             <p className="text-center text-[10px] text-outline uppercase tracking-widest">Complimentary insured global shipping included.</p>
                         </div>

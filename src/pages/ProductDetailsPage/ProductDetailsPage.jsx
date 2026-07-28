@@ -111,6 +111,11 @@ export function ProductDetailsPage() {
         );
     }
 
+    const handleVisitStore = () => {
+        // In a real app, this would redirect to `/store/${product.seller_id}` or similar.
+        navigate('/inventory');
+    };
+
     return (
         <>
             {isMobile ? (
@@ -118,6 +123,7 @@ export function ProductDetailsPage() {
                     product={product} 
                     onAddToCart={handleAddToCart} 
                     onBuyNow={handleBuyNow}
+                    onVisitStore={handleVisitStore}
                     cartAdding={cartAdding} 
                     cartSuccess={cartSuccess} 
                 />
@@ -126,6 +132,7 @@ export function ProductDetailsPage() {
                     product={product} 
                     onAddToCart={handleAddToCart} 
                     onBuyNow={handleBuyNow}
+                    onVisitStore={handleVisitStore}
                     cartAdding={cartAdding} 
                     cartSuccess={cartSuccess} 
                 />

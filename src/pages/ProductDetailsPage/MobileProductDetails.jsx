@@ -1,4 +1,4 @@
-export function MobileProductDetails({ product, onAddToCart, onBuyNow, cartAdding, cartSuccess }) {
+export function MobileProductDetails({ product, onAddToCart, onBuyNow, onVisitStore, cartAdding, cartSuccess }) {
     if (!product) return null;
 
     const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
@@ -34,6 +34,13 @@ export function MobileProductDetails({ product, onAddToCart, onBuyNow, cartAddin
                     <p className="text-on-surface-variant font-light text-base leading-relaxed max-w-[90%]">
                         {product.description}
                     </p>
+                    <button 
+                        onClick={onVisitStore} 
+                        className="mt-4 w-full py-4 border border-outline-variant/50 text-primary font-label text-xs tracking-widest uppercase rounded-lg active:scale-95 transition-all flex items-center justify-center gap-2"
+                    >
+                        <span className="material-symbols-outlined text-sm">storefront</span>
+                        Visit Seller Store
+                    </button>
                 </section>
                 {/*  Provenance & Philosophy (Collapsible)  */}
                 <section className="mt-8 space-y-0.5">
