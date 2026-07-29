@@ -141,6 +141,32 @@ export function MobileLoginPage({ setIsAuthenticated }) {
                                 Create Account
                             </Link>
                         </p>
+                        <div className="pt-8">
+                            <p className="text-center font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-4">Demo Accounts</p>
+                            <div className="flex flex-col gap-3">
+                                <button
+                                    type="button"
+                                    onClick={() => { setEmail('buyer@demo.com'); setPassword('password123'); }}
+                                    className="w-full py-3 border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors rounded shadow-sm"
+                                >
+                                    Demo Buyer
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => { setEmail('seller@demo.com'); setPassword('password123'); }}
+                                    className="w-full py-3 border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors rounded shadow-sm"
+                                >
+                                    Demo Seller
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => { setEmail('admin@demo.com'); setPassword('password123'); }}
+                                    className="w-full py-3 border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors rounded shadow-sm"
+                                >
+                                    Demo Admin
+                                </button>
+                            </div>
+                        </div>
                     </footer>
                 </div>
             </main>

@@ -134,6 +134,33 @@ export function DesktopLoginPage({ setIsAuthenticated }) {
                             Sign up
                         </Link>
                     </p>
+
+                    <div className="pt-6 border-t ghost-border">
+                        <p className="text-center font-label text-xs uppercase tracking-widest text-on-surface-variant mb-4">Demo Accounts</p>
+                        <div className="flex flex-col gap-3">
+                            <button
+                                type="button"
+                                onClick={() => { setEmail('buyer@demo.com'); setPassword('password123'); }}
+                                className="w-full py-2 border border-outline-variant/50 text-xs font-label uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors rounded"
+                            >
+                                Demo Buyer
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => { setEmail('seller@demo.com'); setPassword('password123'); }}
+                                className="w-full py-2 border border-outline-variant/50 text-xs font-label uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors rounded"
+                            >
+                                Demo Seller
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => { setEmail('admin@demo.com'); setPassword('password123'); }}
+                                className="w-full py-2 border border-outline-variant/50 text-xs font-label uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors rounded"
+                            >
+                                Demo Admin
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Discrete Copyright for focus screens */}

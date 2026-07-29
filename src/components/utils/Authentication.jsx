@@ -1,4 +1,4 @@
-export async function checkAuthentication(setIsAuthenticated, setIsAuthLoading) {
+export async function checkAuthentication(setIsAuthenticated, setIsAuthLoading, setUserRole) {
     setIsAuthLoading(true);
 
     try {
@@ -7,10 +7,18 @@ export async function checkAuthentication(setIsAuthenticated, setIsAuthLoading) 
             credentials: 'include'
         });
 
-        setIsAuthenticated(response.status === 200);
+        if (response.status === 200) {
+            setIsAuthenticated(true);
+            const data = await response.json();
+            if (setUserRole) setUserRole(data.role);
+        } else {
+            setIsAuthenticated(false);
+            if (setUserRole) setUserRole(null);
+        }
     } catch (error) {
         console.error('Authentication check failed:', error);
         setIsAuthenticated(false);
+        if (setUserRole) setUserRole(null);
     } finally {
         setIsAuthLoading(false);
     }

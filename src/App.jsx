@@ -29,11 +29,11 @@ import { checkAuthentication } from './components/utils/Authentication'
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
+  const [userRole, setUserRole] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
-    checkAuthentication(setIsAuthenticated, setIsAuthLoading);
-
+    checkAuthentication(setIsAuthenticated, setIsAuthLoading, setUserRole);
   }, [location.pathname])
 
   const hideHeader = ['/login', '/signup'].includes(location.pathname);
@@ -104,13 +104,13 @@ function App() {
           </ProtectedRoute>
         } />
         <Route path="/inventory" element={
-          <InventoryPage isAuthenticated={isAuthenticated} />
+          <InventoryPage isAuthenticated={isAuthenticated} userRole={userRole} />
         } />
 
         {/* Anonymous Routes (Redirect to home if logged in) */}
         <Route path="/login" element={
           <AnonymousRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
-            <LoginPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+            <LoginPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />
           </AnonymousRoute>
         } />
         <Route path="/signup" element={
