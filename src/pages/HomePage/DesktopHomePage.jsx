@@ -180,7 +180,7 @@ export function DesktopHomePage() {
                     <div className="md:text-right space-y-6">
                         <div className="flex md:justify-end gap-8 font-['Manrope'] text-xs tracking-widest uppercase">
                             <a className="text-slate-400 hover:text-slate-900 transition-all" href="#">Contact</a>
-                            <a className="text-slate-400 hover:text-slate-900 transition-all" href="#">Privacy</a>
+                            <Link className="text-slate-400 hover:text-slate-900 transition-all" to="/privacy">Privacy</Link>
                         </div>
                         <p className="font-['Manrope'] text-xs tracking-widest uppercase text-slate-400 opacity-60">© 2024 CURATED GALLERY. ALL RIGHTS RESERVED.</p>
                     </div>

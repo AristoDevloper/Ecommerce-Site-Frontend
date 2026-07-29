@@ -17,6 +17,7 @@ import { OrderHistoryPage } from './pages/OrderHistoryPage/OrderHistoryPage'
 import { AccountPage } from './pages/AccountPage/AccountPage'
 import { WishlistPage } from './pages/WishlistPage/WishlistPage'
 import { InventoryPage } from './pages/InventoryPage/InventoryPage'
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage/PrivacyPolicyPage'
 import { Header } from './components/Header/Header'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import { SignupPage } from './pages/SignupPage/SignupPage'
@@ -48,6 +49,12 @@ function App() {
         <Route path="/product/:productId" element={<ProductDetailsPage isAuthenticated={isAuthenticated} />} />
         <Route path="/products" element={<ProductListingPage isAuthenticated={isAuthenticated} />} />
         {/* Protected Routes */}
+        <Route path="/inventory" element={
+          <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
+            <InventoryPage isAuthenticated={isAuthenticated} userRole={userRole} />
+          </ProtectedRoute>
+        } />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/checkout" element={
           <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
             <CheckoutPage isAuthenticated={isAuthenticated} />
@@ -103,9 +110,7 @@ function App() {
             <WishlistPage isAuthenticated={isAuthenticated} />
           </ProtectedRoute>
         } />
-        <Route path="/inventory" element={
-          <InventoryPage isAuthenticated={isAuthenticated} userRole={userRole} />
-        } />
+
 
         {/* Anonymous Routes (Redirect to home if logged in) */}
         <Route path="/login" element={
