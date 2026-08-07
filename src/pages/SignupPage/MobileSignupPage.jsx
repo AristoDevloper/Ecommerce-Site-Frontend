@@ -15,7 +15,7 @@ export function MobileSignupPage() {
             const firstName = nameParts[0] || '';
             const lastName = nameParts.slice(1).join(' ') || '';
 
-            const response = await fetch('http://localhost:8000/user_signup/', {
+            const response = await fetch('http://localhost:8000/user_register/', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
