@@ -2,6 +2,12 @@
 
 This is the frontend client for the Ecommerce Platform, designed with high aesthetic standards and real-time interaction capabilities. It is built using **React (Vite)** and styled exclusively with **TailwindCSS**.
 
+## Disclaimer About .env.production
+- The committed `.env.production` file is intentional for this project.
+- It only contains `VITE_API_BASE_URL`, which is a public backend URL and not a secret.
+- Committing this value does not expose credentials, tokens, or private keys, and therefore does not impact application security by itself.
+- Sensitive values (API keys, tokens, private credentials) must never be committed and should always be set through deployment environment variables.
+
 ## Architecture & Core Technologies
 - **React 18 & Vite:** Fast build tool and component-based UI.
 - **TailwindCSS:** Used for all styling, custom animations, and responsive utilities.
