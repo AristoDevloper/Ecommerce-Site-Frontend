@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { API_BASE_URL } from '../../config/api';
+
 export function DesktopTrackOrderPage({ order }) {
     const currencyFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -103,7 +105,7 @@ export function DesktopTrackOrderPage({ order }) {
                                             {item.product?.images && item.product.images.length > 0 ? (
                                                 <img 
                                                     className="w-full h-full object-cover mix-blend-multiply opacity-90 transition-transform group-hover:scale-105" 
-                                                    src={`https://ecommercesitebackend02.vercel.app${item.product.images[0].image}`} 
+                                                    src={`${API_BASE_URL}${item.product.images[0].image}`} 
                                                     alt={item.product?.name} 
                                                 />
                                             ) : (

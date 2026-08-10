@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/api';
 
 export function DesktopSearchPage({ query, results, count, page, loading, error, onPageChange }) {
     const currencyFormatter = new Intl.NumberFormat('en-US', {
@@ -43,7 +44,7 @@ export function DesktopSearchPage({ query, results, count, page, loading, error,
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
                             {results.map((product) => {
                                 const imageUrl = product.images && product.images.length > 0
-                                    ? `https://ecommercesitebackend02.vercel.app${product.images[0].image}`
+                                    ? `${API_BASE_URL}${product.images[0].image}`
                                     : 'https://via.placeholder.com/400x500?text=No+Image';
 
                                 return (

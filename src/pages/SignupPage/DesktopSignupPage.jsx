@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/api';
 
 export function DesktopSignupPage() {
     const [firstName, setFirstName] = useState('');
@@ -8,6 +9,7 @@ export function DesktopSignupPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [agreedToTerms, setAgreedToTerms] = useState(false);
     const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ export function DesktopSignupPage() {
             return;
         }
         try {
-            const response = await fetch('https://ecommercesitebackend02.vercel.app/user_register/', {
+            const response = await fetch(`${API_BASE_URL}/user_register/`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -168,13 +170,21 @@ export function DesktopSignupPage() {
                                 <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant block px-1">
                                     Confirm Password
                                 </label>
-                                <input
-                                    className="w-full bg-surface-container-low border-none ghost-border rounded px-4 py-3 text-sm focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-on-surface-variant/40"
-                                    placeholder="••••••••"
-                                    type="password"
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                />
+                                <div className="relative">
+                                    <input
+                                        className="w-full bg-surface-container-low border-none ghost-border rounded px-4 py-3 text-sm focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-on-surface-variant/40"
+                                        placeholder="••••••••"
+                                        type={showConfirmPassword ? 'text' : 'password'}
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                    />
+                                    <span
+                                        className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm cursor-pointer hover:text-primary transition-colors"
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    >
+                                        {showConfirmPassword ? 'visibility_off' : 'visibility'}
+                                    </span>
+                                </div>
                             </div>
 
                             <div className="flex items-start gap-3 py-2">

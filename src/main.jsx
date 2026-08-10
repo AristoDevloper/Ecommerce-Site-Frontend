@@ -4,9 +4,10 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 
+import { API_BASE_URL } from './config/api'
+
 const LOCAL_BACKEND_URL = 'http://localhost:8000'
 const PROD_BACKEND_URL = 'https://ecommercesitebackend02.vercel.app'
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || LOCAL_BACKEND_URL).replace(/\/+$/, '')
 
 const backendHosts = new Set([LOCAL_BACKEND_URL, PROD_BACKEND_URL])
 const originalFetch = window.fetch.bind(window)

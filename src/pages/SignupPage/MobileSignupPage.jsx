@@ -1,21 +1,28 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/api';
 
 export function MobileSignupPage() {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            console.error('Passwords do not match');
+            return;
+        }
         try {
             const nameParts = fullName.trim().split(' ');
             const firstName = nameParts[0] || '';
             const lastName = nameParts.slice(1).join(' ') || '';
 
-            const response = await fetch('https://ecommercesitebackend02.vercel.app/user_register/', {
+            const response = await fetch(`${API_BASE_URL}/user_register/`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -130,6 +137,34 @@ export function MobileSignupPage() {
                                 onClick={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? 'visibility_off' : 'visibility'}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Confirm Password Field */}
+                    <div className="relative group border-b border-outline-variant focus-within:border-primary transition-colors duration-300">
+                        <div className="flex items-center">
+                            <input
+                                className="input-minimal peer w-full bg-transparent border-none px-0 py-3 focus:ring-0 placeholder:text-transparent text-primary"
+                                id="mobile-signup-confirm-password"
+                                name="confirm_password"
+                                placeholder="••••••••"
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                            <label
+                                className="absolute left-0 top-3 text-on-surface-variant/60 font-label text-xs uppercase tracking-widest transition-all duration-300 pointer-events-none origin-left"
+                                htmlFor="mobile-signup-confirm-password"
+                            >
+                                Confirm Password
+                            </label>
+                            <button
+                                className="material-symbols-outlined text-on-surface-variant/40 hover:text-primary transition-colors"
+                                type="button"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            >
+                                {showConfirmPassword ? 'visibility_off' : 'visibility'}
                             </button>
                         </div>
                     </div>

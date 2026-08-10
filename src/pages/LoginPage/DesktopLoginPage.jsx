@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/api';
 
 export function DesktopLoginPage({ setIsAuthenticated }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://ecommercesitebackend02.vercel.app/user_login/', {
+            const response = await fetch(`${API_BASE_URL}/user_login/`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

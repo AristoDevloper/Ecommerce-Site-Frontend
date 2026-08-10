@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../components/utils/Authentication';
 
 export function DesktopAccountPage({ profile, setProfile, addresses, setAddresses, paymentAccounts, setPaymentAccounts, setIsAuthenticated }) {
   // Profile modal
@@ -75,17 +76,7 @@ export function DesktopAccountPage({ profile, setProfile, addresses, setAddresse
   const defaultAddress = addresses.find(a => a.isDefault) || addresses[0];
 
   const signout = async () => {
-    try {
-      await fetch('https://ecommercesitebackend02.vercel.app/user_logout/', {
-        method: 'POST',
-        credentials: 'include'
-      });
-    } catch (error) {
-      console.error('Logout failed:', error);
-    } finally {
-      setIsAuthenticated(false);
-      navigate('/login');
-    }
+    logoutUser(setIsAuthenticated, null, navigate);
   };
 
   return (

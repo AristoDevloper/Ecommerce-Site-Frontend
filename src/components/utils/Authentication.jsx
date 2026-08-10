@@ -1,8 +1,10 @@
+import { API_BASE_URL } from '../../config/api';
+
 export async function checkAuthentication(setIsAuthenticated, setIsAuthLoading, setUserRole) {
     setIsAuthLoading(true);
 
     try {
-        const response = await fetch('https://ecommercesitebackend02.vercel.app/auth-check/', {
+        const response = await fetch(`${API_BASE_URL}/auth-check/`, {
             method: 'POST',
             credentials: 'include'
         });
@@ -26,7 +28,7 @@ export async function checkAuthentication(setIsAuthenticated, setIsAuthLoading, 
 
 export async function logoutUser(setIsAuthenticated, setUserRole, navigate) {
     try {
-        await fetch('https://ecommercesitebackend02.vercel.app/user_logout/', {
+        await fetch(`${API_BASE_URL}/user_logout/`, {
             method: 'POST',
             credentials: 'include'
         });

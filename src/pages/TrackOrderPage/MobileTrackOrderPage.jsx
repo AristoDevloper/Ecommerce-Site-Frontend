@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/api';
 
 export function MobileTrackOrderPage({ order }) {
     const currencyFormatter = new Intl.NumberFormat('en-US', {
@@ -105,7 +106,7 @@ export function MobileTrackOrderPage({ order }) {
                                     {item.product?.images && item.product.images.length > 0 ? (
                                         <img 
                                             className="w-full h-full object-cover" 
-                                            src={`https://ecommercesitebackend02.vercel.app${item.product.images[0].image}`} 
+                                            src={`${API_BASE_URL}${item.product.images[0].image}`} 
                                             alt={item.product?.name} 
                                         />
                                     ) : (

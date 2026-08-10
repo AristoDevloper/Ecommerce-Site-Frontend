@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/api';
 
 export function MobileSearchPage({ query: initialQuery, results, count, page, loading, error, onPageChange, onSearchSubmit }) {
     const [query, setQuery] = useState(initialQuery || '');
@@ -80,7 +81,7 @@ export function MobileSearchPage({ query: initialQuery, results, count, page, lo
                         <div className="grid grid-cols-2 gap-x-4 gap-y-12">
                             {results.map((product) => {
                                 const imageUrl = product.images && product.images.length > 0
-                                    ? `https://ecommercesitebackend02.vercel.app${product.images[0].image}`
+                                    ? `${API_BASE_URL}${product.images[0].image}`
                                     : 'https://via.placeholder.com/200x250?text=No+Image';
 
                                 return (
