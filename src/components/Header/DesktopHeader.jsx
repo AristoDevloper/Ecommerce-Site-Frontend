@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { logoutUser } from '../utils/Authentication';
 
-export function DesktopHeader({ isAuthenticated }) {
+export function DesktopHeader({ isAuthenticated, setIsAuthenticated, setUserRole }) {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -10,6 +11,10 @@ export function DesktopHeader({ isAuthenticated }) {
             navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
             setSearchQuery('');
         }
+    };
+
+    const handleLogout = () => {
+        logoutUser(setIsAuthenticated, setUserRole, navigate);
     };
 
     return (
@@ -35,19 +40,26 @@ export function DesktopHeader({ isAuthenticated }) {
                         />
                     </div>
                     {isAuthenticated ? (
-                        <div className="flex gap-4">
-                            <Link to="/orders" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900">
+                        <div className="flex gap-4 items-center">
+                            <Link to="/orders" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Orders">
                                 <span className="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
                             </Link>
-                            <Link to="/conversations" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900">
+                            <Link to="/conversations" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Chat">
                                 <span className="material-symbols-outlined" data-icon="chat">chat</span>
                             </Link>
-                            <Link to="/cart" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900">
+                            <Link to="/cart" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Cart">
                                 <span className="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
                             </Link>
-                            <Link to="/account" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900">
+                            <Link to="/account" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Account">
                                 <span className="material-symbols-outlined" data-icon="person">person</span>
                             </Link>
+                            <button
+                                onClick={handleLogout}
+                                title="Sign Out"
+                                className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-red-600 flex items-center gap-1 cursor-pointer bg-transparent border-0 p-0 ml-1"
+                            >
+                                <span className="material-symbols-outlined text-xl" data-icon="logout">logout</span>
+                            </button>
                         </div>
                     ) : (
                         <div className="flex gap-4">

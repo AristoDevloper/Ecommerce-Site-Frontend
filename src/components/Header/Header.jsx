@@ -3,7 +3,7 @@ import { DesktopHeader } from './DesktopHeader';
 import { MobileHeader } from './MobileHeader';
 import { MobileBottomNav } from './MobileBottomNav';
 
-export function Header({ isAuthenticated }) {
+export function Header({ isAuthenticated, setIsAuthenticated, setUserRole }) {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
     useEffect(() => {
@@ -19,8 +19,8 @@ export function Header({ isAuthenticated }) {
 
     return isMobile ? (
         <>
-            <MobileHeader isAuthenticated={isAuthenticated} />
-            <MobileBottomNav isAuthenticated={isAuthenticated} />
+            <MobileHeader isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />
+            <MobileBottomNav isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />
         </>
-    ) : <DesktopHeader isAuthenticated={isAuthenticated} />;
+    ) : <DesktopHeader isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />;
 }

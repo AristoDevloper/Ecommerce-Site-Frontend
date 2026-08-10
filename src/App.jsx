@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-      {!hideHeader && <Header isAuthenticated={isAuthenticated} />}
+      {!hideHeader && <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />}
       <Routes>
         <Route path="/" element={<HomePage isAuthenticated={isAuthenticated} />} />
         <Route path="/about" element={<AboutPage isAuthenticated={isAuthenticated} />} />

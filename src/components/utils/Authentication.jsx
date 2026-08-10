@@ -23,3 +23,18 @@ export async function checkAuthentication(setIsAuthenticated, setIsAuthLoading, 
         setIsAuthLoading(false);
     }
 }
+
+export async function logoutUser(setIsAuthenticated, setUserRole, navigate) {
+    try {
+        await fetch('https://ecommercesitebackend02.vercel.app/user_logout/', {
+            method: 'POST',
+            credentials: 'include'
+        });
+    } catch (error) {
+        console.error('Logout error:', error);
+    } finally {
+        if (setIsAuthenticated) setIsAuthenticated(false);
+        if (setUserRole) setUserRole(null);
+        if (navigate) navigate('/login');
+    }
+}
