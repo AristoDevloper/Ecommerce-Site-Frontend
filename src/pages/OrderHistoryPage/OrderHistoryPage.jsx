@@ -12,7 +12,7 @@ export function OrderHistoryPage() {
 
     const fetchOrders = async () => {
         try {
-            const response = await fetch('http://localhost:8000/order/', {
+            const response = await fetch('https://ecommercesitebackend02.vercel.app/order/', {
                 method: 'GET',
                 credentials: 'include'
             });

@@ -22,7 +22,7 @@ export function DesktopSignupPage() {
             return;
         }
         try {
-            const response = await fetch('http://localhost:8000/user_register/', {
+            const response = await fetch('https://ecommercesitebackend02.vercel.app/user_register/', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

@@ -29,7 +29,7 @@ export default function SearchResultPage() {
             setLoading(true);
             setError(null);
             try {
-                const url = new URL('http://localhost:8000/products-api/');
+                const url = new URL('https://ecommercesitebackend02.vercel.app/products-api/');
                 if (query) {
                     url.searchParams.append('search', query);
                 }

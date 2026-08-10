@@ -31,7 +31,7 @@ export function EsewaSuccessPage() {
                 // Now fire the POST /order/ API
                 setStatus('Payment successful! Placing your order...');
                 
-                const res = await fetch('http://localhost:8000/order/', {
+                const res = await fetch('https://ecommercesitebackend02.vercel.app/order/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',

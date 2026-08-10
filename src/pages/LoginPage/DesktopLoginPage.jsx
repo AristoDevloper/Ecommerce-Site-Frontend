@@ -9,7 +9,7 @@ export function DesktopLoginPage({ setIsAuthenticated }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8000/user_login/', {
+            const response = await fetch('https://ecommercesitebackend02.vercel.app/user_login/', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

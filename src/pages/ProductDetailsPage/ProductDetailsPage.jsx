@@ -30,7 +30,7 @@ export function ProductDetailsPage() {
             try {
                 setIsLoading(true);
                 setError(null);
-                const response = await fetch(`http://localhost:8000/api/products/${productId}/`, {
+                const response = await fetch(`https://ecommercesitebackend02.vercel.app/api/products/${productId}/`, {
                     credentials: 'include'
                 });
                 if (!response.ok) throw new Error('Product not found');
@@ -52,7 +52,7 @@ export function ProductDetailsPage() {
         try {
             setCartAdding(true);
             setCartSuccess(false);
-            const response = await fetch('http://localhost:8000/cart/', {
+            const response = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

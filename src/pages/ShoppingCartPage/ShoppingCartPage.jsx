@@ -12,7 +12,7 @@ export function ShoppingCartPage() {
 
   const fetchCart = async () => {
     try {
-      const response = await fetch('http://localhost:8000/cart/', {
+      const response = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
         method: 'GET',
         credentials: 'include'
       });
@@ -41,7 +41,7 @@ export function ShoppingCartPage() {
 
   const handleUpdateQuantity = async (productId, delta) => {
     try {
-      const response = await fetch('http://localhost:8000/cart/', {
+      const response = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ export function ShoppingCartPage() {
 
   const handleRemoveItem = async (productId) => {
     try {
-      const response = await fetch('http://localhost:8000/cart/', {
+      const response = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

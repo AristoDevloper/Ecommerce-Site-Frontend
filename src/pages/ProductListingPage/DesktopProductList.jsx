@@ -57,7 +57,7 @@ export function DesktopProductList() {
                     queryParams.set('category', selectedCategory);
                 }
 
-                const response = await fetch(`http://localhost:8000/products-api/?${queryParams.toString()}`, {
+                const response = await fetch(`https://ecommercesitebackend02.vercel.app/products-api/?${queryParams.toString()}`, {
                     signal: controller.signal,
                 });
 

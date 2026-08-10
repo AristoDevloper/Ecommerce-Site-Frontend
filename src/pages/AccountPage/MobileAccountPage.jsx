@@ -74,7 +74,7 @@ export function MobileAccountPage({ profile, setProfile, addresses, setAddresses
 
   const signout = async () => {
     try {
-      const response = await fetch('http://localhost:8000/user_logout/', {
+      const response = await fetch('https://ecommercesitebackend02.vercel.app/user_logout/', {
         method: 'POST',
         credentials: 'include'
       });

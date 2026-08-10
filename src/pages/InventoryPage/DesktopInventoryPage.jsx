@@ -21,7 +21,7 @@ export function DesktopInventoryPage({ userRole }) {
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:8000/products-api/');
+            const response = await fetch('https://ecommercesitebackend02.vercel.app/products-api/');
             const data = await response.json();
             if (response.ok) {
                 setProducts(data.results || data);
@@ -36,7 +36,7 @@ export function DesktopInventoryPage({ userRole }) {
     const handleAddProduct = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8000/products-api/', {
+            const response = await fetch('https://ecommercesitebackend02.vercel.app/products-api/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -103,7 +103,7 @@ export function DesktopTrackOrderPage({ order }) {
                                             {item.product?.images && item.product.images.length > 0 ? (
                                                 <img 
                                                     className="w-full h-full object-cover mix-blend-multiply opacity-90 transition-transform group-hover:scale-105" 
-                                                    src={`http://localhost:8000${item.product.images[0].image}`} 
+                                                    src={`https://ecommercesitebackend02.vercel.app${item.product.images[0].image}`} 
                                                     alt={item.product?.name} 
                                                 />
                                             ) : (

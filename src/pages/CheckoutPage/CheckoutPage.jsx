@@ -44,7 +44,7 @@ export function CheckoutPage() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const res = await fetch('http://localhost:8000/profile/', {
+                const res = await fetch('https://ecommercesitebackend02.vercel.app/profile/', {
                     credentials: 'include'
                 });
                 if (res.ok) {
@@ -83,7 +83,7 @@ export function CheckoutPage() {
             // Fetch cart items
             const fetchCart = async () => {
                 try {
-                    const res = await fetch('http://localhost:8000/cart/', {
+                    const res = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
                         credentials: 'include'
                     });
                     if (res.ok) {

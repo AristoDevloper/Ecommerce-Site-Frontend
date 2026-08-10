@@ -11,7 +11,7 @@ export function MobileProductListing() {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('http://localhost:8000/products-api/');
+                const response = await fetch('https://ecommercesitebackend02.vercel.app/products-api/');
                 if (!response.ok) {
                     throw new Error('Failed to fetch products');
                 }

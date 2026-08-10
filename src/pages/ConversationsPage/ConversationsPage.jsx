@@ -25,7 +25,7 @@ export function ConversationsPage() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch('http://localhost:8000/profile/', { credentials: 'include' });
+        const res = await fetch('https://ecommercesitebackend02.vercel.app/profile/', { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
           setCurrentUser(data);
@@ -42,7 +42,7 @@ export function ConversationsPage() {
     const fetchConversations = async () => {
       setLoadingConvs(true);
       try {
-        const res = await fetch('http://localhost:8000/chat/rooms/', { credentials: 'include' });
+        const res = await fetch('https://ecommercesitebackend02.vercel.app/chat/rooms/', { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
           console.log('Fetched conversations:', data);
@@ -64,7 +64,7 @@ export function ConversationsPage() {
     const fetchMessages = async () => {
       setLoadingMessages(true);
       try {
-        const res = await fetch(`http://localhost:8000/chat/rooms/${selectedConversation.uuid}/messages/`, { credentials: 'include' });
+        const res = await fetch(`https://ecommercesitebackend02.vercel.app/chat/rooms/${selectedConversation.uuid}/messages/`, { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
           setMessages(data);

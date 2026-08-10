@@ -2,7 +2,7 @@ export async function checkAuthentication(setIsAuthenticated, setIsAuthLoading, 
     setIsAuthLoading(true);
 
     try {
-        const response = await fetch('http://localhost:8000/auth-check/', {
+        const response = await fetch('https://ecommercesitebackend02.vercel.app/auth-check/', {
             method: 'POST',
             credentials: 'include'
         });

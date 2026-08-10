@@ -105,7 +105,7 @@ export function MobileTrackOrderPage({ order }) {
                                     {item.product?.images && item.product.images.length > 0 ? (
                                         <img 
                                             className="w-full h-full object-cover" 
-                                            src={`http://localhost:8000${item.product.images[0].image}`} 
+                                            src={`https://ecommercesitebackend02.vercel.app${item.product.images[0].image}`} 
                                             alt={item.product?.name} 
                                         />
                                     ) : (

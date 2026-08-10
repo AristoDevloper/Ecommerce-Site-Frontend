@@ -80,7 +80,7 @@ export function MobileSearchPage({ query: initialQuery, results, count, page, lo
                         <div className="grid grid-cols-2 gap-x-4 gap-y-12">
                             {results.map((product) => {
                                 const imageUrl = product.images && product.images.length > 0
-                                    ? `http://localhost:8000${product.images[0].image}`
+                                    ? `https://ecommercesitebackend02.vercel.app${product.images[0].image}`
                                     : 'https://via.placeholder.com/200x250?text=No+Image';
 
                                 return (
