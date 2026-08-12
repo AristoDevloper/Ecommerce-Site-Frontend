@@ -190,7 +190,7 @@ export function DesktopProductList() {
                     <div className="flex-grow">
                         <div className="flex justify-between items-center mb-8 pb-4 border-b border-surface-container-high/30">
                             <span className="text-xs text-on-surface-variant font-label tracking-wide uppercase">
-                                {totalProducts === 0 ? 'No products found' : `Showing ${startItem}-${endItem} of ${totalProducts} Items`}
+                                {isLoading ? 'Searching...' : totalProducts === 0 ? 'No products found' : `Showing ${startItem}-${endItem} of ${totalProducts} Items`}
                             </span>
                             <button className="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest group">
                                 <span>Sort By: Newest</span>

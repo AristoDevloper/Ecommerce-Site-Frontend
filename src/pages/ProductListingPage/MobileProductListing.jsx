@@ -46,7 +46,7 @@ export function MobileProductListing() {
                         <span className="font-label text-xs uppercase font-bold tracking-wider">Refine</span>
                     </button>
                     <div className="flex items-center gap-4">
-                        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{products.length} Items</span>
+                        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{loading ? 'Searching...' : `${products.length} Items`}</span>
                     </div>
                 </div>
                 {/*  Product Grid  */}
