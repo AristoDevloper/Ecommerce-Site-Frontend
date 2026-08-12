@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config/api";
 
 const PAGE_SIZE = 6;
 
@@ -57,7 +58,7 @@ export function DesktopProductList() {
                     queryParams.set('category', selectedCategory);
                 }
 
-                const response = await fetch(`https://ecommercesitebackend02.vercel.app/products-api/?${queryParams.toString()}`, {
+                const response = await fetch(`${API_BASE_URL}/products-api/?${queryParams.toString()}`, {
                     signal: controller.signal,
                 });
 

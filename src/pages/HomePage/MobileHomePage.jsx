@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export function MobileHomePage() {
+    const navigate = useNavigate();
     return (
         <div className="mobile-screen bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
 
@@ -18,7 +21,10 @@ export function MobileHomePage() {
                             Explore our latest curation of architectural furniture and objects of intent.
                         </p>
                         <div className="pt-2">
-                            <button className="bg-gradient-to-r from-primary to-primary-container text-on-primary px-8 py-4 rounded-DEFAULT text-xs font-bold uppercase tracking-widest hover:opacity-90 active:scale-95 transition-all">
+                            <button 
+                                className="bg-gradient-to-r from-primary to-primary-container text-on-primary px-8 py-4 rounded-DEFAULT text-xs font-bold uppercase tracking-widest hover:opacity-90 active:scale-95 transition-all"
+                                onClick={() => navigate('/products')}
+                            >
                                 Shop Collection
                             </button>
                         </div>
@@ -31,7 +37,10 @@ export function MobileHomePage() {
                             <h3 className="text-2xl font-headline italic">Trending Now</h3>
                             <p className="text-on-surface-variant text-[10px] uppercase tracking-widest">Most sought after pieces</p>
                         </div>
-                        <button className="text-primary text-xs font-bold underline underline-offset-4 decoration-primary/20 hover:decoration-primary transition-all">View All</button>
+                        <button 
+                            className="text-primary text-xs font-bold underline underline-offset-4 decoration-primary/20 hover:decoration-primary transition-all"
+                            onClick={() => navigate('/products')}
+                        >View All</button>
                     </div>
                     <div className="flex overflow-x-auto gap-6 px-8 hide-scrollbar snap-x snap-mandatory">
                         {/*  Product Card 1  */}

@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function DesktopHomePage() {
+    const navigate = useNavigate();
 
     return (
         <div className="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -19,7 +20,7 @@ export function DesktopHomePage() {
                         <div className="flex flex-col md:flex-row gap-4 justify-center">
                             <button
                                 className="bg-primary text-on-primary px-10 py-4 rounded-lg font-medium manrope-caps hover:scale-[1.02] transition-transform shadow-xl"
-                                onClick={() => window.location.href = '/products'}
+                                onClick={() => navigate('/products')}
                             >Shop The Collection</button>
                         </div>
                     </div>
@@ -50,7 +51,7 @@ export function DesktopHomePage() {
                         <div className="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low shadow-sm">
                             <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Artistic shot of minimalist leather footwear on a stone pedestal with sharp morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASU0N3hjRiuOy0-I8j2S3aryK7cO9XggLfe-NkTev8BlLeNTexuYxWpKqWWGr3d1dI1nskWmgEVYF2ez-kgsFtcMN1bNvxti1mcGAc4nRD_hKGlpIfAj4ufzov8SRyhgoBlamZuKzee8gdHrrPaZ1XM_Q7KmNrw_AEqqBU9yu2aBZ83gw0wvyvIThT79NSl_e0ohnYUT2WzwU9g5cyOLV5Too60W2e2xSQcJuh1uPF0YF-5XctA9C9Os3jBTAYJ5TfpHMM7daIsEgM" />
                             <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-                                <button className="bg-white text-primary px-8 py-3 manrope-caps text-xs font-bold rounded shadow-lg" onClick={() => window.location.href = '/product-details'}>
+                                <button className="bg-white text-primary px-8 py-3 manrope-caps text-xs font-bold rounded shadow-lg" onClick={() => navigate('/products')}>
                                     View Details
                                 </button>
                             </div>
@@ -63,7 +64,7 @@ export function DesktopHomePage() {
                             <span className="text-tertiary manrope-caps font-bold mb-4">Limited Edition</span>
                             <h3 className="serif-tight text-4xl text-primary font-bold mb-6">The Silk Capsule</h3>
                             <p className="text-secondary max-w-lg mb-8 leading-relaxed">Introducing a curated series of 100% mulberry silk essentials, designed to transition effortlessly from morning to evening.</p>
-                            <button className="text-primary border border-primary px-8 py-3 manrope-caps text-xs font-bold hover:bg-primary hover:text-white transition-colors" onClick={() => window.location.href = '/products'}>
+                            <button className="text-primary border border-primary px-8 py-3 manrope-caps text-xs font-bold hover:bg-primary hover:text-white transition-colors" onClick={() => navigate('/products')}>
                                 Discover Series
                             </button>
                         </div>
