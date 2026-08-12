@@ -31,7 +31,7 @@ export function DesktopShoppingCartPage({ cartItems = [], onUpdateQuantity, onRe
                         {/* Left Column: Items */}
                         <div className="lg:col-span-8 space-y-12">
                             {cartItems.map((item) => {
-                                const productImage = item.product.images?.[0]?.image_url;
+                                const productImage = item.product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
 
                                 return (
                                     <div key={item.id} className="group flex flex-col md:flex-row gap-8 pb-12 border-b border-outline-variant/10 last:border-b-0 last:pb-0">

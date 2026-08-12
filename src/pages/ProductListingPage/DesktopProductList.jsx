@@ -130,7 +130,7 @@ export function DesktopProductList() {
 
     const getProductImageUrl = (product) => {
         const image = product?.images?.[0]?.image_url;
-        return typeof image === 'string' && image.trim() ? image : '';
+        return typeof image === 'string' && image.trim() ? image : 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
     };
 
     return (

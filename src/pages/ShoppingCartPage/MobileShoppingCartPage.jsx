@@ -35,7 +35,7 @@ export function MobileShoppingCartPage({ cartItems = [], onUpdateQuantity, onRem
                         {/* Cart Items List */}
                         <div className="space-y-8">
                             {cartItems.map((item) => {
-                                const productImage = item.product.images?.[0]?.image_url;
+                                const productImage = item.product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
 
                                 return (
                                     <div key={item.id} className="flex gap-6 items-start group">
