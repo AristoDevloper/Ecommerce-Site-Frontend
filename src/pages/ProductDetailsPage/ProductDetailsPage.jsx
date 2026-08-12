@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../../config/api';
 
-export function ProductDetailsPage() {
+export function ProductDetailsPage({ isAuthenticated, userRole }) {
     const { productId } = useParams();
     const navigate = useNavigate();
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
@@ -127,6 +127,7 @@ export function ProductDetailsPage() {
                     onVisitStore={handleVisitStore}
                     cartAdding={cartAdding} 
                     cartSuccess={cartSuccess} 
+                    userRole={userRole}
                 />
             ) : (
                 <DesktopProductDetails 
@@ -136,6 +137,7 @@ export function ProductDetailsPage() {
                     onVisitStore={handleVisitStore}
                     cartAdding={cartAdding} 
                     cartSuccess={cartSuccess} 
+                    userRole={userRole}
                 />
             )}
         </>

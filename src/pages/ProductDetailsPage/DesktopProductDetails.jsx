@@ -1,4 +1,4 @@
-export function DesktopProductDetails({ product, onAddToCart, onBuyNow, onVisitStore, cartAdding, cartSuccess }) {
+export function DesktopProductDetails({ product, onAddToCart, onBuyNow, onVisitStore, cartAdding, cartSuccess, userRole }) {
     if (!product) return null;
 
     const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
@@ -32,20 +32,24 @@ export function DesktopProductDetails({ product, onAddToCart, onBuyNow, onVisitS
                             </div>
                         </div>
                         <div className="space-y-4 pt-4">
-                            <button 
-                                onClick={onAddToCart} 
-                                disabled={cartAdding || product.stock <= 0}
-                                className="velvet-gradient w-full py-5 text-on-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-lg active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                {cartAdding ? "Adding to Collection..." : cartSuccess ? "Added to Collection ✓" : "Add to Collection"}
-                            </button>
-                            <button 
-                                onClick={onBuyNow} 
-                                disabled={cartAdding || product.stock <= 0}
-                                className="w-full py-5 bg-primary text-on-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-lg active:scale-[0.98] transition-all hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed mt-3"
-                            >
-                                Buy Now
-                            </button>
+                            {userRole !== 'seller' && userRole !== 'admin' && (
+                                <>
+                                    <button 
+                                        onClick={onAddToCart} 
+                                        disabled={cartAdding || product.stock <= 0}
+                                        className="velvet-gradient w-full py-5 text-on-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-lg active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {cartAdding ? "Adding to Collection..." : cartSuccess ? "Added to Collection ✓" : "Add to Collection"}
+                                    </button>
+                                    <button 
+                                        onClick={onBuyNow} 
+                                        disabled={cartAdding || product.stock <= 0}
+                                        className="w-full py-5 bg-primary text-on-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-lg active:scale-[0.98] transition-all hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed mt-3"
+                                    >
+                                        Buy Now
+                                    </button>
+                                </>
+                            )}
                             <button 
                                 onClick={onVisitStore} 
                                 className="w-full py-5 bg-surface-container-high text-primary font-label text-sm tracking-widest uppercase rounded-lg shadow-sm active:scale-[0.98] transition-all hover:bg-surface-variant mt-3 border border-outline-variant/50"

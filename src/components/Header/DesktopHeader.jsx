@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { logoutUser } from '../utils/Authentication';
 
-export function DesktopHeader({ isAuthenticated, setIsAuthenticated, setUserRole }) {
+export function DesktopHeader({ isAuthenticated, setIsAuthenticated, setUserRole, userRole }) {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -47,9 +47,16 @@ export function DesktopHeader({ isAuthenticated, setIsAuthenticated, setUserRole
                             <Link to="/conversations" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Chat">
                                 <span className="material-symbols-outlined" data-icon="chat">chat</span>
                             </Link>
-                            <Link to="/cart" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Cart">
-                                <span className="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
-                            </Link>
+                            {userRole !== 'seller' && userRole !== 'admin' && (
+                                <Link to="/cart" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Cart">
+                                    <span className="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                                </Link>
+                            )}
+                            {(userRole === 'seller' || userRole === 'admin') && (
+                                <Link to="/inventory" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Inventory">
+                                    <span className="material-symbols-outlined" data-icon="inventory">inventory</span>
+                                </Link>
+                            )}
                             <Link to="/account" className="hover:opacity-70 transition-opacity duration-300 text-slate-500 hover:text-slate-900" title="Account">
                                 <span className="material-symbols-outlined" data-icon="person">person</span>
                             </Link>

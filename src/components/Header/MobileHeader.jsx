@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export function MobileHeader({ isAuthenticated }) {
+export function MobileHeader({ isAuthenticated, userRole }) {
     return (
         <header className="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 shadow-sm shadow-slate-900/5">
             <div className="flex-1"></div>
@@ -9,9 +9,18 @@ export function MobileHeader({ isAuthenticated }) {
             </Link>
             <div className="flex-1 flex justify-end gap-4">
                 {isAuthenticated ? (
-                    <Link to="/cart" className="text-slate-900 hover:opacity-70 transition-opacity active:scale-95 duration-150">
-                        <span className="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
-                    </Link>
+                    <>
+                        {userRole !== 'seller' && userRole !== 'admin' && (
+                            <Link to="/cart" className="text-slate-900 hover:opacity-70 transition-opacity active:scale-95 duration-150">
+                                <span className="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                            </Link>
+                        )}
+                        {(userRole === 'seller' || userRole === 'admin') && (
+                            <Link to="/inventory" className="text-slate-900 hover:opacity-70 transition-opacity active:scale-95 duration-150">
+                                <span className="material-symbols-outlined" data-icon="inventory">inventory</span>
+                            </Link>
+                        )}
+                    </>
                 ) : (
                     <Link to="/login" className="text-slate-900 hover:opacity-70 transition-opacity active:scale-95 duration-150">
                         <span className="material-symbols-outlined" data-icon="login">login</span>

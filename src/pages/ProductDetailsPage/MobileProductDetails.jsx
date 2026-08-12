@@ -1,4 +1,4 @@
-export function MobileProductDetails({ product, onAddToCart, onBuyNow, onVisitStore, cartAdding, cartSuccess }) {
+export function MobileProductDetails({ product, onAddToCart, onBuyNow, onVisitStore, cartAdding, cartSuccess, userRole }) {
     if (!product) return null;
 
     const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
@@ -122,27 +122,29 @@ export function MobileProductDetails({ product, onAddToCart, onBuyNow, onVisitSt
                     </div>
                 </section>
             </main>
-            <footer className="fixed bottom-0 w-full z-50 p-4 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
-                <div className="flex gap-3">
-                    <button className="w-12 h-12 flex items-center justify-center bg-surface-container-highest text-primary rounded-lg active:scale-95 transition-transform flex-shrink-0">
-                        <span className="material-symbols-outlined">favorite</span>
-                    </button>
-                    <button 
-                        onClick={onAddToCart} 
-                        disabled={cartAdding || product.stock <= 0}
-                        className="flex-1 h-12 border border-primary text-primary font-bold text-xs tracking-wider uppercase rounded-lg active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        {cartAdding ? "Adding..." : cartSuccess ? "Added ✓" : "Add to Cart"}
-                    </button>
-                    <button 
-                        onClick={onBuyNow} 
-                        disabled={cartAdding || product.stock <= 0}
-                        className="flex-1 h-12 bg-primary text-on-primary font-bold text-xs tracking-wider uppercase rounded-lg active:scale-95 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        Buy Now
-                    </button>
-                </div>
-            </footer>
+            {userRole !== 'seller' && userRole !== 'admin' && (
+                <footer className="fixed bottom-0 w-full z-50 p-4 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+                    <div className="flex gap-3">
+                        <button className="w-12 h-12 flex items-center justify-center bg-surface-container-highest text-primary rounded-lg active:scale-95 transition-transform flex-shrink-0">
+                            <span className="material-symbols-outlined">favorite</span>
+                        </button>
+                        <button 
+                            onClick={onAddToCart} 
+                            disabled={cartAdding || product.stock <= 0}
+                            className="flex-1 h-12 border border-primary text-primary font-bold text-xs tracking-wider uppercase rounded-lg active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {cartAdding ? "Adding..." : cartSuccess ? "Added ✓" : "Add to Cart"}
+                        </button>
+                        <button 
+                            onClick={onBuyNow} 
+                            disabled={cartAdding || product.stock <= 0}
+                            className="flex-1 h-12 bg-primary text-on-primary font-bold text-xs tracking-wider uppercase rounded-lg active:scale-95 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            Buy Now
+                        </button>
+                    </div>
+                </footer>
+            )}
             {/*  Bottom Navigation Bar (Hidden on this transactional detail page per hierarchy rule)  */}
         </div>
     )

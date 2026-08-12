@@ -41,12 +41,12 @@ function App() {
 
   return (
     <>
-      {!hideHeader && <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />}
+      {!hideHeader && <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} userRole={userRole} />}
       <Routes>
         <Route path="/" element={<HomePage isAuthenticated={isAuthenticated} />} />
         <Route path="/about" element={<AboutPage isAuthenticated={isAuthenticated} />} />
         <Route path="/search" element={<SearchResultPage isAuthenticated={isAuthenticated} />} />
-        <Route path="/product/:productId" element={<ProductDetailsPage isAuthenticated={isAuthenticated} />} />
+        <Route path="/product/:productId" element={<ProductDetailsPage isAuthenticated={isAuthenticated} userRole={userRole} />} />
         <Route path="/products" element={<ProductListingPage isAuthenticated={isAuthenticated} />} />
         {/* Protected Routes */}
         <Route path="/inventory" element={

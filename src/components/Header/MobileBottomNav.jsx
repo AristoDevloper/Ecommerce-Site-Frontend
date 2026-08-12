@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-export function MobileBottomNav({ isAuthenticated }) {
+export function MobileBottomNav({ isAuthenticated, userRole }) {
     const location = useLocation();
     
     return (
@@ -25,14 +25,24 @@ export function MobileBottomNav({ isAuthenticated }) {
             
             {isAuthenticated ? (
                 <>
-                    {/*  Bag  */}
-                    <Link 
-                        className={`flex flex-col items-center justify-center pt-2 transition-colors ${location.pathname === '/cart' ? 'text-slate-900 border-t-2 border-slate-900 transform translate-y-[-2px]' : 'text-slate-400 hover:text-slate-600'}`} 
-                        to="/cart"
-                    >
-                        <span className="material-symbols-outlined" data-icon="shopping_cart" style={location.pathname === '/cart' ? { fontVariationSettings: "'FILL' 1" } : {}}>shopping_cart</span>
-                        <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Bag</span>
-                    </Link>
+                    {/*  Bag or Inventory  */}
+                    {userRole !== 'seller' && userRole !== 'admin' ? (
+                        <Link 
+                            className={`flex flex-col items-center justify-center pt-2 transition-colors ${location.pathname === '/cart' ? 'text-slate-900 border-t-2 border-slate-900 transform translate-y-[-2px]' : 'text-slate-400 hover:text-slate-600'}`} 
+                            to="/cart"
+                        >
+                            <span className="material-symbols-outlined" data-icon="shopping_cart" style={location.pathname === '/cart' ? { fontVariationSettings: "'FILL' 1" } : {}}>shopping_cart</span>
+                            <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Bag</span>
+                        </Link>
+                    ) : (
+                        <Link 
+                            className={`flex flex-col items-center justify-center pt-2 transition-colors ${location.pathname === '/inventory' ? 'text-slate-900 border-t-2 border-slate-900 transform translate-y-[-2px]' : 'text-slate-400 hover:text-slate-600'}`} 
+                            to="/inventory"
+                        >
+                            <span className="material-symbols-outlined" data-icon="inventory" style={location.pathname === '/inventory' ? { fontVariationSettings: "'FILL' 1" } : {}}>inventory</span>
+                            <span className="text-[10px] uppercase tracking-[0.1em] font-sans font-bold mt-1">Inventory</span>
+                        </Link>
+                    )}
 
                     {/*  Chat  */}
                     <Link 
