@@ -26,7 +26,7 @@ export function ConversationsPage() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/profile/', { credentials: 'include` });
+        const res = await fetch(`${API_BASE_URL}/profile/`, { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
           setCurrentUser(data);
@@ -43,7 +43,7 @@ export function ConversationsPage() {
     const fetchConversations = async () => {
       setLoadingConvs(true);
       try {
-        const res = await fetch(`${API_BASE_URL}/chat/rooms/', { credentials: 'include` });
+        const res = await fetch(`${API_BASE_URL}/chat/rooms/`, { credentials: 'include' });
         if (res.ok) {
           const data = await res.json();
           console.log('Fetched conversations:', data);

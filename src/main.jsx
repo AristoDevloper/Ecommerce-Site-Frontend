@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { API_BASE_URL } from './config/api'
 
 const LOCAL_BACKEND_URL = 'http://localhost:8000'
-const PROD_BACKEND_URL = `${API_BASE_URL}'
+const PROD_BACKEND_URL = API_BASE_URL
 
 const backendHosts = new Set([LOCAL_BACKEND_URL, PROD_BACKEND_URL])
 const originalFetch = window.fetch.bind(window)
