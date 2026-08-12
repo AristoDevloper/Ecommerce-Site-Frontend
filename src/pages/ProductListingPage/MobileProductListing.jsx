@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +12,7 @@ export function MobileProductListing() {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('https://ecommercesitebackend02.vercel.app/products-api/');
+                const response = await fetch(`${API_BASE_URL}/products-api/`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch products');
                 }

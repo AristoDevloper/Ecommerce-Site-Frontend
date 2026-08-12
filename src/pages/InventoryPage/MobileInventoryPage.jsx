@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +22,7 @@ export function MobileInventoryPage({ userRole }) {
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://ecommercesitebackend02.vercel.app/products-api/');
+            const response = await fetch(`${API_BASE_URL}/products-api/`);
             const data = await response.json();
             if (response.ok) {
                 setProducts(data.results || data);
@@ -36,7 +37,7 @@ export function MobileInventoryPage({ userRole }) {
     const handleAddProduct = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://ecommercesitebackend02.vercel.app/products-api/', {
+            const response = await fetch(`${API_BASE_URL}/products-api/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

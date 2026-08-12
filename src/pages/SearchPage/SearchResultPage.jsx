@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import './SearchPage.css'
 import './MobileSearchPage.css'
 import { MobileSearchPage } from './MobileSearchPage';
@@ -29,7 +30,7 @@ export default function SearchResultPage() {
             setLoading(true);
             setError(null);
             try {
-                const url = new URL('https://ecommercesitebackend02.vercel.app/products-api/');
+                const url = new URL(`${API_BASE_URL}/products-api/`);
                 if (query) {
                     url.searchParams.append('search', query);
                 }

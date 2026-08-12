@@ -4,6 +4,7 @@ import { MobileProductDetails } from './MobileProductDetails';
 import { DesktopProductDetails } from './DesktopProductDetails';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/api';
 
 export function ProductDetailsPage() {
     const { productId } = useParams();
@@ -30,7 +31,7 @@ export function ProductDetailsPage() {
             try {
                 setIsLoading(true);
                 setError(null);
-                const response = await fetch(`https://ecommercesitebackend02.vercel.app/api/products/${productId}/`, {
+                const response = await fetch(`${API_BASE_URL}/api/products/${productId}/`, {
                     credentials: 'include'
                 });
                 if (!response.ok) throw new Error('Product not found');
@@ -52,7 +53,7 @@ export function ProductDetailsPage() {
         try {
             setCartAdding(true);
             setCartSuccess(false);
-            const response = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
+            const response = await fetch(`${API_BASE_URL}/cart/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

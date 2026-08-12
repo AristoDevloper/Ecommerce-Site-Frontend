@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import './TrackOrderPage.css';
 import { useState, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
@@ -22,7 +23,7 @@ export function TrackOrderPage({ isAuthenticated }) {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await fetch(`https://ecommercesitebackend02.vercel.app/order/${orderId}/`, {
+        const response = await fetch(`${API_BASE_URL}/order/${orderId}/`, {
           method: 'GET',
           credentials: 'include'
         });

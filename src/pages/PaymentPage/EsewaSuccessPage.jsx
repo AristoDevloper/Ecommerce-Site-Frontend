@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -31,7 +32,7 @@ export function EsewaSuccessPage() {
                 // Now fire the POST /order/ API
                 setStatus('Payment successful! Placing your order...');
                 
-                const res = await fetch('https://ecommercesitebackend02.vercel.app/order/', {
+                const res = await fetch(`${API_BASE_URL}/order/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',

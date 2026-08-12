@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import './ShoppingCartPage.css';
 import { useState, useEffect } from 'react';
 import { DesktopShoppingCartPage } from './DesktopShoppingCartPage';
@@ -12,7 +13,7 @@ export function ShoppingCartPage() {
 
   const fetchCart = async () => {
     try {
-      const response = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
+      const response = await fetch(`${API_BASE_URL}/cart/`, {
         method: 'GET',
         credentials: 'include'
       });
@@ -41,7 +42,7 @@ export function ShoppingCartPage() {
 
   const handleUpdateQuantity = async (productId, delta) => {
     try {
-      const response = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
+      const response = await fetch(`${API_BASE_URL}/cart/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -64,7 +65,7 @@ export function ShoppingCartPage() {
 
   const handleRemoveItem = async (productId) => {
     try {
-      const response = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
+      const response = await fetch(`${API_BASE_URL}/cart/`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

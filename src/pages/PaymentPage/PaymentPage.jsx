@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import './PaymentPage.css'
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -113,7 +114,7 @@ export function PaymentPage() {
 
         setPlacingOrder(true);
         try {
-            const res = await fetch('https://ecommercesitebackend02.vercel.app/order/', {
+            const res = await fetch(`${API_BASE_URL}/order/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

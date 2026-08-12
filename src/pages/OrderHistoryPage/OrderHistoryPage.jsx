@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import './OrderHistoryPage.css'
 import { useEffect, useState } from 'react'
 import { DesktopOrderHistoryPage } from './DesktopOrderHistoryPage'
@@ -12,7 +13,7 @@ export function OrderHistoryPage() {
 
     const fetchOrders = async () => {
         try {
-            const response = await fetch('https://ecommercesitebackend02.vercel.app/order/', {
+            const response = await fetch(`${API_BASE_URL}/order/`, {
                 method: 'GET',
                 credentials: 'include'
             });

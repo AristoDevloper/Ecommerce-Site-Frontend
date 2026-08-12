@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../config/api';
 import './CheckoutPage.css'
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -44,7 +45,7 @@ export function CheckoutPage() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const res = await fetch('https://ecommercesitebackend02.vercel.app/profile/', {
+                const res = await fetch(`${API_BASE_URL}/profile/`, {
                     credentials: 'include'
                 });
                 if (res.ok) {
@@ -83,7 +84,7 @@ export function CheckoutPage() {
             // Fetch cart items
             const fetchCart = async () => {
                 try {
-                    const res = await fetch('https://ecommercesitebackend02.vercel.app/cart/', {
+                    const res = await fetch(`${API_BASE_URL}/cart/`, {
                         credentials: 'include'
                     });
                     if (res.ok) {
