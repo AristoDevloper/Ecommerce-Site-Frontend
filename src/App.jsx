@@ -18,6 +18,7 @@ import { AccountPage } from './pages/AccountPage/AccountPage'
 import { WishlistPage } from './pages/WishlistPage/WishlistPage'
 import { InventoryPage } from './pages/InventoryPage/InventoryPage'
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage/PrivacyPolicyPage'
+import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage/TermsAndConditionsPage'
 import { Header } from './components/Header/Header'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import { SignupPage } from './pages/SignupPage/SignupPage'
@@ -55,6 +56,7 @@ function App() {
           </ProtectedRoute>
         } />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms" element={<TermsAndConditionsPage />} />
         <Route path="/checkout" element={
           <ProtectedRoute isAuthenticated={isAuthenticated} isAuthLoading={isAuthLoading}>
             <CheckoutPage isAuthenticated={isAuthenticated} />

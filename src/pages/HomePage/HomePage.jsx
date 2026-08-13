@@ -22,7 +22,7 @@ export function HomePage({ isAuthenticated }) {
 
     return (
         <>
-            {isMobile ? <MobileHomePage /> : <DesktopHomePage />}
+            {isMobile ? <MobileHomePage isAuthenticated={isAuthenticated} /> : <DesktopHomePage isAuthenticated={isAuthenticated} />}
         </>
     )
 }

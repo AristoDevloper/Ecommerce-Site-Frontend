@@ -1,7 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { API_BASE_URL } from "../../config/api";
 
-export function DesktopHomePage() {
+export function DesktopHomePage({ isAuthenticated }) {
     const navigate = useNavigate();
+    const [shopProducts, setShopProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchShopProducts = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/products-api/?limit=3`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const results = Array.isArray(data.results) ? data.results : Array.isArray(data) ? data : [];
+                    setShopProducts(results.slice(0, 3));
+                }
+            } catch (err) {
+                console.error("Failed to fetch shop the look products:", err);
+            }
+        };
+        fetchShopProducts();
+    }, []);
 
     return (
         <div className="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -78,94 +97,54 @@ export function DesktopHomePage() {
                             <p className="manrope-caps text-xs tracking-[0.2em] text-on-surface-variant">Editorial Perspectives</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                            {/*  Editorial Card 1  */}
-                            <div className="space-y-6">
-                                <div className="aspect-[3/4] overflow-hidden rounded-lg bg-surface-variant">
-                                    <img className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" data-alt="Fashion editorial of a woman in an oversized beige blazer sitting in a minimal concrete room with soft afternoon sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDURZwtzN5GxVte3PpNJsngnbdolvdUMt-4znTTmGC1LBEAECRflAWlvNtMDXNMAqvp3N71M15nWn-hoCpuUBciAgmbZaXpnaCJwJDP0raJWNai-f3vWb3f6_3eIyeUgUFka7hdvDwilBvXtRsxgZeGR_KQHbrkVr4dB7Edm180sGSifwUatxH_qMcDC7cLe_BaES1zGaoOUrlHvq7DMHcRs_Fhr-Q35fy_PuHhrbem56LfbRlkA93FD1YexlmiS8qtTNsKtromukgC" />
-                                </div>
-                                <div className="space-y-4">
-                                    <h4 className="serif-tight text-2xl">Modern Monochromatics</h4>
-                                    <div className="space-y-2 border-l border-outline-variant pl-4">
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Oversized Blazer</span>
-                                            <span className="font-bold">$420</span>
+                            {shopProducts.map((product, index) => {
+                                const imageUrl = product.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30';
+                                return (
+                                    <div key={product.product_id || index} className={`space-y-6 ${index === 1 ? 'md:translate-y-12' : ''}`}>
+                                        <div className="aspect-[3/4] overflow-hidden rounded-lg bg-surface-variant cursor-pointer" onClick={() => navigate(`/product/${product.product_id}`)}>
+                                            <img className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" alt={product.name} src={imageUrl} />
                                         </div>
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Silk Camisole</span>
-                                            <span className="font-bold">$180</span>
-                                        </div>
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Tailored Trousers</span>
-                                            <span className="font-bold">$310</span>
-                                        </div>
-                                    </div>
-                                    <button className="w-full py-3 bg-primary text-on-primary manrope-caps text-[10px] font-bold mt-4">Add Entire Look to Bag</button>
-                                </div>
-                            </div>
-                            {/*  Editorial Card 2 (Offset)  */}
-                            <div className="space-y-6 md:translate-y-12">
-                                <div className="aspect-[3/4] overflow-hidden rounded-lg bg-surface-variant">
-                                    <img className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" data-alt="Dynamic shot of a man walking in a minimalist navy utility jacket against a neutral urban background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAden3LMogY1bYxAWeYwZiS8jTyNiLSBUebbD1Wz8qmaUtTXbZ75dPuxNHyW6D4Su0JhKlYiv_od8Ln9EeO5G5CSEabRL45LRXmEc0LB7AWQl0hnTNKM5iPHQN3JOuKzfja4jdGpUlCCn1c9jun6Spo4S3BKUewq9R7p9o5Xp1DnFDeNiYiUpN3OLO90XTgdkP-NMPwUdrLq-whrekOhV3oiGp-c9VB73M3NtuUrjWnWeY64VWVDsVOxbWkB-Zg1JtDYBwwtXKILCct" />
-                                </div>
-                                <div className="space-y-4">
-                                    <h4 className="serif-tight text-2xl">The Utility Uniform</h4>
-                                    <div className="space-y-2 border-l border-outline-variant pl-4">
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Field Jacket</span>
-                                            <span className="font-bold">$550</span>
-                                        </div>
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Supima Tee</span>
-                                            <span className="font-bold">$65</span>
-                                        </div>
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Canvas Chinos</span>
-                                            <span className="font-bold">$195</span>
+                                        <div className="space-y-4">
+                                            <h4 className="serif-tight text-2xl cursor-pointer" onClick={() => navigate(`/product/${product.product_id}`)}>{product.name}</h4>
+                                            <div className="space-y-2 border-l border-outline-variant pl-4">
+                                                <div className="flex flex-col text-sm">
+                                                    <span className="text-on-surface-variant line-clamp-2">{product.description || "A curated piece of exceptional design."}</span>
+                                                    <span className="font-bold text-lg mt-2">${Number(product.price).toLocaleString()}</span>
+                                                </div>
+                                            </div>
+                                            <button 
+                                                className="w-full py-3 bg-primary text-on-primary manrope-caps text-[10px] font-bold mt-4"
+                                                onClick={() => navigate(`/product/${product.product_id}`)}
+                                            >
+                                                View Details
+                                            </button>
                                         </div>
                                     </div>
-                                    <button className="w-full py-3 bg-primary text-on-primary manrope-caps text-[10px] font-bold mt-4">Add Entire Look to Bag</button>
+                                );
+                            })}
+                            {shopProducts.length === 0 && (
+                                <div className="col-span-3 text-center text-on-surface-variant py-12">
+                                    Loading curated looks...
                                 </div>
-                            </div>
-                            {/*  Editorial Card 3  */}
-                            <div className="space-y-6">
-                                <div className="aspect-[3/4] overflow-hidden rounded-lg bg-surface-variant">
-                                    <img className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" data-alt="Close up of a woman's hands wearing delicate gold jewelry and holding a small architectural leather handbag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB432M5hCeWXOvPvdrvcJk9bcW6RAKXu8N28DLlqBWpBId_2zrVHqS2KFVZxAzn0Zradui7Bd5Rb0PgL-YFOoxr5OhGNqLGtYPnhXsX4e8RxmNVFlRkcrKEvE15BXwYIxJ_B27wf4k8O3BXklnPmf7F64JvNpnzhiNck5QJz42Ch3qJUmTbMiUYop6flB4NGh8ZADlng60uclj-kSjBJt8sGS7F17WaubDSDa_vOetz8DkMY4bZOvsD-RAr-bQm2HC4GuydccSLmCwY" />
-                                </div>
-                                <div className="space-y-4">
-                                    <h4 className="serif-tight text-2xl">Refined Details</h4>
-                                    <div className="space-y-2 border-l border-outline-variant pl-4">
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Pebbled Tote</span>
-                                            <span className="font-bold">$890</span>
-                                        </div>
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Chain Bracelet</span>
-                                            <span className="font-bold">$240</span>
-                                        </div>
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-on-surface-variant">Silk Scarf</span>
-                                            <span className="font-bold">$125</span>
-                                        </div>
-                                    </div>
-                                    <button className="w-full py-3 bg-primary text-on-primary manrope-caps text-[10px] font-bold mt-4">Add Entire Look to Bag</button>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </section>
                 {/*  Minimal Newsletter  */}
-                <section className="py-32 px-6 bg-white border-t border-outline-variant/10">
-                    <div className="max-w-2xl mx-auto text-center space-y-8">
-                        <span className="material-symbols-outlined text-4xl text-tertiary">mail</span>
-                        <h2 className="serif-tight text-4xl font-bold">The Weekly Muse</h2>
-                        <p className="text-on-surface-variant leading-relaxed font-light">Join our inner circle for early access to collection drops, editorial stories, and curated lifestyle inspiration.</p>
-                        <form className="flex flex-col md:flex-row gap-4 mt-8">
-                            <input className="flex-1 bg-surface-container border-none focus:ring-1 focus:ring-primary text-sm px-6 py-4 rounded ghost-border" placeholder="Email Address" type="email" />
-                            <button className="bg-primary text-on-primary px-10 py-4 manrope-caps text-xs font-bold hover:bg-primary-container transition-colors rounded">Subscribe</button>
-                        </form>
-                        <p className="text-[10px] text-slate-400 manrope-caps">By subscribing, you agree to our privacy policy. unsubscribe at any time.</p>
-                    </div>
-                </section>
+                {!isAuthenticated && (
+                    <section className="py-32 px-6 bg-white border-t border-outline-variant/10">
+                        <div className="max-w-2xl mx-auto text-center space-y-8">
+                            <span className="material-symbols-outlined text-4xl text-tertiary">mail</span>
+                            <h2 className="serif-tight text-4xl font-bold">The Weekly Muse</h2>
+                            <p className="text-on-surface-variant leading-relaxed font-light">Join our inner circle for early access to collection drops, editorial stories, and curated lifestyle inspiration.</p>
+                            <form className="flex flex-col md:flex-row gap-4 mt-8" onSubmit={(e) => { e.preventDefault(); navigate('/signup'); }}>
+                                <input className="flex-1 bg-surface-container border-none focus:ring-1 focus:ring-primary text-sm px-6 py-4 rounded ghost-border" placeholder="Email Address" type="email" />
+                                <button className="bg-primary text-on-primary px-10 py-4 manrope-caps text-xs font-bold hover:bg-primary-container transition-colors rounded">Subscribe</button>
+                            </form>
+                            <p className="text-[10px] text-slate-400 manrope-caps">By subscribing, you agree to our privacy policy. unsubscribe at any time.</p>
+                        </div>
+                    </section>
+                )}
             </main>
             {/*  Footer  */}
             <footer className="w-full py-16 px-6 md:px-12 mt-auto bg-slate-50 border-t border-slate-200/20">
@@ -174,13 +153,11 @@ export function DesktopHomePage() {
                         <div className="text-lg font-['Noto_Serif'] italic text-slate-400">CURATED GALLERY</div>
                         <div className="flex gap-8 font-['Manrope'] text-xs tracking-widest uppercase">
                             <a className="text-slate-400 hover:text-slate-900 transition-all hover:underline decoration-slate-300 underline-offset-4" href="#">Sustainability</a>
-                            <a className="text-slate-400 hover:text-slate-900 transition-all hover:underline decoration-slate-300 underline-offset-4" href="#">Shipping</a>
-                            <a className="text-slate-400 hover:text-slate-900 transition-all hover:underline decoration-slate-300 underline-offset-4" href="#">Returns</a>
                         </div>
                     </div>
                     <div className="md:text-right space-y-6">
                         <div className="flex md:justify-end gap-8 font-['Manrope'] text-xs tracking-widest uppercase">
-                            <a className="text-slate-400 hover:text-slate-900 transition-all" href="#">Contact</a>
+                            <Link className="text-slate-400 hover:text-slate-900 transition-all" to="/terms">Terms & Conditions</Link>
                             <Link className="text-slate-400 hover:text-slate-900 transition-all" to="/privacy">Privacy</Link>
                         </div>
                         <p className="font-['Manrope'] text-xs tracking-widest uppercase text-slate-400 opacity-60">© 2024 CURATED GALLERY. ALL RIGHTS RESERVED.</p>
