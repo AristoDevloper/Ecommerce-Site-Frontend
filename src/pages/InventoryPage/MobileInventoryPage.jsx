@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function MobileInventoryPage({ userRole }) {
-    const [isCurator, setIsCurator] = useState(false);
+    const [isCurator, setIsCurator] = useState(userRole === 'seller');
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showAddModal, setShowAddModal] = useState(false);
