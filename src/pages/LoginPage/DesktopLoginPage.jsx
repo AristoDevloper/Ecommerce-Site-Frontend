@@ -154,13 +154,6 @@ export function DesktopLoginPage({ setIsAuthenticated }) {
                             >
                                 Demo Seller
                             </button>
-                            <button
-                                type="button"
-                                onClick={() => { setEmail('admin@demo.com'); setPassword('password123'); }}
-                                className="w-full py-2 border border-outline-variant/50 text-xs font-label uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors rounded"
-                            >
-                                Demo Admin
-                            </button>
                         </div>
                     </div>
                 </div>

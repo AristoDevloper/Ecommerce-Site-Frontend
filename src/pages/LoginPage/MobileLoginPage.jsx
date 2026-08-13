@@ -132,13 +132,6 @@ export function MobileLoginPage({ setIsAuthenticated }) {
                                 >
                                     Demo Seller
                                 </button>
-                                <button
-                                    type="button"
-                                    onClick={() => { setEmail('admin@demo.com'); setPassword('password123'); }}
-                                    className="w-full py-3 border border-outline-variant/30 text-[10px] font-label uppercase tracking-widest text-on-surface hover:bg-surface-variant transition-colors rounded shadow-sm"
-                                >
-                                    Demo Admin
-                                </button>
                             </div>
                         </div>
                     </footer>
