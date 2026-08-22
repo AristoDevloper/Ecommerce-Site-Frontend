@@ -274,7 +274,7 @@ export function MobileCheckout({
             </main>
 
             {/*  Fixed Bottom CTA  */}
-            <div className="fixed bottom-0 left-0 w-full bg-surface-bright/95 backdrop-blur-md px-6 py-6 pb-10 shadow-[0_-10px_30px_rgba(0,0,0,0.03)] z-40">
+            <div className="fixed bottom-20 left-0 w-full bg-surface-bright/95 backdrop-blur-md px-6 py-6 shadow-[0_-10px_30px_rgba(0,0,0,0.03)] z-40">
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-outline">Total Amount</p>
